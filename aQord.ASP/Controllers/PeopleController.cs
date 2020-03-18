@@ -31,7 +31,7 @@ namespace aQord.ASP.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(Person person)
+        public ActionResult New(Person person)
         {
             var craftsmanInDb = _dbContext.PeopleDbSet.Create();
 
