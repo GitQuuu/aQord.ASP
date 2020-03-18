@@ -20,10 +20,15 @@ namespace aQord.ASP.Controllers
         {
             _dbContext.Dispose();
         }
+
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            List<Person> peopleFromDb = _dbContext.PeopleDbSet.ToList();
+
+            return View(peopleFromDb);
         }
+
 
         [HttpPost]
         public ActionResult Create(Person person)
@@ -44,12 +49,8 @@ namespace aQord.ASP.Controllers
             _dbContext.PeopleDbSet.Add(person);
             _dbContext.SaveChanges();
 
-            return View("Index");
-        }
-
-        public ActionResult Delete()
-        {
             return View();
         }
+
     }
 }
