@@ -1,4 +1,5 @@
-﻿@model aQord.ASP.Models.Person
+﻿@using aQord.ASP.Controllers
+@model aQord.ASP.Models.Person
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2></h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create","People")) 
 {
     @Html.AntiForgeryToken()
     
