@@ -23,9 +23,11 @@ namespace aQord.ASP.Models
         public string  City { get; set; }
 
         [Display(Name = "Post nummer")]
+        [DataType(DataType.Text)]
         public int PostalCode { get; set; }
 
         [Display(Name = "Telefon nummer")]
+        [DataType(DataType.Text)]
         public int CellphoneNo { get; set; }
 
         [Display(Name = "Email")]
