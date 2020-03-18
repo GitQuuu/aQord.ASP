@@ -46,5 +46,10 @@ namespace aQord.ASP.Controllers
 
             return View("Index");
         }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
     }
 }
