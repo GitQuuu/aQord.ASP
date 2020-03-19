@@ -59,5 +59,15 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index","People");
         }
 
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            Person entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
+
+            _dbContext.PeopleDbSet.Remove(entity);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "People");
+        }
     }
 }
