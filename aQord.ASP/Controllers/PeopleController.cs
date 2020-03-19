@@ -73,7 +73,7 @@ namespace aQord.ASP.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var entity = _dbContext.PeopleDbSet.Where(p => p.Id == id).FirstOrDefault();
+            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
 
             return View(entity);
         }
