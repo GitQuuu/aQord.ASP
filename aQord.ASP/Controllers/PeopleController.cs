@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
+using aQord.ASP.ViewModels;
 
 namespace aQord.ASP.Controllers
 {
@@ -29,9 +30,20 @@ namespace aQord.ASP.Controllers
             return View(peopleFromDb);
         }
 
+        // a view for adding a new person
+        public ActionResult New()
+        {
+            var viewModel = new PeopleFormViewModels
+            {
+                Person = new Person()
+            };
 
+            return View("PeopleForm", viewModel);
+        }
+
+        // a method that saves user input from the PeopleForm.cshtml  
         [HttpPost]
-        public ActionResult New(Person person)
+        public ActionResult Save(Person person)
         {
             var craftsmanInDb = _dbContext.PeopleDbSet.Create();
 
@@ -49,7 +61,7 @@ namespace aQord.ASP.Controllers
             _dbContext.PeopleDbSet.Add(person);
             _dbContext.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index","People");
         }
 
     }
