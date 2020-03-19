@@ -70,23 +70,18 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "People");
         }
 
-        public ViewResult Edit(Person person)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            Person entity = _dbContext.PeopleDbSet.Find(person.Id);
+            var entity = _dbContext.PeopleDbSet.Where(p => p.Id == id).FirstOrDefault();
 
-            entity.FirstName = person.FirstName;
-            entity.LastName = person.LastName;
-            entity.Address = person.Address;
-            entity.City = person.City;
-            entity.PostalCode = person.PostalCode;
-            entity.CellphoneNo = person.CellphoneNo;
-            entity.Email = person.Email;
-            entity.OccupationalStatus = person.OccupationalStatus;
-            entity.SalaryPrHour = person.SalaryPrHour;
-            entity.WeeklyWorkingHours = person.WeeklyWorkingHours;
+            return View(entity);
+        }
 
-
-            return View("PeopleForm");
+        [HttpPost]
+        public ActionResult Edit(Person person)
+        {
+            return RedirectToAction("Index", "People");
         }
     }
 }
