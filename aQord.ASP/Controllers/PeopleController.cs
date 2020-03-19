@@ -30,7 +30,7 @@ namespace aQord.ASP.Controllers
             return View(peopleFromDb);
         }
 
-        // a view for adding a new person
+        // direct user to the PeopleForm view
         public ActionResult New()
         {
             return View("PeopleForm");
