@@ -33,12 +33,7 @@ namespace aQord.ASP.Controllers
         // a view for adding a new person
         public ActionResult New()
         {
-            var viewModel = new PeopleFormViewModels
-            {
-                Person = new Person()
-            };
-
-            return View("PeopleForm", viewModel);
+            return View("PeopleForm");
         }
 
         // a method that saves user input from the PeopleForm.cshtml  
