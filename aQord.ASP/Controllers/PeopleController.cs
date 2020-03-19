@@ -70,6 +70,7 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "People");
         }
 
+        // transfer text to Edit view
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -78,9 +79,25 @@ namespace aQord.ASP.Controllers
             return View(entity);
         }
 
+        // Updating the entity
         [HttpPost]
-        public ActionResult Edit(Person person)
+        public ActionResult Update(Person person)
         {
+            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == person.Id);
+
+            entity.FirstName = person.FirstName;
+            entity.LastName = person.LastName;
+            entity.Address = person.Address;
+            entity.City = person.City;
+            entity.PostalCode = person.PostalCode;
+            entity.CellphoneNo = person.CellphoneNo;
+            entity.Email = person.Email;
+            entity.OccupationalStatus = person.OccupationalStatus;
+            entity.SalaryPrHour = person.SalaryPrHour;
+            entity.WeeklyWorkingHours = person.WeeklyWorkingHours;
+
+            _dbContext.SaveChanges();
+
             return RedirectToAction("Index", "People");
         }
     }
