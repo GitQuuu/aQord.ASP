@@ -59,15 +59,34 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index","People");
         }
 
-        [HttpDelete]
+        
         public ActionResult Delete(int id)
         {
-            Person entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
+            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
 
             _dbContext.PeopleDbSet.Remove(entity);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "People");
+        }
+
+        public ViewResult Edit(Person person)
+        {
+            Person entity = _dbContext.PeopleDbSet.Find(person.Id);
+
+            entity.FirstName = person.FirstName;
+            entity.LastName = person.LastName;
+            entity.Address = person.Address;
+            entity.City = person.City;
+            entity.PostalCode = person.PostalCode;
+            entity.CellphoneNo = person.CellphoneNo;
+            entity.Email = person.Email;
+            entity.OccupationalStatus = person.OccupationalStatus;
+            entity.SalaryPrHour = person.SalaryPrHour;
+            entity.WeeklyWorkingHours = person.WeeklyWorkingHours;
+
+
+            return View("PeopleForm");
         }
     }
 }
