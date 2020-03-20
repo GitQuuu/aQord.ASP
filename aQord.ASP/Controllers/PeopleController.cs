@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
@@ -59,10 +60,39 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index","People");
         }
 
-        
-        public ActionResult Delete(int id)
+        //Get: /Controller/Action/Id
+        //add ? behind the int signature to allow nullable int, since int is never nullable pr. default
+        public ActionResult Delete(int? id)
         {
-            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                Person person = _dbContext.PeopleDbSet.Find(id);
+                if (person == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(person);
+
+            }
+           
+        }
+
+        //Post: /Controller/Action/Id
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(Person person)
+        {
+            if (person == null)
+            {
+                return HttpNotFound();
+            }
+            
+            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == person.Id);
 
             _dbContext.PeopleDbSet.Remove(entity);
             _dbContext.SaveChanges();

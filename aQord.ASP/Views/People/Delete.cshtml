@@ -1,0 +1,97 @@
+﻿@model aQord.ASP.Models.Person
+
+<h3>Er du sikker på du vil fjerne denne person fra databasen</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellphoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellphoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OccupationalStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OccupationalStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryPrHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryPrHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeeklyWorkingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeeklyWorkingHours)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete","People")) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> 
+            @Html.ActionLink("Fortryd", "Index","People",new{@class = "btn btn-default"})
+        </div>
+    }
+</div>

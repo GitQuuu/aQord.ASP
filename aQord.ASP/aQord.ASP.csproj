@@ -252,6 +252,7 @@
     <Content Include="Views\People\Index.cshtml" />
     <Content Include="Views\People\PeopleForm.cshtml" />
     <Content Include="Views\People\Edit.cshtml" />
+    <Content Include="Views\People\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
