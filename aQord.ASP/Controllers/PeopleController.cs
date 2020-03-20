@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
 using aQord.ASP.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace aQord.ASP.Controllers
 {
@@ -23,12 +24,39 @@ namespace aQord.ASP.Controllers
             _dbContext.Dispose();
         }
 
-        [HttpGet]
-        public ActionResult Index()
-        {
-            List<Person> peopleFromDb = _dbContext.PeopleDbSet.ToList();
+        //Get data from database - my own solution
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    List<Person> peopleFromDb = _dbContext.PeopleDbSet.ToList();
 
-            return View(peopleFromDb);
+        //    return View(peopleFromDb);
+        //}
+
+        //Get data from database - from https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-search
+        [HttpGet]
+        public ActionResult Index(string personCity, string searchString)
+        {
+            var cityList = new List<string>();
+
+            var cityQry = from c in _dbContext.PeopleDbSet orderby c.City select c.City;
+
+            cityList.AddRange(cityQry.Distinct());
+            ViewBag.personCity = new SelectList(cityList);
+
+            var person = from p in _dbContext.PeopleDbSet select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                person = _dbContext.PeopleDbSet.Where(s => s.FirstName.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(personCity))
+            {
+                person = _dbContext.PeopleDbSet.Where(x => x.City == personCity);
+            }
+
+            return View(person);
         }
 
         // direct user to the PeopleForm view
