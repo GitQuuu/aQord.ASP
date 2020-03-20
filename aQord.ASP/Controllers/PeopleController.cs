@@ -28,9 +28,9 @@ namespace aQord.ASP.Controllers
         [HttpGet]
         public ActionResult Index(string searchString)
         {
-            //var peopleFromDb = _dbContext.People.ToList();
+            IQueryable<Person> people = _dbContext.People;
 
-            var people = from p in _dbContext.People select p;
+            //var people = from p in _dbContext.People select p;
             
 
             if (!string.IsNullOrEmpty(searchString))
