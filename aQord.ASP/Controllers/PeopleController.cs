@@ -24,32 +24,30 @@ namespace aQord.ASP.Controllers
             _dbContext.Dispose();
         }
 
-        //Get data from database - my own solution
+        //Get data from database
         [HttpGet]
         public ActionResult Index(string searchString)
         {
-            
             //var peopleFromDb = _dbContext.People.ToList();
 
             var people = from p in _dbContext.People select p;
-
+            
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var searchWords = searchString.Split(',').ToList();
+                 var searchWords = searchString.Split(',');
 
-                people =_dbContext.People.Where(p => searchWords.Contains(p.FirstName) ||
-
-                                                     p.LastName.Contains(searchString)||
-                                                     p.Address.Contains(searchString) ||
-                                                     p.City.Contains(searchString) ||
-                                                     p.PostalCode.ToString().Contains(searchString) ||
-                                                     p.CellphoneNo.ToString().Contains(searchString) ||
-                                                     p.Email.Contains(searchString) ||
-                                                     p.OccupationalStatus.Contains(searchString) ||
-                                                     p.SalaryPrHour.ToString().Contains(searchString) ||
-                                                     p.WeeklyWorkingHours.ToString().Contains(searchString));
-
+                people = _dbContext.People.Where(p => searchWords.Contains(p.FirstName) || 
+                                                      searchWords.Contains(p.LastName) ||
+                                                      searchWords.Contains(p.Address) ||
+                                                      searchWords.Contains(p.City) ||
+                                                      searchWords.Contains(p.PostalCode.ToString()) ||
+                                                      searchWords.Contains(p.CellphoneNo.ToString()) ||
+                                                      searchWords.Contains(p.Email) ||
+                                                      searchWords.Contains(p.OccupationalStatus) ||
+                                                      searchWords.Contains(p.SalaryPrHour.ToString()) ||
+                                                      searchWords.Contains(p.WeeklyWorkingHours.ToString()) 
+                                                      );
 
                 //peopleFromDb = _dbContext.People.Where(p => p.FirstName.Contains(searchString) ||
                 //                                                p.LastName.Contains(searchString) ||
