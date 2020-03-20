@@ -1,6 +1,7 @@
 ﻿@using aQord.ASP.Models
 @model IEnumerable<aQord.ASP.Models.Person>
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -13,8 +14,7 @@
     @using (Html.BeginForm("Index","People", FormMethod.Get))
     {
         <p>
-            City: @Html.DropDownList("personCity","All")
-            First name: @Html.TextBox("SearchString") <br/>
+            Search: @Html.TextBox("searchString") <br/>
             <input type="submit" value="Filter"/>
         </p>
     }

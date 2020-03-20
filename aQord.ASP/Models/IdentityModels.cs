@@ -20,7 +20,7 @@ namespace aQord.ASP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Person> PeopleDbSet  { get; set; } 
+        public DbSet<Person> People  { get; set; } 
         public DbSet<Schematics> Schematics { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -25,39 +25,43 @@ namespace aQord.ASP.Controllers
         }
 
         //Get data from database - my own solution
-        //[HttpGet]
-        //public ActionResult Index()
-        //{
-        //    List<Person> peopleFromDb = _dbContext.PeopleDbSet.ToList();
-
-        //    return View(peopleFromDb);
-        //}
-
-        //Get data from database - from https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-search
         [HttpGet]
-        public ActionResult Index(string personCity, string searchString)
+        public ActionResult Index(string searchString)
         {
-            var cityList = new List<string>();
+            
+            //var peopleFromDb = _dbContext.People.ToList();
 
-            var cityQry = from c in _dbContext.PeopleDbSet orderby c.City select c.City;
+            var people = from p in _dbContext.People select p;
 
-            cityList.AddRange(cityQry.Distinct());
-            ViewBag.personCity = new SelectList(cityList);
 
-            var person = from p in _dbContext.PeopleDbSet select p;
-
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                person = _dbContext.PeopleDbSet.Where(s => s.FirstName.Contains(searchString));
+                var searchWords = searchString.Split(',').ToList();
+
+                people =_dbContext.People.Where(p => searchWords.Contains(p.FirstName) ||
+
+                                                     p.LastName.Contains(searchString)||
+                                                     p.Address.Contains(searchString) ||
+                                                     p.City.Contains(searchString) ||
+                                                     p.PostalCode.ToString().Contains(searchString) ||
+                                                     p.CellphoneNo.ToString().Contains(searchString) ||
+                                                     p.Email.Contains(searchString) ||
+                                                     p.OccupationalStatus.Contains(searchString) ||
+                                                     p.SalaryPrHour.ToString().Contains(searchString) ||
+                                                     p.WeeklyWorkingHours.ToString().Contains(searchString));
+
+
+                //peopleFromDb = _dbContext.People.Where(p => p.FirstName.Contains(searchString) ||
+                //                                                p.LastName.Contains(searchString) ||
+                //                                                p.City.Contains(searchString)).ToList();
             }
 
-            if (!String.IsNullOrEmpty(personCity))
-            {
-                person = _dbContext.PeopleDbSet.Where(x => x.City == personCity);
-            }
 
-            return View(person);
+            return View(people);
         }
+
+        ////Get data from database - from https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-search
+
 
         // direct user to the PeopleForm view
         public ActionResult New()
@@ -69,7 +73,7 @@ namespace aQord.ASP.Controllers
         [HttpPost]
         public ActionResult Save(Person person)
         {
-            var craftsmanInDb = _dbContext.PeopleDbSet.Create();
+            var craftsmanInDb = _dbContext.People.Create();
 
             craftsmanInDb.FirstName = person.FirstName;
             craftsmanInDb.LastName = person.LastName;
@@ -82,7 +86,7 @@ namespace aQord.ASP.Controllers
             craftsmanInDb.SalaryPrHour = person.SalaryPrHour;
             craftsmanInDb.WeeklyWorkingHours = person.WeeklyWorkingHours;
 
-            _dbContext.PeopleDbSet.Add(person);
+            _dbContext.People.Add(person);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index","People");
@@ -98,7 +102,7 @@ namespace aQord.ASP.Controllers
             }
             else
             {
-                Person person = _dbContext.PeopleDbSet.Find(id);
+                Person person = _dbContext.People.Find(id);
                 if (person == null)
                 {
                     return HttpNotFound();
@@ -120,9 +124,9 @@ namespace aQord.ASP.Controllers
                 return HttpNotFound();
             }
             
-            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == person.Id);
+            var entity = _dbContext.People.FirstOrDefault(p => p.Id == person.Id);
 
-            _dbContext.PeopleDbSet.Remove(entity);
+            _dbContext.People.Remove(entity);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "People");
@@ -132,7 +136,7 @@ namespace aQord.ASP.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == id);
+            var entity = _dbContext.People.FirstOrDefault(p => p.Id == id);
 
             return View(entity);
         }
@@ -141,7 +145,7 @@ namespace aQord.ASP.Controllers
         [HttpPost]
         public ActionResult Update(Person person)
         {
-            var entity = _dbContext.PeopleDbSet.FirstOrDefault(p => p.Id == person.Id);
+            var entity = _dbContext.People.FirstOrDefault(p => p.Id == person.Id);
 
             entity.FirstName = person.FirstName;
             entity.LastName = person.LastName;
