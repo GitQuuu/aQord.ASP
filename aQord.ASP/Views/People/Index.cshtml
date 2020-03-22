@@ -13,10 +13,11 @@
 
     @using (Html.BeginForm("Index","People", FormMethod.Get))
     {
-<p>
-    Search: @Html.TextBox("searchString") <br />
-    <input type="submit" value="Filter" />
-</p>
+        <p>
+            By: @Html.DropDownList("filterByCity","All")
+            Søg: @Html.TextBox("searchString") <br/>
+            <input type="submit" value="Filter"/>
+        </p>
     }
 
 </p>

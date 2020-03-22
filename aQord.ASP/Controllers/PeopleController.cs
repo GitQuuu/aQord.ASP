@@ -26,13 +26,27 @@ namespace aQord.ASP.Controllers
 
         //Get data from database
         [HttpGet]
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string filterByCity)
         {
             IQueryable<Person> people = _dbContext.People;
 
-            //var people = from p in _dbContext.People select p;
+            //var people =  from p in _dbContext.People
+            //              select p;
             
 
+            var cityList = new List<string>();
+
+            var cityQry =    from c in _dbContext.People 
+                                                orderby c.City 
+                                                select c.City;
+
+
+
+            cityList.AddRange(cityQry.Distinct());
+            ViewBag.filterByCity = new SelectList(cityList);
+
+
+            //For the searchbox in view
             if (!string.IsNullOrEmpty(searchString))
             {
                  var searchWords = searchString.Split(',');
@@ -49,11 +63,13 @@ namespace aQord.ASP.Controllers
                                                       searchWords.Contains(p.WeeklyWorkingHours.ToString()) 
                                                       );
 
-                //peopleFromDb = _dbContext.People.Where(p => p.FirstName.Contains(searchString) ||
-                //                                                p.LastName.Contains(searchString) ||
-                //                                                p.City.Contains(searchString)).ToList();
             }
 
+            //For the dropdown in the view
+            if (!string.IsNullOrEmpty(filterByCity))
+            {
+                people = _dbContext.People.Where(p => p.City == filterByCity);
+            }
 
             return View(people);
         }
