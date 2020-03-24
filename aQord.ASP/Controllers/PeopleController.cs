@@ -30,46 +30,32 @@ namespace aQord.ASP.Controllers
         {
             IQueryable<Person> people = _dbContext.People;
 
-            //var people =  from p in _dbContext.People
-            //              select p;
-            
-
-            var cityList = new List<string>();
-
-            var cityQry =    from c in _dbContext.People 
-                                                orderby c.City 
-                                                select c.City;
-
-
-
-            cityList.AddRange(cityQry.Distinct());
-            ViewBag.filterByCity = new SelectList(cityList);
 
 
             //For the searchbox in view
             if (!string.IsNullOrEmpty(searchString))
             {
-                 var searchWords = searchString.Split(',');
+                var words = searchString.Split(',');
 
-                people = _dbContext.People.Where(p => searchWords.Contains(p.FirstName) || 
-                                                      searchWords.Contains(p.LastName) ||
-                                                      searchWords.Contains(p.Address) ||
-                                                      searchWords.Contains(p.City) ||
-                                                      searchWords.Contains(p.PostalCode.ToString()) ||
-                                                      searchWords.Contains(p.CellphoneNo.ToString()) ||
-                                                      searchWords.Contains(p.Email) ||
-                                                      searchWords.Contains(p.OccupationalStatus) ||
-                                                      searchWords.Contains(p.SalaryPrHour.ToString()) ||
-                                                      searchWords.Contains(p.WeeklyWorkingHours.ToString()) 
-                                                      );
+               
 
+                
+                foreach (var word in words)
+                {
+                   people = people.Where(p => word.Contains(p.FirstName) ||
+                                      word.Contains(p.LastName) ||
+                                      word.Contains(p.Address) ||
+                                      word.Contains(p.City) ||
+                                      word.Contains(p.PostalCode.ToString()) ||
+                                      word.Contains(p.CellphoneNo.ToString()) ||
+                                      word.Contains(p.Email) ||
+                                      word.Contains(p.OccupationalStatus) ||
+                                      word.Contains(p.SalaryPrHour.ToString()) ||
+                                      word.Contains(p.WeeklyWorkingHours.ToString()));
+                }
+                
             }
 
-            //For the dropdown in the view
-            if (!string.IsNullOrEmpty(filterByCity))
-            {
-                people = _dbContext.People.Where(p => p.City == filterByCity);
-            }
 
             return View(people);
         }
