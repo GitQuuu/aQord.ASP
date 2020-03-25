@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202003171013155_initSchematicsTable.designer.cs">
       <DependentUpon>202003171013155_initSchematicsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003251138287_addDataannotationToSchematicModel.cs" />
+    <Compile Include="Migrations\202003251138287_addDataannotationToSchematicModel.designer.cs">
+      <DependentUpon>202003251138287_addDataannotationToSchematicModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -278,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003171013155_initSchematicsTable.resx">
       <DependentUpon>202003171013155_initSchematicsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003251138287_addDataannotationToSchematicModel.resx">
+      <DependentUpon>202003251138287_addDataannotationToSchematicModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

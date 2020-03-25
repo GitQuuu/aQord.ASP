@@ -35,19 +35,19 @@ namespace aQord.ASP.Models
         public string Name { get; set; }
 
         [Display(Name = "Uge nr.")]
-        public int WeekNumber { get; set; }
+        public int? WeekNumber { get; set; }
 
         [Display(Name = "Timer i akkord")]
-        public double[] AkkordHours { get; set; }
+        public double?[] AkkordHours { get; set; }
 
         [Display(Name = "Dagløns timer")]
-        public double[] NormalHours { get; set; }
+        public double?[] NormalHours { get; set; }
 
         [Display(Name = "Skurpenge antal dage")]
-        public double ShelterRateAmountOfDays { get; set; }
+        public double? ShelterRateAmountOfDays { get; set; }
 
         [Display(Name = "Kørepenge antal km.")]
-        public double MileageAllowanceAmountOfKm { get; set; }
+        public double? MileageAllowanceAmountOfKm { get; set; }
         
     }
 }

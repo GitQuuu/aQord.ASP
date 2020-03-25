@@ -1,4 +1,5 @@
 ﻿@*@model System.Data.Entity.DbSet<aQord.ASP.Models.Schematics>*@
+@using aQord.ASP.Models
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
 @{
@@ -8,7 +9,7 @@
 <h2>Uge skema</h2>
 
 <p>
-    @Html.ActionLink("Tilføj","Create","Schematics", new {@class = "btn btn-default"})
+    @Html.ActionLink("Tilføj", "Create", "Schematics", new { @class = "btn btn-default" })
 </p>
 
 <p>
@@ -37,8 +38,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProjectNumber)
             </th>
-        </tr>
-        <tr>
+
             <th>
                 @Html.DisplayNameFor(model => model.CraftsmanId)
             </th>
@@ -67,6 +67,69 @@
                 @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
             </th>
         </tr>
+
+        @foreach (var data in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(Items => data.TypeOfWork)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(Items => data.StaffRepresentative)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(Items => data.Year)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(Items => data.Firm)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(Items => data.WorkplaceAddress)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(Items => data.ProjectNumber)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(items => data.CraftsmanId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.WeekNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.AkkordHours)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.NormalHours)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.ShelterRateAmountOfDays)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(items => data.MileageAllowanceAmountOfKm)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Redigere", "Edit", "Schematics")
+                    @Html.ActionLink("Detalje", "Details", "Schematics")
+                    @Html.ActionLink("Slet", "Delete", "Schematics")
+                </td>
+            </tr>
+        }
 
     </table>
 </p>
