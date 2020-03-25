@@ -5,19 +5,69 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Uge skema</h2>
+
+<p>
+    @Html.ActionLink("Tilføj","Create","Schematics", new {@class = "btn btn-default"})
+</p>
 
 <p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model=> model.TypeOfWork)
+                @Html.DisplayNameFor(model => model.TypeOfWork)
             </th>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.StaffRepresentative)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Firm)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.WorkplaceAddress)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </th>
         </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftsmanId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.WeekNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AkkordHours)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.NormalHours)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+            </th>
+        </tr>
+
     </table>
 </p>
 
