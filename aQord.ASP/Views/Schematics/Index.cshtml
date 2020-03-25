@@ -1,0 +1,23 @@
+﻿@*@model System.Data.Entity.DbSet<aQord.ASP.Models.Schematics>*@
+@model IEnumerable<aQord.ASP.Models.Schematics>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=> model.TypeOfWork)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRepresentative)
+            </th>
+        </tr>
+    </table>
+</p>
+
