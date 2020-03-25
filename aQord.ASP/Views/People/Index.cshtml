@@ -14,7 +14,7 @@
     @using (Html.BeginForm("Index","People", FormMethod.Get))
     {
         <p>
-            Søg: @Html.TextBox("searchString") <br/>
+            Filter: @Html.TextBox("searchString") <br/>
             <input type="submit" value="Filter"/>
         </p>
     }

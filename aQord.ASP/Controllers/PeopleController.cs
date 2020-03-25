@@ -42,16 +42,16 @@ namespace aQord.ASP.Controllers
                 
                 foreach (var word in words)
                 {
-                   people = people.Where(p => word.Contains(p.FirstName) ||
-                                      word.Contains(p.LastName) ||
-                                      word.Contains(p.Address) ||
-                                      word.Contains(p.City) ||
-                                      word.Contains(p.PostalCode.ToString()) ||
-                                      word.Contains(p.CellphoneNo.ToString()) ||
-                                      word.Contains(p.Email) ||
-                                      word.Contains(p.OccupationalStatus) ||
-                                      word.Contains(p.SalaryPrHour.ToString()) ||
-                                      word.Contains(p.WeeklyWorkingHours.ToString()));
+                   people = people.Where(p => word.Equals(p.FirstName) ||
+                                      word.Equals(p.LastName) ||
+                                      word.Equals(p.Address) ||
+                                      word.Equals(p.City) ||
+                                      word.Equals(p.PostalCode.ToString()) ||
+                                      word.Equals(p.CellphoneNo.ToString()) ||
+                                      word.Equals(p.Email) ||
+                                      word.Equals(p.OccupationalStatus) ||
+                                      word.Equals(p.SalaryPrHour.ToString()) ||
+                                      word.Equals(p.WeeklyWorkingHours.ToString()));
                 }
                 
             }
