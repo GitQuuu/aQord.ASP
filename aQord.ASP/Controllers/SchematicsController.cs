@@ -21,5 +21,10 @@ namespace aQord.ASP.Controllers
         {
             return View(_dbContext.Schematics);
         }
+
+        public ActionResult New()
+        {
+            return View("SchematicsForm");
+        }
     }
 }
