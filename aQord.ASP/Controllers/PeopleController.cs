@@ -37,9 +37,6 @@ namespace aQord.ASP.Controllers
             {
                 var words = searchString.Split(',');
 
-               
-
-                
                 foreach (var word in words)
                 {
                    people = people.Where(p => word.Equals(p.FirstName) ||
