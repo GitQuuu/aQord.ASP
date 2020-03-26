@@ -26,5 +26,28 @@ namespace aQord.ASP.Controllers
         {
             return View("SchematicsForm");
         }
+
+        public ActionResult Save(Schematics schematic)
+        {
+            var schematicsToDb = _dbContext.Schematics.Create();
+
+            schematicsToDb.Id = schematic.Id;
+            schematicsToDb.TypeOfWork = schematic.TypeOfWork;
+            schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
+            schematicsToDb.Year = schematic.Year;
+            schematicsToDb.Firm = schematic.Firm;
+            schematicsToDb.WorkplaceAddress = schematic.WorkplaceAddress;
+            schematicsToDb.ProjectNumber = schematic.ProjectNumber;
+            schematicsToDb.CraftsmanId = schematic.CraftsmanId;
+            schematicsToDb.Name = schematic.Name;
+            schematicsToDb.WeekNumber = schematic.WeekNumber;
+            schematicsToDb.AkkordHours = schematic.AkkordHours;
+            schematicsToDb.NormalHours = schematic.NormalHours;
+
+            _dbContext.Schematics.Add(schematic);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Schematics");
+        }
     }
 }
