@@ -26,16 +26,15 @@ namespace aQord.ASP.Controllers
 
         //Get data from database
         [HttpGet]
-        public ActionResult Index(string searchString, string filterByCity)
+        public ActionResult Index(string filterString)
         {
             IQueryable<Person> people = _dbContext.People;
 
 
-
-            //For the searchbox in view
-            if (!string.IsNullOrEmpty(searchString))
+            //For the filterbox in view
+            if (!string.IsNullOrEmpty(filterString))
             {
-                var words = searchString.Split(',');
+                var words = filterString.Split(',');
 
                 foreach (var word in words)
                 {

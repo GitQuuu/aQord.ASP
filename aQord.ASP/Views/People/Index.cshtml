@@ -1,4 +1,5 @@
-﻿@using aQord.ASP.Models
+﻿@using System.Web.UI.WebControls
+@using aQord.ASP.Models
 @model IEnumerable<aQord.ASP.Models.Person>
 
 
@@ -8,18 +9,22 @@
 
 <h2>Liste af håndværkere</h2>
 
+
 <p>
     @Html.ActionLink("Tilføj ny", "New", "People", new { @class = "btn btn-default" })
 
-    @using (Html.BeginForm("Index","People", FormMethod.Get))
-    {
-        <p>
-            Filter: @Html.TextBox("searchString") <br/>
-            <input type="submit" value="Filter"/>
-        </p>
-    }
 
-</p>
+    @using (Html.BeginForm("Index", "People", FormMethod.Get))
+    {
+    <p>
+        
+        @Html.TextBox("filterString", null, new {@placeholder = "Søg"})
+        
+        <input type="submit" value="Filter" />  
+    </p>
+
+}
+    </p>
     <table class="table">
         <tr>
             <th>
