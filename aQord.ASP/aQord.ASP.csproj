@@ -188,6 +188,10 @@
     <Compile Include="Migrations\202003251138287_addDataannotationToSchematicModel.designer.cs">
       <DependentUpon>202003251138287_addDataannotationToSchematicModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003271131056_storeDoubleArrayWithEFCFapproch.cs" />
+    <Compile Include="Migrations\202003271131056_storeDoubleArrayWithEFCFapproch.designer.cs">
+      <DependentUpon>202003271131056_storeDoubleArrayWithEFCFapproch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -286,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003251138287_addDataannotationToSchematicModel.resx">
       <DependentUpon>202003251138287_addDataannotationToSchematicModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003271131056_storeDoubleArrayWithEFCFapproch.resx">
+      <DependentUpon>202003271131056_storeDoubleArrayWithEFCFapproch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

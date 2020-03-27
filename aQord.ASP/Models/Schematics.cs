@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -38,7 +39,26 @@ namespace aQord.ASP.Models
         public int? WeekNumber { get; set; }
 
         [Display(Name = "Timer i akkord")]
-        public double?[] AkkordHours { get; set; }
+        [NotMapped]
+        public double[] AkkordHours
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(HoursInAkkordData))
+                {
+                    return Array.ConvertAll(HoursInAkkordData.Split(','), double.Parse);
+                }
+
+                return new double[7];
+            }
+            set
+            {
+                var _data = value;
+                HoursInAkkordData = String.Join(",", _data.Select(d => d.ToString()).ToArray());
+            }
+        }
+
+        public string HoursInAkkordData { get; set; }
 
         [Display(Name = "Dagløns timer")]
         public double?[] NormalHours { get; set; }
