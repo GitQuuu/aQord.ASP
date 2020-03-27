@@ -38,8 +38,8 @@ namespace aQord.ASP.Models
         [Display(Name = "Uge nr.")]
         public int? WeekNumber { get; set; }
 
-        [Display(Name = "Timer i akkord")]
         [NotMapped]
+        [Display(Name = "Timer i akkord")]
         public double[] AkkordHours
         {
             get
@@ -58,10 +58,32 @@ namespace aQord.ASP.Models
             }
         }
 
+        [Display(Name = "Timer i akkord")]
         public string HoursInAkkordData { get; set; }
 
+        [NotMapped]
         [Display(Name = "Dagløns timer")]
-        public double?[] NormalHours { get; set; }
+        public double[] NormalHours {
+            get
+            {
+                if (!string.IsNullOrEmpty(NormalHoursData))
+                {
+                    return Array.ConvertAll(NormalHoursData.Split(','), double.Parse);
+                }
+                else
+                {
+                   return new double[7]; 
+                }
+            }
+            set
+            {
+                var _data = value;
+                NormalHoursData = String.Join(",", _data.Select(d => d.ToString()).ToArray());
+            }
+        }
+
+        [Display(Name = "Dagløns timer")]
+        public string NormalHoursData { get; set; }
 
         [Display(Name = "Skurpenge antal dage")]
         public double? ShelterRateAmountOfDays { get; set; }
