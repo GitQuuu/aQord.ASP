@@ -72,5 +72,22 @@ namespace aQord.ASP.Controllers
             }
 
         }
+
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(Schematics schematics)
+        {
+            if (schematics == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            var entity = _dbContext.Schematics.FirstOrDefault(s=>s.Id == schematics.Id);
+            _dbContext.Schematics.Remove(entity);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index","Schematics");
+        }
     }
 }
