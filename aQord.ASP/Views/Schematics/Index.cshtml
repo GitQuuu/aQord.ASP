@@ -68,65 +68,65 @@
             </th>
         </tr>
 
-        @foreach (var data in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(Items => data.TypeOfWork)
+                    @Html.DisplayFor(Items => item.TypeOfWork)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => data.StaffRepresentative)
+                    @Html.DisplayFor(Items => item.StaffRepresentative)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => data.Year)
+                    @Html.DisplayFor(Items => item.Year)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => data.Firm)
+                    @Html.DisplayFor(Items => item.Firm)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => data.WorkplaceAddress)
+                    @Html.DisplayFor(Items => item.WorkplaceAddress)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => data.ProjectNumber)
+                    @Html.DisplayFor(Items => item.ProjectNumber)
                 </td>
                 
                 <td>
-                    @Html.DisplayFor(items => data.CraftsmanId)
+                    @Html.DisplayFor(items => item.CraftsmanId)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.Name)
+                    @Html.DisplayFor(items => item.Name)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.WeekNumber)
+                    @Html.DisplayFor(items => item.WeekNumber)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.AkkordHours)
+                    @Html.DisplayFor(items => item.AkkordHours)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.NormalHours)
+                    @Html.DisplayFor(items => item.NormalHours)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.ShelterRateAmountOfDays)
+                    @Html.DisplayFor(items => item.ShelterRateAmountOfDays)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(items => data.MileageAllowanceAmountOfKm)
+                    @Html.DisplayFor(items => item.MileageAllowanceAmountOfKm)
                 </td>
                 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics")
                     @Html.ActionLink("Detalje", "Details", "Schematics")
-                    @Html.ActionLink("Slet", "Delete", "Schematics")
+                    @Html.ActionLink("Slet", "Delete", new {id = item.Id})
                 </td>
             </tr>
         }

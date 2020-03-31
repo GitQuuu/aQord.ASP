@@ -49,5 +49,28 @@ namespace aQord.ASP.Controllers
 
             return RedirectToAction("Index", "Schematics");
         }
+
+        // Get
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var schematic = _dbContext.Schematics.Find(id);
+
+                if (schematic == null)
+                {
+                    return HttpNotFound();
+                }
+                
+
+                return View(schematic);
+
+            }
+
+        }
     }
 }

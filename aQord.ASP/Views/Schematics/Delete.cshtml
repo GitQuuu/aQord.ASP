@@ -1,0 +1,124 @@
+﻿@model aQord.ASP.Models.Schematics
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h3>Er du sikker på du vil fjerne denne ugeskema fra databasen</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfWork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffRepresentative)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffRepresentative)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Firm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Firm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkplaceAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkplaceAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CraftsmanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CraftsmanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeekNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeekNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoursInAkkordData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoursInAkkordData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NormalHoursData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NormalHoursData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShelterRateAmountOfDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MileageAllowanceAmountOfKm)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" />
+            @Html.ActionLink("Fortryd", "Index", "Schematics", new{@class = "btn btn-default"})
+        </div>
+    }
+</div>
