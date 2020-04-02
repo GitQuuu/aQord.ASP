@@ -22,6 +22,17 @@ namespace aQord.ASP.Controllers
             return View(_dbContext.Schematics);
         }
 
+        //Action Function for dropdown  to populate other textbos in SchematicsForm
+        [HttpPost]
+        public ActionResult Action(string code)
+        {
+            var query = from c in _dbContext.Schematics
+                where c.ProjectNumber == code
+                select c;
+            
+            return Json(query);
+        }
+
         public ActionResult New()
         {
             ViewData["ProjectNumber"] = new SelectList(_dbContext.Schematics, "ProjectNumber", "ProjectNumber");
