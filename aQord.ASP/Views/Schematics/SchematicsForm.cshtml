@@ -137,11 +137,11 @@
     {
 
     <script type="text/javascript">
-        function Action(code) {
+        function Action(dropdownSelection) {
             $.ajax({
                 url: '@Url.Action("Action", "Schematics")',
                 type: "POST",
-                data: { "code": code },
+                data: { "dropdownSelection": dropdownSelection },
                 "success": function (data) {
                     if (data != null) {
                         var vdata = data;

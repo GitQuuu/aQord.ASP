@@ -24,11 +24,11 @@ namespace aQord.ASP.Controllers
 
         //Action Function for dropdown  to populate other textbos in SchematicsForm
         [HttpPost]
-        public ActionResult Action(string code)
+        public ActionResult Action(string dropdownSelection)
         {
             var query = from c in _dbContext.Schematics
-                where c.ProjectNumber == code
-                select c;
+                where c.ProjectNumber == dropdownSelection
+                        select c;
             
             return Json(query);
         }
