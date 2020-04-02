@@ -7,7 +7,7 @@
 <h2>SchematicsForm</h2>
 
 
-@using (Html.BeginForm("Save","Schematics")) 
+@using (Html.BeginForm("Save","Schematics", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -58,6 +58,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            @Html.DropDownList("Id", (SelectList)ViewData["ProjectNumber"], "vælg eksisterende eller tilføj nyt under", new { onchange = "Action(this.value);", @class = "form-control" })
+
             @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
         </div>
@@ -66,8 +68,6 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CraftsmanId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Id", (SelectList)ViewData["Id"], "Select Id", new { onchange = "Action(this.value);", @class = "form-control" })
-
             @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CraftsmanId, "", new { @class = "text-danger" })
         </div>

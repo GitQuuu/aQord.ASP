@@ -24,7 +24,7 @@ namespace aQord.ASP.Controllers
 
         public ActionResult New()
         {
-            ViewData["Id"] = new SelectList(_dbContext.People,"Id","Id");
+            ViewData["ProjectNumber"] = new SelectList(_dbContext.Schematics, "ProjectNumber", "ProjectNumber");
             return View("SchematicsForm");
         }
 
