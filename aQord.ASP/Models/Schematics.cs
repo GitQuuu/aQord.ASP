@@ -18,6 +18,7 @@ namespace aQord.ASP.Models
         public string StaffRepresentative { get; set; }
 
         [Display(Name = "Årstal")]
+        [DataType(DataType.Text)]
         public int Year { get; set; }
 
         [Display(Name = "Firma")]
