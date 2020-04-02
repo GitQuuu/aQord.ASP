@@ -26,16 +26,14 @@ namespace aQord.ASP.Controllers
         [HttpPost]
         public ActionResult Action(string dropdownSelection)
         {
-            var query = from c in _dbContext.Schematics
-                where c.ProjectNumber == dropdownSelection
-                        select c;
-            
+            var query = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == dropdownSelection);
+
             return Json(query);
         }
 
         public ActionResult New()
         {
-            ViewData["ProjectNumber"] = new SelectList(_dbContext.Schematics, "ProjectNumber", "ProjectNumber");
+            ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
             return View("SchematicsForm");
         }
 
