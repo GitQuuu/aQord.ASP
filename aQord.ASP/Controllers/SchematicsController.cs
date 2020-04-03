@@ -24,16 +24,27 @@ namespace aQord.ASP.Controllers
 
         //Action Function for dropdown  to populate other textbos in SchematicsForm
         [HttpPost]
-        public ActionResult Action(string dropdownSelection)
+        public ActionResult AutofillSchematicForm(string dropdownSelection)
         {
             var query = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == dropdownSelection);
 
             return Json(query);
         }
 
+        [HttpPost]
+        public ActionResult AutofillSchematicFormPeople(string dropdownSelection)
+        {
+            var query = _dbContext.People.FirstOrDefault(s => s.FirstName == dropdownSelection);
+
+            return Json(query);
+        }
+
+
+
         public ActionResult New()
         {
             ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
+            ViewData["Person"] = new SelectList(_dbContext.People, "FirstName", "FirstName");
             return View("SchematicsForm");
         }
 

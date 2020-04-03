@@ -1,4 +1,5 @@
-﻿@model aQord.ASP.Models.Schematics
+﻿@using System.Data.Entity.Core.Metadata.Edm
+@model aQord.ASP.Models.Schematics
 
 @{
     ViewBag.Title = "SchematicsForm";
@@ -19,7 +20,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "Action(this.value);", @class = "form-control" })
+            @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicForm(this.value);", @class = "form-control" })
 
             @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
@@ -65,20 +66,23 @@
             @Html.ValidationMessageFor(model => model.WorkplaceAddress, "", new { @class = "text-danger" })
         </div>
     </div>
-    <hr/>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Fullname", (SelectList)ViewData["Person"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicFormPeople(this.value);", @class = "form-control" })
+
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
     <div class="form-group">
         @Html.LabelFor(model => model.CraftsmanId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CraftsmanId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -125,7 +129,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Gem" class="btn btn-default" />
-            @Html.ActionLink("Fortryd", "Index", "Schematics",new{@class="btn btn-default"})
+            @Html.ActionLink("Fortryd", "Index", "Schematics", new { @class = "btn btn-default" })
         </div>
     </div>
 </div>
@@ -137,9 +141,9 @@
     {
 
     <script type="text/javascript">
-        function Action(dropdownSelection) {
+        function AutofillSchematicForm(dropdownSelection) {
             $.ajax({
-                url: '@Url.Action("Action", "Schematics")',
+                url: '@Url.Action("AutofillSchematicForm", "Schematics")',
                 type: "POST",
                 data: { "dropdownSelection": dropdownSelection },
                 "success": function (data) {
@@ -149,6 +153,21 @@
                         $("#Year").val(data.Year);
                         $("#Firm").val(data.Firm);
                         $("#WorkplaceAddress").val(data.WorkplaceAddress);
+                    }
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function AutofillSchematicFormPeople(dropdownSelection) {
+            $.ajax({
+                url: '@Url.Action("AutofillSchematicFormPeople", "Schematics")',
+                type: "POST",
+                data: { "dropdownSelection": dropdownSelection },
+                "success": function (data) {
+                    if (data != null) {
+                        $("#CraftsmanId").val(data.Id);
                     }
                 }
             });

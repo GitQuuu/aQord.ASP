@@ -31,12 +31,14 @@ namespace aQord.ASP.Models
         public string ProjectNumber { get; set; }
 
         [Display(Name = "Arbejds nr.")]
+        [DataType(DataType.Text)]
         public int CraftsmanId { get ; set; }
 
         [Display(Name = "Navn")]
         public string Name { get; set; }
 
         [Display(Name = "Uge nr.")]
+        [DataType(DataType.Text)]
         public int? WeekNumber { get; set; }
 
         [NotMapped]
