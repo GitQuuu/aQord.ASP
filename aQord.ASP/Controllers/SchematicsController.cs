@@ -44,7 +44,11 @@ namespace aQord.ASP.Controllers
         public ActionResult New()
         {
             ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
-            ViewData["Person"] = new SelectList(_dbContext.People, "FirstName", "FirstName");
+            //ViewData["Person"] = new SelectList(_dbContext.People, "FirstName", "FirstName");
+
+            var medlist = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
+            ViewData["FullName"] = new SelectList(medlist,"Id","FullName");
+          
             return View("SchematicsForm");
         }
 
