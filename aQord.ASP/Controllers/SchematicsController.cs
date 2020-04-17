@@ -22,7 +22,7 @@ namespace aQord.ASP.Controllers
             return View(_dbContext.Schematics);
         }
 
-        //Action Function for dropdown  to populate other textbos in SchematicsForm
+        //Action Function for dropdown  to populate other input fields in SchematicsForm
         [HttpPost]
         public ActionResult AutofillSchematicForm(string dropdownSelection)
         {
@@ -31,6 +31,7 @@ namespace aQord.ASP.Controllers
             return Json(query);
         }
 
+        //Action Function for dropdown  to populate other input fields in SchematicsForm for people
         [HttpPost]
         public ActionResult AutofillSchematicFormPeople(string dropdownSelection)
         {
@@ -46,8 +47,8 @@ namespace aQord.ASP.Controllers
             ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
             //ViewData["Person"] = new SelectList(_dbContext.People, "FirstName", "FirstName");
 
-            var medlist = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
-            ViewData["FullName"] = new SelectList(medlist,"Id","FullName");
+            var autoFill = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
+            ViewData["FullName"] = new SelectList(autoFill,"Id","FullName");
           
             return View("SchematicsForm");
         }

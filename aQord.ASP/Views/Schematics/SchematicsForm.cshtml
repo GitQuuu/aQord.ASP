@@ -148,12 +148,13 @@
                 data: { "dropdownSelection": dropdownSelection },
                 "success": function (data) {
                     if (data != null) {
+                        $("#ProjectNumber").val(data.ProjectNumber);
                         $("#TypeOfWork").val(data.TypeOfWork);
                         $("#StaffRepresentative").val(data.StaffRepresentative);
                         $("#Year").val(data.Year);
                         $("#Firm").val(data.Firm);
                         $("#WorkplaceAddress").val(data.WorkplaceAddress);
-                    }
+                    } 
                 }
             });
         }
@@ -167,6 +168,7 @@
                 data: { "dropdownSelection": dropdownSelection },
                 "success": function (data) {
                     if (data != null) {
+                        $("#Name").val(data.FirstName + " " + data.LastName);
                         $("#CraftsmanId").val(data.Id);
                     }
                 }
