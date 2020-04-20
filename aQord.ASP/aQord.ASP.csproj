@@ -269,6 +269,7 @@
     <Content Include="Views\Schematics\Index.cshtml" />
     <Content Include="Views\Schematics\SchematicsForm.cshtml" />
     <Content Include="Views\Schematics\Delete.cshtml" />
+    <Content Include="Views\Schematics\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
