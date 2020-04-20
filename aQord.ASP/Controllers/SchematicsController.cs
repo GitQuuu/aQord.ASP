@@ -76,6 +76,14 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var entity = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
+
+            return View(entity);
+        }
+
         // Get
         public ActionResult Delete(int? id)
         {
