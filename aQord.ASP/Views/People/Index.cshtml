@@ -17,12 +17,11 @@
     @using (Html.BeginForm("Index", "People", FormMethod.Get))
     {
     <p>
-        
-        @Html.TextBox("filterString", null, new {@placeholder = "Søg"})
-        
-        <input type="submit" value="Filter" />  
-    </p>
 
+        @Html.TextBox("filterString", null, new { @placeholder = "Søg" })
+
+        <input type="submit" value="Filter" />
+    </p>
 }
     </p>
     <table class="table">

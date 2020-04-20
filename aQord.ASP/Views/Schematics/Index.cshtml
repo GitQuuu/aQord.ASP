@@ -1,4 +1,5 @@
 ﻿@*@model System.Data.Entity.DbSet<aQord.ASP.Models.Schematics>*@
+@using System.Web.UI.WebControls
 @using aQord.ASP.Models
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
@@ -11,6 +12,15 @@
 <p>
     @Html.ActionLink("Tilføj", "New", "Schematics", new { @class = "btn btn-default" })
 </p>
+
+@using (Html.BeginForm("index", "Schematics", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("FilterString",null,new {@PlaceHolder="Søg"})
+        <input type="submit" value="Søg"/>
+    </p>
+}
+
 
 <p>
     <table class="table">
@@ -94,7 +104,7 @@
                 <td>
                     @Html.DisplayFor(Items => item.ProjectNumber)
                 </td>
-                
+
                 <td>
                     @Html.DisplayFor(items => item.CraftsmanId)
                 </td>
@@ -122,11 +132,11 @@
                 <td>
                     @Html.DisplayFor(items => item.MileageAllowanceAmountOfKm)
                 </td>
-                
+
                 <td>
-                    @Html.ActionLink("Redigere", "Edit","Schematics", new {id = item.Id},"")
+                    @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, "")
                     @Html.ActionLink("Detalje", "Details", "Schematics")
-                    @Html.ActionLink("Slet", "Delete", new {id = item.Id})
+                    @Html.ActionLink("Slet", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }
