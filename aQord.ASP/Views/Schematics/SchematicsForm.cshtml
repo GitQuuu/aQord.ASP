@@ -71,7 +71,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Fullname", (SelectList)ViewData["Person"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicFormPeople(this.value);", @class = "form-control" })
+                @Html.DropDownList("FullName", (SelectList)ViewData["Person"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicFormPeople(this.value);", @class = "form-control" })
 
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -140,6 +140,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     {
 
+    <!--Script for schematic to autofill input fields and reset them-->
     <script type="text/javascript">
         function AutofillSchematicForm(dropdownSelection) {
 
@@ -171,9 +172,13 @@
         }
     </script>
 
-
+    <!--Script for schematic to autofill input fields and reset them-->
     <script type="text/javascript">
         function AutofillSchematicFormPeople(dropdownSelection) {
+
+            $("#CraftsmanId").val('');
+            $("#Name").val('');
+
             $.ajax({
                 url: '@Url.Action("AutofillSchematicFormPeople", "Schematics")',
                 type: "POST",
