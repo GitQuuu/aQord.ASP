@@ -13,10 +13,10 @@
     @Html.ActionLink("Tilføj", "New", "Schematics", new { @class = "btn btn-default" })
 </p>
 
-@using (Html.BeginForm("index", "Schematics", FormMethod.Get))
+@using (Html.BeginForm("Index", "Schematics", FormMethod.Get))
 {
     <p>
-        @Html.TextBox("FilterString",null,new {@PlaceHolder="Søg"})
+        @Html.TextBox("searchString",null,new {@PlaceHolder="Søg"})
         <input type="submit" value="Søg"/>
     </p>
 }
