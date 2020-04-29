@@ -11,6 +11,8 @@ namespace aQord.ASP.Controllers
     {
         public ApplicationDbContext _dbContext;
 
+        private IQueryable<Schematics> schematics; 
+
         public SchematicsController()
         {
             _dbContext = new ApplicationDbContext();
@@ -19,9 +21,7 @@ namespace aQord.ASP.Controllers
         // GET: Schematics
         public ActionResult Index(string searchString)
         {
-            IQueryable<Schematics> schematics = _dbContext.Schematics;
-
-
+            schematics = _dbContext.Schematics;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -150,6 +150,13 @@ namespace aQord.ASP.Controllers
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Schematics");
+        }
+
+        public ActionResult ExportToExcel()
+        {
+            // use the  schematics variable locally instead of export from database or razorview
+
+            return View("Index");
         }
     }
 }
