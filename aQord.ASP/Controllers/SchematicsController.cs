@@ -27,24 +27,24 @@ namespace aQord.ASP.Controllers
             {
                 var words = searchString.Split(',');
 
-                schematics = _dbContext.Schematics.Where(x=>x.)
+                schematics = _dbContext.Schematics;
 
-                //foreach (var word in words)
-                //{
-                //    schematics = schematics.Where(s => word.Contains(s.TypeOfWork) ||
-                //                                       word.Contains(s.StaffRepresentative) ||
-                //                                       word.Contains(s.Year.ToString()) ||
-                //                                       word.Contains(s.Firm) ||
-                //                                       word.Contains(s.WorkplaceAddress.ToString()) ||
-                //                                       word.Contains(s.ProjectNumber.ToString()) ||
-                //                                       word.Contains(s.CraftsmanId.ToString()) ||
-                //                                       word.Contains(s.Name) ||
-                //                                       word.Contains(s.WeekNumber.ToString()) ||
-                //                                       word.Contains(s.HoursInAkkordData.ToString()) || 
-                //                                       word.Contains(s.NormalHoursData.ToString()) || 
-                //                                       word.Contains(s.ShelterRateAmountOfDays.ToString()) ||
-                //                                                                                                                                                 word.Contains(s.MileageAllowanceAmountOfKm.ToString()));
-                //}
+                foreach (var word in words)
+                {
+                    schematics = schematics.Where(s => word.Contains(s.TypeOfWork) ||
+                                                       word.Contains(s.StaffRepresentative) ||
+                                                       word.Contains(s.Year.ToString()) ||
+                                                       word.Contains(s.Firm) ||
+                                                       word.Contains(s.WorkplaceAddress.ToString()) ||
+                                                       word.Contains(s.ProjectNumber.ToString()) ||
+                                                       word.Contains(s.CraftsmanId.ToString()) ||
+                                                       word.Contains(s.Name) ||
+                                                       word.Contains(s.WeekNumber.ToString()) ||
+                                                       word.Contains(s.HoursInAkkordData.ToString()) ||
+                                                       word.Contains(s.NormalHoursData.ToString()) ||
+                                                       word.Contains(s.ShelterRateAmountOfDays.ToString()) ||
+                                                                                                                                                                 word.Contains(s.MileageAllowanceAmountOfKm.ToString()));
+                }
             }
 
             return View(schematics);
