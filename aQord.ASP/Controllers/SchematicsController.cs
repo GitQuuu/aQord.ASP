@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
+using ClosedXML.Excel;
+using Microsoft.Ajax.Utilities;
 
 namespace aQord.ASP.Controllers
 {
@@ -11,7 +13,7 @@ namespace aQord.ASP.Controllers
     {
         public ApplicationDbContext _dbContext;
 
-        private IQueryable<Schematics> schematics; 
+        private IQueryable<Schematics> schematics;
 
         public SchematicsController()
         {
@@ -152,9 +154,29 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
-        public ActionResult ExportToExcel()
+        public ActionResult ExportToExcel(int id)
         {
             // use the  schematics variable locally instead of export from database or razorview
+
+            IXLWorkbook workbook = new XLWorkbook("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\UgeSkabelon.xlsx");
+            IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
+
+            int row = 8;
+
+            var selectedSchema = schematics.Where(s => s.Id == id);
+
+            foreach (var data in selectedSchema)
+            {
+                pageTab.Cell($"T{3}").Value = data.ProjectNumber;
+                pageTab.Cell($"B{1}").Value = data.TypeOfWork;
+                pageTab.Cell($"J{1}").Value = data.StaffRepresentative;
+                pageTab.Cell($"U{1}").Value = data.Year;
+                pageTab.Cell($"B{3}").Value = data.Firm;
+                pageTab.Cell($"I{3}").Value = data.WorkplaceAddress;
+                pageTab.Cell($"B{6}").Value = data.WeekNumber;
+            }
+
+            workbook.SaveAs("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel");
 
             return View("Index");
         }

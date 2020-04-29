@@ -137,7 +137,7 @@
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, "")
                     @Html.ActionLink("Detalje", "Details", "Schematics")
                     @Html.ActionLink("Slet", "Delete", new { id = item.Id })
-                    @Html.ActionLink("Export","ExportToExcel","Schematics")
+                    @Html.ActionLink("Export","ExportToExcel",new {id = item.Id},"")
                 </td>
             </tr>
         }
