@@ -154,7 +154,7 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
-        public ActionResult ExportToExcel(int id)
+        public void ExportToExcel(int id)
         {
             // use the  schematics variable locally instead of export from database or razorview
 
@@ -163,22 +163,21 @@ namespace aQord.ASP.Controllers
 
             int row = 8;
 
-            var selectedSchema = schematics.Where(s => s.Id == id);
+            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
-            foreach (var data in selectedSchema)
-            {
-                pageTab.Cell($"T{3}").Value = data.ProjectNumber;
-                pageTab.Cell($"B{1}").Value = data.TypeOfWork;
-                pageTab.Cell($"J{1}").Value = data.StaffRepresentative;
-                pageTab.Cell($"U{1}").Value = data.Year;
-                pageTab.Cell($"B{3}").Value = data.Firm;
-                pageTab.Cell($"I{3}").Value = data.WorkplaceAddress;
-                pageTab.Cell($"B{6}").Value = data.WeekNumber;
-            }
+           
+                pageTab.Cell($"T{3}").Value = selectedSchema.ProjectNumber;
+                pageTab.Cell($"B{1}").Value = selectedSchema.TypeOfWork;
+                pageTab.Cell($"J{1}").Value = selectedSchema.StaffRepresentative;
+                pageTab.Cell($"U{1}").Value = selectedSchema.Year;
+                pageTab.Cell($"B{3}").Value = selectedSchema.Firm;
+                pageTab.Cell($"I{3}").Value = selectedSchema.WorkplaceAddress;
+                pageTab.Cell($"B{6}").Value = selectedSchema.WeekNumber;
+            
 
-            workbook.SaveAs("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel");
+            workbook.SaveAs("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\test.xlsx");
 
-            return View("Index");
+            
         }
     }
 }
