@@ -13,8 +13,6 @@ namespace aQord.ASP.Controllers
     {
         public ApplicationDbContext _dbContext;
 
-        private IQueryable<Schematics> schematics;
-
         public SchematicsController()
         {
             _dbContext = new ApplicationDbContext();
@@ -23,7 +21,7 @@ namespace aQord.ASP.Controllers
         // GET: Schematics
         public ActionResult Index(string searchString)
         {
-            schematics = _dbContext.Schematics;
+            IQueryable<Schematics> schematics = _dbContext.Schematics;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -114,6 +112,30 @@ namespace aQord.ASP.Controllers
             return View(entity);
         }
 
+        [HttpPost]
+        public ActionResult Update(Schematics schematics)
+        {
+            var entity = _dbContext.Schematics.FirstOrDefault(p => p.Id == schematics.Id);
+
+            entity.TypeOfWork = schematics.TypeOfWork;
+            entity.StaffRepresentative = schematics.StaffRepresentative;
+            entity.Year = schematics.Year;
+            entity.Firm = schematics.Firm;
+            entity.WorkplaceAddress = schematics.WorkplaceAddress;
+            entity.ProjectNumber = schematics.ProjectNumber;
+            entity.CraftsmanId = schematics.CraftsmanId;
+            entity.Name = schematics.Name;
+            entity.WeekNumber = schematics.WeekNumber;
+            entity.AkkordHours = schematics.AkkordHours;
+            entity.NormalHours = schematics.NormalHours;
+            entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
+            entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Schematics");
+        }
+
         // Get
         public ActionResult Delete(int? id)
         {
@@ -154,7 +176,7 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
-        public void ExportToExcel(int id)
+        public ActionResult ExportToExcel(int id)
         {
             // use the  schematics variable locally instead of export from database or razorview
 
@@ -165,6 +187,8 @@ namespace aQord.ASP.Controllers
 
             var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
+            pageTab.Cell($"A{row}").Value = selectedSchema.CraftsmanId;
+            pageTab.Cell($"B{row}").Value = selectedSchema.Name;
            
                 pageTab.Cell($"T{3}").Value = selectedSchema.ProjectNumber;
                 pageTab.Cell($"B{1}").Value = selectedSchema.TypeOfWork;
@@ -173,11 +197,35 @@ namespace aQord.ASP.Controllers
                 pageTab.Cell($"B{3}").Value = selectedSchema.Firm;
                 pageTab.Cell($"I{3}").Value = selectedSchema.WorkplaceAddress;
                 pageTab.Cell($"B{6}").Value = selectedSchema.WeekNumber;
+
+            // Hours in akkord row in excel
+            pageTab.Cell($"C{row}").Value = selectedSchema.WeekNumber;
+            pageTab.Cell($"D{row}").Value = selectedSchema.AkkordHours[0];
+            pageTab.Cell($"E{row}").Value = selectedSchema.AkkordHours[1];
+            pageTab.Cell($"F{row}").Value = selectedSchema.AkkordHours[2];
+            pageTab.Cell($"G{row}").Value = selectedSchema.AkkordHours[3];
+            pageTab.Cell($"H{row}").Value = selectedSchema.AkkordHours[4];
+            pageTab.Cell($"I{row}").Value = selectedSchema.AkkordHours[5];
+            pageTab.Cell($"J{row}").Value = selectedSchema.AkkordHours[6];
+
             
+           
+            // Hours in normal row in excel selectedSchema
+            pageTab.Cell($"M{row}").Value = selectedSchema.NormalHours[0];
+            pageTab.Cell($"N{row}").Value = selectedSchema.NormalHours[1];
+            pageTab.Cell($"O{row}").Value = selectedSchema.NormalHours[2];
+            pageTab.Cell($"P{row}").Value = selectedSchema.NormalHours[3];
+            pageTab.Cell($"Q{row}").Value = selectedSchema.NormalHours[4];
+            pageTab.Cell($"R{row}").Value = selectedSchema.NormalHours[5];
+            pageTab.Cell($"S{row}").Value = selectedSchema.NormalHours[6];
+
+            
+
+            row++;
 
             workbook.SaveAs("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\test.xlsx");
 
-            
+            return RedirectToAction("Index", "Schematics");
         }
     }
 }
