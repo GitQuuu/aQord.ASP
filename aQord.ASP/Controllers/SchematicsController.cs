@@ -178,6 +178,10 @@ namespace aQord.ASP.Controllers
 
         public ActionResult ExportToExcel(int id)
         {
+            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
+
+            string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
+
             // use the  schematics variable locally instead of export from database or razorview
 
             IXLWorkbook workbook = new XLWorkbook("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\UgeSkabelon.xlsx");
@@ -185,7 +189,6 @@ namespace aQord.ASP.Controllers
 
             int row = 8;
 
-            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
             pageTab.Cell($"A{row}").Value = selectedSchema.CraftsmanId;
             pageTab.Cell($"B{row}").Value = selectedSchema.Name;
@@ -223,7 +226,7 @@ namespace aQord.ASP.Controllers
 
             row++;
 
-            workbook.SaveAs("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\test.xlsx");
+            workbook.SaveAs(fileName);
 
             return RedirectToAction("Index", "Schematics");
         }
