@@ -1,6 +1,9 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
@@ -19,6 +22,7 @@ namespace aQord.ASP.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
+        
         private IQueryable<Schematics> schematics;
 
         // GET: Schematics
@@ -179,10 +183,18 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
+        private void ImportToCollection(int projectNumber)
+        {
+            ObservableCollection<Schematics> ImportFromDb = new ObservableCollection<Schematics>(_dbContext.Schematics.Where(s => s.ProjectNumber == projectNumber));
+        }
+
         public ActionResult ExportToExcel(int projectNumber)
         {
-            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == projectNumber);
+            ImportToCollection(projectNumber);
 
+            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s=> s.ProjectNumber == projectNumber);
+
+            
             string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
 
             // use the  schematics variable locally instead of export from database or razorview
@@ -192,50 +204,54 @@ namespace aQord.ASP.Controllers
 
             int row = 8;
 
-            foreach (var entity in _dbContext.Schematics)
-            {
-                
-            }
 
-            pageTab.Cell($"A{row}").Value = selectedSchema.CraftsmanId;
-            pageTab.Cell($"B{row}").Value = selectedSchema.Name;
-           
-                pageTab.Cell($"T{3}").Value = selectedSchema.ProjectNumber;
-                pageTab.Cell($"B{1}").Value = selectedSchema.TypeOfWork;
-                pageTab.Cell($"J{1}").Value = selectedSchema.StaffRepresentative;
-                pageTab.Cell($"U{1}").Value = selectedSchema.Year;
-                pageTab.Cell($"B{3}").Value = selectedSchema.Firm;
-                pageTab.Cell($"I{3}").Value = selectedSchema.WorkplaceAddress;
-                pageTab.Cell($"B{6}").Value = selectedSchema.WeekNumber;
+            pageTab.Cell($"T{3}").Value = selectedSchema.ProjectNumber;
+            pageTab.Cell($"B{1}").Value = selectedSchema.TypeOfWork;
+            pageTab.Cell($"J{1}").Value = selectedSchema.StaffRepresentative;
+            pageTab.Cell($"U{1}").Value = selectedSchema.Year;
+            pageTab.Cell($"B{3}").Value = selectedSchema.Firm;
+            pageTab.Cell($"I{3}").Value = selectedSchema.WorkplaceAddress;
+            pageTab.Cell($"B{6}").Value = selectedSchema.WeekNumber;
 
-            // Hours in akkord row in excel
-            pageTab.Cell($"C{row}").Value = selectedSchema.WeekNumber;
-            pageTab.Cell($"D{row}").Value = selectedSchema.AkkordHours[0];
-            pageTab.Cell($"E{row}").Value = selectedSchema.AkkordHours[1];
-            pageTab.Cell($"F{row}").Value = selectedSchema.AkkordHours[2];
-            pageTab.Cell($"G{row}").Value = selectedSchema.AkkordHours[3];
-            pageTab.Cell($"H{row}").Value = selectedSchema.AkkordHours[4];
-            pageTab.Cell($"I{row}").Value = selectedSchema.AkkordHours[5];
-            pageTab.Cell($"J{row}").Value = selectedSchema.AkkordHours[6];
-
-            
-           
-            // Hours in normal row in excel selectedSchema
-            pageTab.Cell($"M{row}").Value = selectedSchema.NormalHours[0];
-            pageTab.Cell($"N{row}").Value = selectedSchema.NormalHours[1];
-            pageTab.Cell($"O{row}").Value = selectedSchema.NormalHours[2];
-            pageTab.Cell($"P{row}").Value = selectedSchema.NormalHours[3];
-            pageTab.Cell($"Q{row}").Value = selectedSchema.NormalHours[4];
-            pageTab.Cell($"R{row}").Value = selectedSchema.NormalHours[5];
-            pageTab.Cell($"S{row}").Value = selectedSchema.NormalHours[6];
 
             
 
-            row++;
+                pageTab.Cell($"A{row}").Value = selectedSchema.CraftsmanId;
+                pageTab.Cell($"B{row}").Value = selectedSchema.Name; 
 
+                // Hours in akkord row in excel
+                pageTab.Cell($"C{row}").Value = selectedSchema.WeekNumber;
+                pageTab.Cell($"D{row}").Value = selectedSchema.AkkordHours[0];
+                pageTab.Cell($"E{row}").Value = selectedSchema.AkkordHours[1];
+                pageTab.Cell($"F{row}").Value = selectedSchema.AkkordHours[2];
+                pageTab.Cell($"G{row}").Value = selectedSchema.AkkordHours[3];
+                pageTab.Cell($"H{row}").Value = selectedSchema.AkkordHours[4];
+                pageTab.Cell($"I{row}").Value = selectedSchema.AkkordHours[5];
+                pageTab.Cell($"J{row}").Value = selectedSchema.AkkordHours[6];
+
+
+
+                // Hours in normal row in excel selectedSchema
+                pageTab.Cell($"M{row}").Value = selectedSchema.NormalHours[0];
+                pageTab.Cell($"N{row}").Value = selectedSchema.NormalHours[1];
+                pageTab.Cell($"O{row}").Value = selectedSchema.NormalHours[2];
+                pageTab.Cell($"P{row}").Value = selectedSchema.NormalHours[3];
+                pageTab.Cell($"Q{row}").Value = selectedSchema.NormalHours[4];
+                pageTab.Cell($"R{row}").Value = selectedSchema.NormalHours[5];
+                pageTab.Cell($"S{row}").Value = selectedSchema.NormalHours[6];
+
+
+
+                row++;
+            
+
+            
             workbook.SaveAs(fileName);
 
             return RedirectToAction("Index", "Schematics");
         }
+
+        
+
     }
 }
