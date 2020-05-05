@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Microsoft.Ajax.Utilities;
 
 namespace aQord.ASP.Controllers
@@ -18,10 +19,12 @@ namespace aQord.ASP.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
+        private IQueryable<Schematics> schematics;
+
         // GET: Schematics
         public ActionResult Index(string searchString)
         {
-            IQueryable<Schematics> schematics = _dbContext.Schematics;
+             schematics = _dbContext.Schematics;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -54,7 +57,7 @@ namespace aQord.ASP.Controllers
         [HttpPost]
         public ActionResult AutofillSchematicForm(string dropdownSelection)
         {
-            var query = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == dropdownSelection);
+            var query = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber.ToString() == dropdownSelection);
 
             return Json(query);
         }
@@ -176,9 +179,9 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
-        public ActionResult ExportToExcel(int id)
+        public ActionResult ExportToExcel(int projectNumber)
         {
-            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
+            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == projectNumber);
 
             string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
 
@@ -189,6 +192,10 @@ namespace aQord.ASP.Controllers
 
             int row = 8;
 
+            foreach (var entity in _dbContext.Schematics)
+            {
+                
+            }
 
             pageTab.Cell($"A{row}").Value = selectedSchema.CraftsmanId;
             pageTab.Cell($"B{row}").Value = selectedSchema.Name;

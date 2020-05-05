@@ -28,7 +28,7 @@ namespace aQord.ASP.Models
         public string WorkplaceAddress { get; set; }
 
         [Display(Name = "Akkord/Projekt nr.")]
-        public string ProjectNumber { get; set; }
+        public Int64 ProjectNumber { get; set; }
 
         [Display(Name = "Arbejds nr.")]
         [DataType(DataType.Text)]

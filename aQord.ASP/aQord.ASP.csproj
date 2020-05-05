@@ -215,6 +215,10 @@
     <Compile Include="Migrations\202003271144249_storeArrayWithEFCFapproch2ndTime.designer.cs">
       <DependentUpon>202003271144249_storeArrayWithEFCFapproch2ndTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005050722407_AlterProjectNumberPropertiesDataTypeToInt.cs" />
+    <Compile Include="Migrations\202005050722407_AlterProjectNumberPropertiesDataTypeToInt.designer.cs">
+      <DependentUpon>202005050722407_AlterProjectNumberPropertiesDataTypeToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -322,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003271144249_storeArrayWithEFCFapproch2ndTime.resx">
       <DependentUpon>202003271144249_storeArrayWithEFCFapproch2ndTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005050722407_AlterProjectNumberPropertiesDataTypeToInt.resx">
+      <DependentUpon>202005050722407_AlterProjectNumberPropertiesDataTypeToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
