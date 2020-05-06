@@ -192,9 +192,10 @@ namespace aQord.ASP.Controllers
 
         public ActionResult ExportToExcel(int projectNumber)
         {
+            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == projectNumber);
+
             var conditionFoundCollection = ImportToCollection(projectNumber);
 
-            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == projectNumber);
             
             string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
 
@@ -216,29 +217,33 @@ namespace aQord.ASP.Controllers
 
             foreach (var schemas in conditionFoundCollection)
             {
-                pageTab.Cell($"A{row}").Value = schemas.CraftsmanId;
-                pageTab.Cell($"B{row}").Value = schemas.Name;
+                if (schemas.ProjectNumber == projectNumber && schemas.WeekNumber == selectedSchema.WeekNumber)
+                {
+                    pageTab.Cell($"A{row}").Value = schemas.CraftsmanId;
+                    pageTab.Cell($"B{row}").Value = schemas.Name;
 
-                // Hours in akkord row in excel
-                pageTab.Cell($"C{row}").Value = schemas.WeekNumber;
-                pageTab.Cell($"D{row}").Value = schemas.AkkordHours[0];
-                pageTab.Cell($"E{row}").Value = schemas.AkkordHours[1];
-                pageTab.Cell($"F{row}").Value = schemas.AkkordHours[2];
-                pageTab.Cell($"G{row}").Value = schemas.AkkordHours[3];
-                pageTab.Cell($"H{row}").Value = schemas.AkkordHours[4];
-                pageTab.Cell($"I{row}").Value = schemas.AkkordHours[5];
-                pageTab.Cell($"J{row}").Value = schemas.AkkordHours[6];
-                                               
-                // Hours in normal row in excel schemas
-                pageTab.Cell($"M{row}").Value = schemas.NormalHours[0];
-                pageTab.Cell($"N{row}").Value = schemas.NormalHours[1];
-                pageTab.Cell($"O{row}").Value = schemas.NormalHours[2];
-                pageTab.Cell($"P{row}").Value = schemas.NormalHours[3];
-                pageTab.Cell($"Q{row}").Value = schemas.NormalHours[4];
-                pageTab.Cell($"R{row}").Value = schemas.NormalHours[5];
-                pageTab.Cell($"S{row}").Value = schemas.NormalHours[6];
+                    // Hours in akkord row in excel
+                    pageTab.Cell($"C{row}").Value = schemas.WeekNumber;
+                    pageTab.Cell($"D{row}").Value = schemas.AkkordHours[0];
+                    pageTab.Cell($"E{row}").Value = schemas.AkkordHours[1];
+                    pageTab.Cell($"F{row}").Value = schemas.AkkordHours[2];
+                    pageTab.Cell($"G{row}").Value = schemas.AkkordHours[3];
+                    pageTab.Cell($"H{row}").Value = schemas.AkkordHours[4];
+                    pageTab.Cell($"I{row}").Value = schemas.AkkordHours[5];
+                    pageTab.Cell($"J{row}").Value = schemas.AkkordHours[6];
 
-                row++;
+                    // Hours in normal row in excel schemas
+                    pageTab.Cell($"M{row}").Value = schemas.NormalHours[0];
+                    pageTab.Cell($"N{row}").Value = schemas.NormalHours[1];
+                    pageTab.Cell($"O{row}").Value = schemas.NormalHours[2];
+                    pageTab.Cell($"P{row}").Value = schemas.NormalHours[3];
+                    pageTab.Cell($"Q{row}").Value = schemas.NormalHours[4];
+                    pageTab.Cell($"R{row}").Value = schemas.NormalHours[5];
+                    pageTab.Cell($"S{row}").Value = schemas.NormalHours[6];
+
+                    row++;
+                }
+                
             }
             
             workbook.SaveAs(fileName);
