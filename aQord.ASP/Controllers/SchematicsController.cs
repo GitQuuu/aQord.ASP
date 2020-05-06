@@ -248,6 +248,7 @@ namespace aQord.ASP.Controllers
 
             }
 
+            // How to export to excel without saving file on the server
             using (var stream = new MemoryStream())
             {
                 workbook.SaveAs(stream);
