@@ -232,6 +232,7 @@ namespace aQord.ASP.Controllers
                     pageTab.Cell($"I{row}").Value = schemas.AkkordHours[5];
                     pageTab.Cell($"J{row}").Value = schemas.AkkordHours[6];
 
+
                     // Hours in normal row in excel schemas
                     pageTab.Cell($"M{row}").Value = schemas.NormalHours[0];
                     pageTab.Cell($"N{row}").Value = schemas.NormalHours[1];
@@ -248,7 +249,7 @@ namespace aQord.ASP.Controllers
             
             workbook.SaveAs(fileName);
 
-            return RedirectToAction("Index", "Schematics");
+            return File(System.IO.File.ReadAllBytes(fileName), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx");
         }
 
         
