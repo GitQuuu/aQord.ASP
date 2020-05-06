@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
@@ -22,13 +23,13 @@ namespace aQord.ASP.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
-        
+
         private IQueryable<Schematics> schematics;
 
         // GET: Schematics
         public ActionResult Index(string searchString)
         {
-             schematics = _dbContext.Schematics;
+            schematics = _dbContext.Schematics;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -196,7 +197,7 @@ namespace aQord.ASP.Controllers
 
             var conditionFoundCollection = ImportToCollection(projectNumber);
 
-            
+
             string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
 
             // use the  schematics variable locally instead of export from database or razorview
@@ -244,15 +245,21 @@ namespace aQord.ASP.Controllers
 
                     row++;
                 }
-                
+
             }
-            
-            workbook.SaveAs(fileName);
 
-            return File(System.IO.File.ReadAllBytes(fileName), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx");
+            using (var stream = new MemoryStream())
+            {
+                workbook.SaveAs(stream);
+                stream.Flush();
+
+                return new FileContentResult(stream.ToArray(),
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                {
+                    FileDownloadName = $"ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx"
+                };
+            }
         }
-
-        
 
     }
 }
