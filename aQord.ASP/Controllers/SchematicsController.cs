@@ -184,41 +184,37 @@ namespace aQord.ASP.Controllers
             return RedirectToAction("Index", "Schematics");
         }
 
-        private ObservableCollection<Schematics> ImportToCollection(int projectNumber)
+        private ObservableCollection<Schematics> ImportToCollection(long projectNumber)
         {
-            ObservableCollection<Schematics> ImportFromDb = new ObservableCollection<Schematics>(_dbContext.Schematics.Where(s => s.ProjectNumber == projectNumber));
+            ObservableCollection<Schematics> importFromDb = new ObservableCollection<Schematics>(_dbContext.Schematics.Where(s => s.ProjectNumber == projectNumber));
 
-            return ImportFromDb;
+            return importFromDb;
         }
 
-        public ActionResult ExportToExcel(int projectNumber)
+        public ActionResult ExportToExcel(int id, long projectNumber = 0)
         {
-            var selectedSchema = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber == projectNumber);
+            Schematics selected = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
-            var conditionFoundCollection = ImportToCollection(projectNumber);
+            var selectionMatched = ImportToCollection(selected.ProjectNumber);
 
-
-            string fileName = $"C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\ExportToExcel\\ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx";
-
-            // use the  schematics variable locally instead of export from database or razorview
+            projectNumber = selected.ProjectNumber;
 
             IXLWorkbook workbook = new XLWorkbook("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\UgeSkabelon.xlsx");
             IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
 
             int row = 8;
 
+            pageTab.Cell($"T{3}").Value = selected.ProjectNumber;
+            pageTab.Cell($"B{1}").Value = selected.TypeOfWork;
+            pageTab.Cell($"J{1}").Value = selected.StaffRepresentative;
+            pageTab.Cell($"U{1}").Value = selected.Year;
+            pageTab.Cell($"B{3}").Value = selected.Firm;
+            pageTab.Cell($"I{3}").Value = selected.WorkplaceAddress;
+            pageTab.Cell($"B{6}").Value = selected.WeekNumber;
 
-            pageTab.Cell($"T{3}").Value = selectedSchema.ProjectNumber;
-            pageTab.Cell($"B{1}").Value = selectedSchema.TypeOfWork;
-            pageTab.Cell($"J{1}").Value = selectedSchema.StaffRepresentative;
-            pageTab.Cell($"U{1}").Value = selectedSchema.Year;
-            pageTab.Cell($"B{3}").Value = selectedSchema.Firm;
-            pageTab.Cell($"I{3}").Value = selectedSchema.WorkplaceAddress;
-            pageTab.Cell($"B{6}").Value = selectedSchema.WeekNumber;
-
-            foreach (var schemas in conditionFoundCollection)
+            foreach (var schemas in selectionMatched)
             {
-                if (schemas.ProjectNumber == projectNumber && schemas.WeekNumber == selectedSchema.WeekNumber)
+                if (schemas.ProjectNumber == projectNumber && schemas.WeekNumber == selected.WeekNumber)
                 {
                     pageTab.Cell($"A{row}").Value = schemas.CraftsmanId;
                     pageTab.Cell($"B{row}").Value = schemas.Name;
@@ -257,7 +253,7 @@ namespace aQord.ASP.Controllers
                 return new FileContentResult(stream.ToArray(),
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    FileDownloadName = $"ProjectNummer_{selectedSchema.ProjectNumber}-Uge_{selectedSchema.WeekNumber}.xlsx"
+                    FileDownloadName = $"ProjectNummer_{selected.ProjectNumber}-Uge_{selected.WeekNumber}.xlsx"
                 };
             }
         }
