@@ -44,21 +44,21 @@ namespace aQord.ASP.Models
 
         [NotMapped]
         [Display(Name = "Timer i akkord")]
-        public double[] AkkordHours
+        public List<double> AkkordHours
         {
             get
             {
                 if (!string.IsNullOrEmpty(HoursInAkkordData))
                 {
-                    return Array.ConvertAll(HoursInAkkordData.Split(','), double.Parse);
+                    return Array.ConvertAll(HoursInAkkordData.Split(), double.Parse).ToList();
                 }
 
-                return new double[7];
+                return new List<double>(7);
             }
             set
             {
                 var _data = value;
-                HoursInAkkordData = String.Join(",", _data.Select(d => d.ToString()).ToArray());
+                HoursInAkkordData = String.Join(" ", _data.Select(d => d.ToString()).ToArray());
             }
         }
 
