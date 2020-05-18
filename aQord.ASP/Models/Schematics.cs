@@ -50,7 +50,7 @@ namespace aQord.ASP.Models
             {
                 if (!string.IsNullOrEmpty(HoursInAkkordData))
                 {
-                    return Array.ConvertAll(HoursInAkkordData.Split(), double.Parse).ToList();
+                    return Array.ConvertAll(HoursInAkkordData.Split(','), double.Parse).ToList();
                 }
 
                 return new List<double>(7);
@@ -58,7 +58,7 @@ namespace aQord.ASP.Models
             set
             {
                 var _data = value;
-                HoursInAkkordData = String.Join(" ", _data.Select(d => d.ToString()).ToArray());
+                HoursInAkkordData = String.Join(",", _data.Select(d => d.ToString()).ToArray());
             }
         }
 
