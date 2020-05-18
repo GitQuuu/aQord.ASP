@@ -97,7 +97,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HoursInAkkordData, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HoursInAkkordData, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.AkkordHours[0], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[1], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[2], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[3], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[4], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[5], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[6], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+
                 @Html.ValidationMessageFor(model => model.HoursInAkkordData, "", new { @class = "text-danger" })
             </div>
         </div>
