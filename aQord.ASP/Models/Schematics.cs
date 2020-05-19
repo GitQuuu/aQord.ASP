@@ -67,16 +67,16 @@ namespace aQord.ASP.Models
 
         [NotMapped]
         [Display(Name = "Dagløns timer")]
-        public double[] NormalHours {
+        public List<double> NormalHours {
             get
             {
                 if (!string.IsNullOrEmpty(NormalHoursData))
                 {
-                    return Array.ConvertAll(NormalHoursData.Split(','), double.Parse);
+                    return Array.ConvertAll(NormalHoursData.Split(), double.Parse).ToList();
                 }
                 else
                 {
-                   return new double[7]; 
+                   return new List<double>(7);
                 }
             }
             set

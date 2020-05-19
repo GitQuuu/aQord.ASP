@@ -107,12 +107,12 @@
 
     <div class="form-group">
         <div style="padding-left: 18%">
-            @Html.LabelFor(model => model.HoursInAkkordData, "M T O T F L S")
+            @Html.LabelFor(model => model.NormalHours, "M T O T F L S")
         </div>
-        @Html.LabelFor(model => model.NormalHoursData, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.NormalHours, htmlAttributes: new { @class = "control-label col-md-2"})
     <div class="col-md-10">
-        @Html.EditorFor(model => model.NormalHoursData, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.NormalHoursData, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.NormalHours, new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width: 45px" } })
+        @Html.ValidationMessageFor(model => model.NormalHours, "", new { @class = "text-danger" })
     </div>
     </div>
 
