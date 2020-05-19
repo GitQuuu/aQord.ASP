@@ -82,7 +82,7 @@ namespace aQord.ASP.Models
             set
             {
                 var _data = value;
-                NormalHoursData = String.Join(",", _data.Select(d => d.ToString()).ToArray());
+                NormalHoursData = String.Join(" ", _data.Select(d => d.ToString()).ToArray());
             }
         }
 
