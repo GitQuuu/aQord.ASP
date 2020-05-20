@@ -200,7 +200,7 @@ namespace aQord.ASP.Controllers
 
             projectNumber = selected.ProjectNumber;
 
-            IXLWorkbook workbook = new XLWorkbook("C:\\Users\\Quanv\\source\\repos\\aQord.ASP\\aQord.ASP\\Files\\UgeSkabelon.xlsx");
+            IXLWorkbook workbook = new XLWorkbook("https://qudevaspstorage.blob.core.windows.net/temp/UgeSkabelon.xlsx");
             IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
 
             int row = 8;
