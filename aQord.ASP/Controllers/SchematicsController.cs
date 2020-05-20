@@ -10,7 +10,10 @@ using System.Web.Mvc;
 using aQord.ASP.Models;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Ajax.Utilities;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 
 namespace aQord.ASP.Controllers
 {
@@ -191,6 +194,33 @@ namespace aQord.ASP.Controllers
             return importFromDb;
         }
 
+        public Stream DownloadBlobFile()
+        {
+            var connection_string = "DefaultEndpointsProtocol=https;AccountName=qudevaspstorage;AccountKey=P3ANGJp2XV1hpRgV26zrfGQJTtkRzQSvMfEVGFQb9FAlPC0v3oChfdhPiU6mj+z8hQTin/ActNF7Kh0yaBDu6A==;EndpointSuffix=core.windows.net";
+            try
+            {
+                var filename = "UgeSkabelon.xlsx";
+                var storageAccount = CloudStorageAccount.Parse($"{connection_string}");
+                var blobClient = storageAccount.CreateCloudBlobClient();
+
+                CloudBlobContainer container = blobClient.GetContainerReference("temp");
+                CloudBlockBlob blob = container.GetBlockBlobReference(filename);
+
+                Stream blobStream = blob.OpenRead();
+
+                return blobStream;
+
+                //return File(blobStream, blob.Properties.ContentType, filename);
+
+            }
+            catch (Exception)
+            {
+                //download failed 
+                //handle exception
+                throw;
+            }
+        }
+
         [HttpGet]
         public ActionResult ExportToExcel(int id, long projectNumber = 0)
         {
@@ -200,7 +230,10 @@ namespace aQord.ASP.Controllers
 
             projectNumber = selected.ProjectNumber;
 
-            IXLWorkbook workbook = new XLWorkbook("https://qudevaspstorage.blob.core.windows.net/temp/UgeSkabelon.xlsx");
+            var getDownloadBlobFile = DownloadBlobFile();
+
+
+            IXLWorkbook workbook = new XLWorkbook(getDownloadBlobFile);
             IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
 
             int row = 8;
