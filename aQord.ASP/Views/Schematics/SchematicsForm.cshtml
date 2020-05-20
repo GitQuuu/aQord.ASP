@@ -1,0 +1,206 @@
+﻿@using System.Data.Entity.Core.Metadata.Edm
+@model aQord.ASP.Models.Schematics
+
+@{
+    ViewBag.Title = "SchematicsForm";
+}
+
+<h2>SchematicsForm</h2>
+
+
+@using (Html.BeginForm("Save", "Schematics", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Schematics</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicForm(this.value);", @class = "form-control" })
+
+                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeOfWork, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TypeOfWork, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TypeOfWork, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StaffRepresentative, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StaffRepresentative, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StaffRepresentative, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Firm, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Firm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Firm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkplaceAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WorkplaceAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WorkplaceAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FullName", (SelectList)ViewData["Person"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicFormPeople(this.value);", @class = "form-control" })
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CraftsmanId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CraftsmanId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WeekNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeekNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WeekNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AkkordHours, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AkkordHours[0], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[1], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[2], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[3], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[4], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[5], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+                @Html.EditorFor(model => model.AkkordHours[6], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+
+                @Html.ValidationMessageFor(model => model.AkkordHours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NormalHoursData, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NormalHoursData, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NormalHoursData, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShelterRateAmountOfDays, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShelterRateAmountOfDays, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShelterRateAmountOfDays, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MileageAllowanceAmountOfKm, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MileageAllowanceAmountOfKm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MileageAllowanceAmountOfKm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Gem" class="btn btn-default" />
+                @Html.ActionLink("Fortryd", "Index", "Schematics", new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    {
+
+    <!--Script for schematic to autofill input fields and reset them-->
+    <script type="text/javascript">
+        function AutofillSchematicForm(dropdownSelection) {
+
+            //pr default if nothing is selected sets inputs to ''
+            $("#ProjectNumber").val('');
+            $("#TypeOfWork").val('');
+            $("#StaffRepresentative").val('');
+            $("#Year").val('');
+            $("#Firm").val('');
+            $("#WorkplaceAddress").val('');
+
+
+            // when onchange on dropdown is being called populate the inputs
+            $.ajax({
+                url: '@Url.Action("AutofillSchematicForm", "Schematics")',
+                type: "POST",
+                data: { "dropdownSelection": dropdownSelection },
+                "success": function (data) {
+
+                        $("#ProjectNumber").val(data.ProjectNumber);
+                        $("#TypeOfWork").val(data.TypeOfWork);
+                        $("#StaffRepresentative").val(data.StaffRepresentative);
+                        $("#Year").val(data.Year);
+                        $("#Firm").val(data.Firm);
+                        $("#WorkplaceAddress").val(data.WorkplaceAddress);
+
+                }
+            });
+        }
+    </script>
+
+    <!--Script for schematic to autofill input fields and reset them-->
+    <script type="text/javascript">
+        function AutofillSchematicFormPeople(dropdownSelection) {
+
+            $("#CraftsmanId").val('');
+            $("#Name").val('');
+
+            $.ajax({
+                url: '@Url.Action("AutofillSchematicFormPeople", "Schematics")',
+                type: "POST",
+                data: { "dropdownSelection": dropdownSelection },
+                "success": function (data) {
+                    if (data != null) {
+                        $("#Name").val(data.FirstName + " " + data.LastName);
+                        $("#CraftsmanId").val(data.Id);
+                    }
+                }
+            });
+        }
+    </script>
+
+    }
+}
+
+
