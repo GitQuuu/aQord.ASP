@@ -191,6 +191,7 @@ namespace aQord.ASP.Controllers
             return importFromDb;
         }
 
+        [HttpGet]
         public ActionResult ExportToExcel(int id, long projectNumber = 0)
         {
             Schematics selected = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
