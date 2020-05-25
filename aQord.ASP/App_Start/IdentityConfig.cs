@@ -11,15 +11,35 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using aQord.ASP.Models;
+using SendGrid;
+using System.Net;
+using System.Configuration;
+using System.Diagnostics;
+using System.Web.Mvc;
+using SendGrid.Helpers.Mail;
+
 
 namespace aQord.ASP
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+
+        // Use NuGet to install SendGrid (Basic C# client lib) 
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+            var apiKey = Environment.GetEnvironmentVariable("SendGridAPI",EnvironmentVariableTarget.Machine);
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("QuDev", "asp.net");
+            var subject = "Sending with SendGrid is Fun";
+            var to = new EmailAddress("Quanvle@live.dk", "Example User");
+            var plainTextContent = "and easy to do anywhere, even with C#";
+            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
         }
     }
 
