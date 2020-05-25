@@ -31,15 +31,24 @@ namespace aQord.ASP
         // Use NuGet to install SendGrid (Basic C# client lib) 
         private async Task configSendGridasync(IdentityMessage message)
         {
-            var apiKey = Environment.GetEnvironmentVariable("SendGridAPI",EnvironmentVariableTarget.Machine);
+            string apiKey = "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";
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("QuDev", "asp.net");
-            var subject = "Sending with SendGrid is Fun";
+
+
+            var from = new EmailAddress("QuDev@Asp.com", "Example User");
+            var subject = "Sending with Twilio SendGrid is Fun";
             var to = new EmailAddress("Quanvle@live.dk", "Example User");
             var plainTextContent = "and easy to do anywhere, even with C#";
             var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            
+
             var response = await client.SendEmailAsync(msg);
+
+            Console.WriteLine(msg.Serialize());
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.Headers);
+            Console.WriteLine("\n\nPress <Enter> to continue.");
         }
     }
 
