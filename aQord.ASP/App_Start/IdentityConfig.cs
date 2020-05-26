@@ -16,10 +16,11 @@ using System.Net;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net.Mail;
-using Azure.Identity;
+using System.Web.WebPages;
 using SendGrid.Helpers.Mail;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+
 
 namespace aQord.ASP
 {
@@ -30,21 +31,22 @@ namespace aQord.ASP
             await configSendGridasync(message);
         }
 
+
         // Use NuGet to install SendGrid (Basic C# client lib) 
         private async Task configSendGridasync(IdentityMessage message)
         {
 
-            string keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
-            var kvUri = "https://" + keyVaultName + ".vault.azure.net";
-
-            var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+            //string keyVaultName = Environment.GetEnvironmentVariable("aQordASPvault", EnvironmentVariableTarget.Machine);
+            var kvUri = "https://aQordASPvault.vault.azure.net";
+            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+            var KeyVaultSecret = clientVault.GetSecret("SendGridAPI").Value;
 
             // using updated sendgrid documentation to get API credentials
-            //string apiKey = Environment.GetEnvironmentVariable("SendGridAPI",EnvironmentVariableTarget.Machine);
-            //var client = new SendGridClient("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");
+            //string apiKey = Environment.GetEnvironmentVariable("","");
+            var client = new SendGridClient(KeyVaultSecret.Value);
 
             // using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
-            
+
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
             myMessage.From = new EmailAddress(
@@ -52,7 +54,6 @@ namespace aQord.ASP
             myMessage.Subject = message.Subject;
             myMessage.PlainTextContent = message.Body;
             myMessage.HtmlContent = message.Body;
-
 
             var response = await client.SendEmailAsync(myMessage);
 
