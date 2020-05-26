@@ -31,8 +31,8 @@ namespace aQord.ASP
         private async Task configSendGridasync(IdentityMessage message)
         {
             // using updated sendgrid documentation to get API credentials
-            var apiKey = Environment.GetEnvironmentVariable("SendGridAPI",EnvironmentVariableTarget.Machine);
-            var client = new SendGridClient(apiKey);
+            //string apiKey = Environment.GetEnvironmentVariable("SendGridAPI",EnvironmentVariableTarget.Machine);
+            var client = new SendGridClient("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");
 
             // using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
             
