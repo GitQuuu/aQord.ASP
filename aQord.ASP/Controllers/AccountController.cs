@@ -15,24 +15,24 @@ namespace aQord.ASP.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private EmailService.ApplicationSignInManager _signInManager;
+        private EmailService.ApplicationUserManager _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(EmailService.ApplicationUserManager userManager, EmailService.ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        public EmailService.ApplicationSignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<EmailService.ApplicationSignInManager>();
             }
             private set 
             { 
@@ -40,11 +40,11 @@ namespace aQord.ASP.Controllers
             }
         }
 
-        public ApplicationUserManager UserManager
+        public EmailService.ApplicationUserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<EmailService.ApplicationUserManager>();
             }
             private set
             {
@@ -155,8 +155,24 @@ namespace aQord.ASP.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail", "Account",
+                        new { userId = user.Id, code = code },
+                        protocol: Request.Url.Scheme);
+
+                    await UserManager.SendEmailAsync(user.Id,
+                        "Confirm your account",
+                        "Please confirm your account by clicking this link: <a href=\""
+                        + callbackUrl + "\">link</a>");
+                   // ViewBag.Link = callbackUrl;   // Used only for initial demo.
+                    return RedirectToAction("Index", "Home");
+
+                    /* default code below
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -164,6 +180,9 @@ namespace aQord.ASP.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
+                    
+                 */
+
                 }
                 AddErrors(result);
             }
