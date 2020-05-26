@@ -79,7 +79,7 @@ namespace aQord.ASP.Controllers
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    ViewBag.errorMessage = "You must have a confirmed email to log on, please check your inbox/spam";
                     return View("Error");
                 }
             }

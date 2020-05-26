@@ -26,6 +26,7 @@ namespace aQord.ASP.Controllers
 
         //Get data from database
         [HttpGet]
+        [Authorize]
         public ActionResult Index(string filterString)
         {
             IQueryable<Person> people = _dbContext.People;
