@@ -23,7 +23,7 @@ namespace aQord.ASP.Models
         public DbSet<Person> People  { get; set; } 
         public DbSet<Schematics> Schematics { get; set; }
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("QuDevConnectionString", throwIfV1Schema: false)
         {
         }
 
