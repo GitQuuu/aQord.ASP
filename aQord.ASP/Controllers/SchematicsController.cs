@@ -43,18 +43,18 @@ namespace aQord.ASP.Controllers
 
                 foreach (var word in words)
                 {
-                    schematics = schematics.Where(s => word.Contains(s.TypeOfWork) ||
-                                                       word.Contains(s.StaffRepresentative) ||
-                                                       word.Contains(s.Year.ToString()) ||
-                                                       word.Contains(s.Firm) ||
-                                                       word.Contains(s.WorkplaceAddress.ToString()) ||
-                                                       word.Contains(s.ProjectNumber.ToString()) ||
-                                                       word.Contains(s.CraftsmanId.ToString()) ||
-                                                       word.Contains(s.Name) ||
-                                                       word.Contains(s.WeekNumber.ToString()) ||
-                                                       word.Contains(s.HoursInAkkordData.ToString()) ||
-                                                       word.Contains(s.NormalHoursData.ToString()) ||
-                                                       word.Contains(s.ShelterRateAmountOfDays.ToString()) ||
+                    schematics = schematics.Where(s => word.Equals(s.TypeOfWork) ||
+                                                       word.Equals(s.StaffRepresentative) ||
+                                                       word.Equals(s.Year.ToString()) ||
+                                                       word.Equals(s.Firm) ||
+                                                       word.Equals(s.WorkplaceAddress.ToString()) ||
+                                                       word.Equals(s.ProjectNumber.ToString()) ||
+                                                       word.Equals(s.CraftsmanId.ToString()) ||
+                                                       word.Equals(s.Name) ||
+                                                       word.Equals(s.WeekNumber.ToString()) ||
+                                                       word.Equals(s.HoursInAkkordData.ToString()) ||
+                                                       word.Equals(s.NormalHoursData.ToString()) ||
+                                                       word.Equals(s.ShelterRateAmountOfDays.ToString()) ||
                                                                                                                                                                  word.Contains(s.MileageAllowanceAmountOfKm.ToString()));
                 }
             }
