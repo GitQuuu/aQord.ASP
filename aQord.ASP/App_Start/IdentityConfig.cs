@@ -15,8 +15,11 @@ using SendGrid;
 using System.Net;
 using System.Configuration;
 using System.Diagnostics;
-using System.Web.Mvc;
+using System.Net.Mail;
+using System.Web.WebPages;
 using SendGrid.Helpers.Mail;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 
 namespace aQord.ASP
@@ -28,111 +31,133 @@ namespace aQord.ASP
             await configSendGridasync(message);
         }
 
+
         // Use NuGet to install SendGrid (Basic C# client lib) 
+        /// <summary>
+        /// Authenticating up against Azure Keyvault and retrieving secrets to send email confirmation
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private async Task configSendGridasync(IdentityMessage message)
         {
-            string apiKey = "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";
-            var client = new SendGridClient(apiKey);
 
 
-            var from = new EmailAddress("QuDev@Asp.com", "Example User");
-            var subject = "Sending with Twilio SendGrid is Fun";
-            var to = new EmailAddress("Quanvle@live.dk", "Example User");
-            var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            
+            // Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
+            //string keyVaultName = Environment.GetEnvironmentVariable("KeyVaultName");
+            var KeyVaultName = ConfigurationManager.AppSettings["KeyVaultName"]; // Read webconfig value and azure app settings. https://stackoverflow.com/questions/44542409/how-to-read-azure-web-site-app-settings-values , https://docs.microsoft.com/en-us/dotnet/api/system.configuration.configurationmanager.appsettings?redirectedfrom=MSDN&view=dotnet-plat-ext-3.1
+            var kvUri = "https://" + KeyVaultName + ".vault.azure.net";
+            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
 
-            var response = await client.SendEmailAsync(msg);
 
-            Console.WriteLine(msg.Serialize());
-            Console.WriteLine(response.StatusCode);
-            Console.WriteLine(response.Headers);
-            Console.WriteLine("\n\nPress <Enter> to continue.");
-        }
-    }
+            // Send a Single Email to a Single Recipient using updated sendgrid documentation to get API credentials https://github.com/sendgrid/sendgrid-csharp/blob/master/USE_CASES.md#send-a-single-email-to-a-single-recipient
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
+            var KeyVaultSecret = clientVault.GetSecret("SendGridAPI").Value;
+            var client = new SendGridClient(KeyVaultSecret.Value);
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserManager : UserManager<ApplicationUser>
-    {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
-        {
+            // Set up email confirmation using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
+
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(message.Destination);
+            myMessage.From = new EmailAddress(
+                "QuDev@Asp.net", "Qu Kops Le");
+            myMessage.Subject = message.Subject;
+            myMessage.PlainTextContent = message.Body;
+            myMessage.HtmlContent = message.Body;
+
+            var response = await client.SendEmailAsync(myMessage);
+
+           
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public class SmsService : IIdentityMessageService
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            public Task SendAsync(IdentityMessage message)
             {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
-
-            // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
-
-            // Configure user lockout defaults
-            manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
-
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-            // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "Your security code is {0}"
-            });
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
-            var dataProtectionProvider = options.DataProtectionProvider;
-            if (dataProtectionProvider != null)
-            {
-                manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                // Plug in your SMS service here to send a text message.
+                return Task.FromResult(0);
             }
-            return manager;
-        }
-    }
-
-    // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
-    {
-        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
-            : base(userManager, authenticationManager)
-        {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+        public class ApplicationUserManager : UserManager<ApplicationUser>
         {
-            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+            public ApplicationUserManager(IUserStore<ApplicationUser> store)
+                : base(store)
+            {
+            }
+
+            public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+                IOwinContext context)
+            {
+                var manager =
+                    new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+                // Configure validation logic for usernames
+                manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+                {
+                    AllowOnlyAlphanumericUserNames = false,
+                    RequireUniqueEmail = true
+                };
+
+                // Configure validation logic for passwords
+                manager.PasswordValidator = new PasswordValidator
+                {
+                    RequiredLength = 6,
+                    RequireNonLetterOrDigit = true,
+                    RequireDigit = true,
+                    RequireLowercase = true,
+                    RequireUppercase = true,
+                };
+
+                // Configure user lockout defaults
+                manager.UserLockoutEnabledByDefault = true;
+                manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+
+                // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
+                // You can write your own provider and plug it in here.
+                manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
+                {
+                    MessageFormat = "Your security code is {0}"
+                });
+                manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
+                {
+                    Subject = "Security Code",
+                    BodyFormat = "Your security code is {0}"
+                });
+                manager.EmailService = new EmailService();
+                manager.SmsService = new SmsService();
+                var dataProtectionProvider = options.DataProtectionProvider;
+                if (dataProtectionProvider != null)
+                {
+                    manager.UserTokenProvider =
+                        new DataProtectorTokenProvider<ApplicationUser>(
+                            dataProtectionProvider.Create("ASP.NET Identity"));
+                }
+
+                return manager;
+            }
         }
 
-        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        // Configure the application sign-in manager which is used in this application.
+        public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
         {
-            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+            public ApplicationSignInManager(ApplicationUserManager userManager,
+                IAuthenticationManager authenticationManager)
+                : base(userManager, authenticationManager)
+            {
+            }
+
+            public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+            {
+                return user.GenerateUserIdentityAsync((ApplicationUserManager) UserManager);
+            }
+
+            public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options,
+                IOwinContext context)
+            {
+                return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(),
+                    context.Authentication);
+            }
         }
     }
 }

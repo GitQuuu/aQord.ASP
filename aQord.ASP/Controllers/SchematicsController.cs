@@ -30,6 +30,7 @@ namespace aQord.ASP.Controllers
         private IQueryable<Schematics> schematics;
 
         // GET: Schematics
+        [Authorize]
         public ActionResult Index(string searchString)
         {
             schematics = _dbContext.Schematics;
