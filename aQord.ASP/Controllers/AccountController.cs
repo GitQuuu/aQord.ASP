@@ -79,7 +79,7 @@ namespace aQord.ASP.Controllers
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ViewBag.errorMessage = "You must have a confirmed email to log on, please check your inbox/spam";
+                    ViewBag.errorMessage = "Du skal aktivere din konto, som kan gøres i den fremsendte mail tjek venligst din indbakke/spam";
                     return View("Error");
                 }
             }
@@ -176,10 +176,14 @@ namespace aQord.ASP.Controllers
                         protocol: Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(user.Id,
-                        "Confirm your account",
-                        "Please confirm your account by clicking this link: <a href=\""
+                        "Aktivere din konto",
+                        "Tryk på linket for at aktivere din konto: <a href=\""
                         + callbackUrl + "\">link</a>");
-                   // ViewBag.Link = callbackUrl;   // Used only for initial demo.
+                    ViewBag.Link = callbackUrl;   // Used only for initial demo.
+
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                      + "before you can log in.";
+
                     return RedirectToAction("Index", "Home");
 
                     /* default code below
