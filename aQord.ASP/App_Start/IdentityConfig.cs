@@ -33,19 +33,28 @@ namespace aQord.ASP
 
 
         // Use NuGet to install SendGrid (Basic C# client lib) 
+        /// <summary>
+        /// Authenticating up against Azure Keyvault and retrieving secrets to send email confirmation
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private async Task configSendGridasync(IdentityMessage message)
         {
 
-            //string keyVaultName = Environment.GetEnvironmentVariable("aQordASPvault", EnvironmentVariableTarget.Machine);
-            var kvUri = "https://aQordASPvault.vault.azure.net";
-            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
-            var KeyVaultSecret = clientVault.GetSecret("SendGridAPI").Value;
 
-            // using updated sendgrid documentation to get API credentials
-            //string apiKey = Environment.GetEnvironmentVariable("","");
+            // Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
+            //string keyVaultName = Environment.GetEnvironmentVariable("KeyVaultName");
+            var KeyVaultName = ConfigurationManager.AppSettings["KeyVaultName"]; // Read webconfig value and azure app settings. https://stackoverflow.com/questions/44542409/how-to-read-azure-web-site-app-settings-values , https://docs.microsoft.com/en-us/dotnet/api/system.configuration.configurationmanager.appsettings?redirectedfrom=MSDN&view=dotnet-plat-ext-3.1
+            var kvUri = "https://" + KeyVaultName + ".vault.azure.net";
+            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+
+
+            // Send a Single Email to a Single Recipient using updated sendgrid documentation to get API credentials https://github.com/sendgrid/sendgrid-csharp/blob/master/USE_CASES.md#send-a-single-email-to-a-single-recipient
+
+            var KeyVaultSecret = clientVault.GetSecret("SendGridAPI").Value;
             var client = new SendGridClient(KeyVaultSecret.Value);
 
-            // using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
+            // Set up email confirmation using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
 
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
