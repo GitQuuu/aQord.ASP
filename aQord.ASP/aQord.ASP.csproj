@@ -416,6 +416,7 @@
     <Content Include="Views\Schematics\SchematicsForm.cshtml" />
     <Content Include="Views\Schematics\Delete.cshtml" />
     <Content Include="Views\Schematics\Edit.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

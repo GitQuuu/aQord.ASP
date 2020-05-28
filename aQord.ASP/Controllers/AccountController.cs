@@ -179,12 +179,11 @@ namespace aQord.ASP.Controllers
                         "Aktivere din konto",
                         "Tryk på linket for at aktivere din konto: <a href=\""
                         + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;   // Used only for initial demo.
+                    /*ViewBag.Link = callbackUrl; */  // Used only for initial demo.
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                      + "before you can log in.";
+                    ViewBag.Message = $"Aktiverings mailen er sendt til {user.Email} venligst tjek din indbakke/spam";
 
-                    return RedirectToAction("Index", "Home");
+                    return View("Info");
 
                     /* default code below
 

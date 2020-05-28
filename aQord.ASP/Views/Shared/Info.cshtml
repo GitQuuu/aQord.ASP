@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Info";
+}
+
+<h3>@ViewBag.Message</h3>
+
+<!--Redirect user back to givin action https://stackoverflow.com/questions/24700208/mvc-redirect-to-another-page-after-a-four-second-pause-->
+<script type="text/javascript">
+    window.setTimeout(function(){
+        window.location= '@Url.Action("Index","Home")';
+    }, 5000);
+</script>
