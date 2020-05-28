@@ -95,43 +95,45 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="inputDefault">Default input</label>
-            <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
-        </div>
-
-        <div class="form-group">
             <div style="padding-left: 18%">
                 @Html.LabelFor(model => model.AkkordHours, "M T O T F L S")
             </div>
-            @Html.LabelFor(model => model.AkkordHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AkkordHours[0], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" }})
-                @Html.EditorFor(model => model.AkkordHours[1], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.AkkordHours[2], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.AkkordHours[3], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.AkkordHours[4], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.AkkordHours[5], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.AkkordHours[6], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+           
+          
+            <div class="row">
+                @Html.LabelFor(model => model.AkkordHours, new {@class= "row mx-1" })
 
-                @Html.ValidationMessageFor(model => model.AkkordHours, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AkkordHours[0], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[1], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[2], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[3], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[4], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[5], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+                @Html.EditorFor(model => model.AkkordHours[6], new {htmlAttributes = new {@class = "form-control col-md-1"}})
+
+                @Html.ValidationMessageFor(model => model.AkkordHours, "", new {@class = "text-danger"})
             </div>
+           
+         
         </div>
 
         <div class="form-group">
             <div style="padding-left: 18%">
                 @Html.LabelFor(model => model.NormalHours, "M T O T F L S")
             </div>
-            @Html.LabelFor(model => model.NormalHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NormalHours[0], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[1], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[2], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[3], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[4], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[5], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
-                @Html.EditorFor(model => model.NormalHours[6], new { htmlAttributes = new { @class = "form-control col-md-3", @style = "width:45px" } })
+           
+            <div class="row">
+                @Html.LabelFor(model => model.NormalHours, htmlAttributes: new { @class = "row mx-1" })
 
-                @Html.ValidationMessageFor(model => model.NormalHours, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NormalHours[0], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[1], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[2], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[3], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[4], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[5], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+                @Html.EditorFor(model => model.NormalHours[6], new {htmlAttributes = new {@class = "form-control col-md-1", @style = "width:45px"}})
+
+                @Html.ValidationMessageFor(model => model.NormalHours, "", new {@class = "text-danger"})
             </div>
         </div>
 
