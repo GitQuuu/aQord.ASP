@@ -57,6 +57,14 @@ namespace aQord.ASP.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // If the user is logged in but not [Authorized] it will send them to this view https://stackoverflow.com/questions/10928277/redirect-to-another-page-when-user-is-not-authorized-in-asp-net-mvc3
+            if (Request.IsAuthenticated)
+            {
+                ViewBag.Message = "Du har ikke tilladelse til dette";
+
+                return View("AccessDenied");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

@@ -1,6 +1,7 @@
 ﻿@*@model System.Data.Entity.DbSet<aQord.ASP.Models.Schematics>*@
 @using System.Web.UI.WebControls
 @using aQord.ASP.Models
+@using DocumentFormat.OpenXml.Drawing
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
 @{
@@ -16,8 +17,8 @@
 @using (Html.BeginForm("Index", "Schematics", FormMethod.Get))
 {
     <p>
-        @Html.TextBox("searchString",null,new {@PlaceHolder="Søg"})
-        <input type="submit" value="Søg"/>
+        @Html.TextBox("searchString", null, new { @PlaceHolder = "Søg" })
+        <input type="submit" value="Søg" />
     </p>
 }
 
@@ -137,7 +138,7 @@
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, "")
                     @Html.ActionLink("Detalje", "Details", "Schematics")
                     @Html.ActionLink("Slet", "Delete", new { id = item.Id })
-                    @Html.ActionLink("Export","ExportToExcel",new { id = item.Id},"")
+                    @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, "")
                 </td>
             </tr>
         }

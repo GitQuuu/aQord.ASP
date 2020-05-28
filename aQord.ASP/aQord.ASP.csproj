@@ -417,6 +417,7 @@
     <Content Include="Views\Schematics\Delete.cshtml" />
     <Content Include="Views\Schematics\Edit.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
