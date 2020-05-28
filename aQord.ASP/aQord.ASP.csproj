@@ -419,6 +419,7 @@
     <Content Include="Views\Schematics\Edit.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
