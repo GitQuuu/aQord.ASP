@@ -7,24 +7,26 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Liste af håndværkere</h2>
+<br/>
 
 
 <p>
     @Html.ActionLink("Tilføj ny", "New", "People", new { @class = "btn btn-primary" })
 
 
-    @using (Html.BeginForm("Index", "People", FormMethod.Get,new{@class= "form-inline my-2 my-lg-0" }))
+    @using (Html.BeginForm("Index", "People", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
     {
-    <p>
+        <p>
 
-        @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder="Søg" })
+            @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
 
-        <input type="submit" value="Filter" class="btn btn-secondary my-2 my-sm-0" />
-    </p>
-}
-    </p>
-    <table class="table">
+            <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0" />
+        </p>
+    }
+</p>
+
+<div class="table-responsive-sm">
+    <table class="table table-striped table-hover" >
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -101,3 +103,5 @@
         }
 
     </table>
+</div>
+    

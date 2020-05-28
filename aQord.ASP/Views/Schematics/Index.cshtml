@@ -8,23 +8,22 @@
     ViewBag.Message = "Index";
 }
 
-<h2>Uge skema</h2>
+<br/>
 
 <p>
-    @Html.ActionLink("Tilføj", "New", "Schematics", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary" })
 </p>
 
 @using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
 {
     <p>
-        @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2", @placeholder = "søg" })
-        <input type="submit" value="filtre" class="btn btn-secondary my-2 my-sm-0" />
+        @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
+        <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0" />
     </p>
 }
 
-
-<p>
-    <table>
+<div class="table-responsive-sm">
+    <table class="table table-striped table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TypeOfWork)
@@ -77,6 +76,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
             </th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -144,4 +144,4 @@
         }
 
     </table>
-</p>
+</div>
