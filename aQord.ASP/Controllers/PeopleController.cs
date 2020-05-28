@@ -91,6 +91,7 @@ namespace aQord.ASP.Controllers
 
         //Get: /Controller/Action/Id
         //add ? behind the int signature to allow nullable int, since int is never nullable pr. default
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +114,7 @@ namespace aQord.ASP.Controllers
 
         //Post: /Controller/Action/Id
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Person person)
         {

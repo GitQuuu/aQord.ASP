@@ -17,6 +17,7 @@ using Microsoft.Azure.Storage.Blob;
 
 namespace aQord.ASP.Controllers
 {
+    
     public class SchematicsController : Controller
     {
         public ApplicationDbContext _dbContext;
@@ -149,6 +150,7 @@ namespace aQord.ASP.Controllers
         }
 
         // Get
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -172,6 +174,7 @@ namespace aQord.ASP.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(Schematics schematics)
         {
