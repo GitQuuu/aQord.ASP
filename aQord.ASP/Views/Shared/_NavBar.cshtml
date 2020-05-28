@@ -1,23 +1,20 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @*@Html.ActionLink("QuDev", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                <li>@Html.ActionLink("Håndværkere","Index","People")</li>
-                <li>@Html.ActionLink("Uge skema","Index","Schematics")</li>
-                <li>@Html.ActionLink("Om", "About", "Home")</li>
-                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
-    </div>
-</div>
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    @*<a class="navbar-brand" href="#">Navbar</a>*@
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            @Html.ActionLink("Hjem", "Index", "Home", "", new { @class = "sr-only(current) nav-link" })
+            @Html.ActionLink("Håndværker", "Index", "People", "", new { @class = "sr-only(current) nav-link" })
+            @Html.ActionLink("Uge skema", "Index", "Schematics", "", new { @class = "sr-only(current) nav-link" })
+            @Html.ActionLink("Om", "About", "Home", "", new { @class = "sr-only(current) nav-link" })
+            @Html.ActionLink("Kontakt", "Contact", "Home", "", new { @class = "sr-only(current) nav-link" })
+        </ul>
+    </div>
+
+    <div class="navbar-text" style="float: right">
+        @Html.Partial("_LoginPartial")
+    </div>
+</nav>

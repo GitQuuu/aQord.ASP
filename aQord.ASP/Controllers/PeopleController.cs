@@ -12,7 +12,7 @@ namespace aQord.ASP.Controllers
 {
     public class PeopleController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public PeopleController()
         {

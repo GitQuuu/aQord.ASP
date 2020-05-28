@@ -11,16 +11,16 @@
 
 
 <p>
-    @Html.ActionLink("Tilføj ny", "New", "People", new { @class = "btn btn-default" })
+    @Html.ActionLink("Tilføj ny", "New", "People", new { @class = "btn btn-primary" })
 
 
-    @using (Html.BeginForm("Index", "People", FormMethod.Get))
+    @using (Html.BeginForm("Index", "People", FormMethod.Get,new{@class= "form-inline my-2 my-lg-0" }))
     {
     <p>
 
-        @Html.TextBox("filterString", null, new { @placeholder = "Søg" })
+        @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder="Søg" })
 
-        <input type="submit" value="Filter" />
+        <input type="submit" value="Filter" class="btn btn-secondary my-2 my-sm-0" />
     </p>
 }
     </p>
@@ -93,9 +93,9 @@
                     @Html.DisplayFor(modelItem => item.WeeklyWorkingHours)
                 </td>
                 <td>
-                    @Html.ActionLink("Redigere", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalje", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Slet", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Redigere", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                    @Html.ActionLink("Detalje", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
                 </td>
             </tr>
         }
