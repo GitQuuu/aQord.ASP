@@ -2,12 +2,15 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -200,11 +203,19 @@ namespace aQord.ASP.Controllers
 
         public Stream DownloadBlobFile()
         {
-            var connection_string = "DefaultEndpointsProtocol=https;AccountName=qudevaspstorage;AccountKey=P3ANGJp2XV1hpRgV26zrfGQJTtkRzQSvMfEVGFQb9FAlPC0v3oChfdhPiU6mj+z8hQTin/ActNF7Kh0yaBDu6A==;EndpointSuffix=core.windows.net";
+            // Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
+            var KeyVaultName = ConfigurationManager.AppSettings["KeyVaultName"];
+            var kvUri = "https://" + KeyVaultName + ".vault.azure.net";
+            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+
+            var KeyVaultSecret = clientVault.GetSecret("AzureBlobStorage").Value;
+
             try
             {
+                // How to use file from Azure blob storage https://stackoverflow.com/questions/45442818/how-to-download-files-from-azure-blob-storage-with-a-download-link
+
                 var filename = "UgeSkabelon.xlsx";
-                var storageAccount = CloudStorageAccount.Parse($"{connection_string}");
+                var storageAccount = CloudStorageAccount.Parse($"{KeyVaultSecret.Value}");
                 var blobClient = storageAccount.CreateCloudBlobClient();
 
                 CloudBlobContainer container = blobClient.GetContainerReference("temp");
