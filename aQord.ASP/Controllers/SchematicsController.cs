@@ -201,6 +201,7 @@ namespace aQord.ASP.Controllers
             return importFromDb;
         }
 
+        // returntype is stream because our ExportToExcel methods requireds a stream to get the file from azure
         public Stream DownloadBlobFile()
         {
             // Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
@@ -248,7 +249,7 @@ namespace aQord.ASP.Controllers
             var getDownloadBlobFile = DownloadBlobFile();
 
 
-            IXLWorkbook workbook = new XLWorkbook(getDownloadBlobFile);
+            IXLWorkbook workbook = new XLWorkbook(getDownloadBlobFile); // since XLWorkBook use a stream our DownloadBlobFile returns a stream
             IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
 
             int row = 8;
