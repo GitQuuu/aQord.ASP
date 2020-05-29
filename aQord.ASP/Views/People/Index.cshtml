@@ -16,7 +16,7 @@
 
     @using (Html.BeginForm("Index", "People", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
     {
-        <p>
+        <p data-toggle="tooltip" title="Brug , for at søge efter flere kriterier">
 
             @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
 

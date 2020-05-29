@@ -8,19 +8,26 @@
     ViewBag.Message = "Index";
 }
 
-<br/>
+<br />
 
 <p>
     @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary" })
 </p>
 
-@using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
+@using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new {@class = "form-inline my-2 my-lg-0"}))
 {
-    <p>
+<div class="e">
+
+    <div data-toggle="tooltip" title="Brug , for at søge efter flere kriterier">
         @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
-        <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0" />
-    </p>
+        <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0 e" />
+
+    </div>
+      
+
+</div>
 }
+
 
 <div class="table-responsive-sm">
     <table class="table table-striped table-hover">
