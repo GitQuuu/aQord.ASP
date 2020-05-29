@@ -16,16 +16,13 @@
 
 @using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new {@class = "form-inline my-2 my-lg-0"}))
 {
-<div class="e">
 
-    <div data-toggle="tooltip" title="Brug , for at søge efter flere kriterier">
+    <div data-toggle="tooltip" title="Brug , for at søge efter flere kriterier" class="space">
         @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
         <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0 e" />
 
     </div>
-      
 
-</div>
 }
 
 

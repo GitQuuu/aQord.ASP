@@ -27,3 +27,8 @@ textarea {
 .inputSize {
     max-width: 45px;
 }
+
+.space {
+    position: relative;
+    top: -10px;
+}

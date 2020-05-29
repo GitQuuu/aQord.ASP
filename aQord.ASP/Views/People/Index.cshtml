@@ -7,26 +7,26 @@
     ViewBag.Title = "Index";
 }
 
-<br/>
+<br />
 
 
 <p>
     @Html.ActionLink("Tilføj ny", "New", "People", new { @class = "btn btn-primary" })
-
-
-    @using (Html.BeginForm("Index", "People", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
-    {
-        <p data-toggle="tooltip" title="Brug , for at søge efter flere kriterier">
-
-            @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
-
-            <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0" />
-        </p>
-    }
 </p>
 
+
+@using (Html.BeginForm("Index", "People", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
+{
+    <div data-toggle="tooltip" title="Brug , for at søge efter flere kriterier" class="space">
+
+        @Html.TextBox("filterString", null, new { @class = "form-control mr-sm-2", @placeholder = "Søg" })
+
+        <input type="submit" value="Filtre" class="btn btn-secondary my-2 my-sm-0" />
+    </div>
+}
+
 <div class="table-responsive-sm">
-    <table class="table table-striped table-hover" >
+    <table class="table table-striped table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -104,4 +104,4 @@
 
     </table>
 </div>
-    
+
