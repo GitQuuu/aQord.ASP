@@ -31,14 +31,13 @@ namespace aQord.ASP.Controllers
         }
 
 
-        private IQueryable<Schematics> schematics;
-
         // GET: Schematics
         [Authorize]
         public ActionResult Index(string searchString)
         {
-            schematics = _dbContext.Schematics;
 
+        IQueryable<Schematics> schematics = _dbContext.Schematics;
+        
             if (!string.IsNullOrEmpty(searchString))
             {
                 var words = searchString.Split(',');
