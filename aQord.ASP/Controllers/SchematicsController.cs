@@ -46,6 +46,9 @@ namespace aQord.ASP.Controllers
             ViewData["ShelterRateAmountOfDays"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ShelterRateAmountOfDays).Select(g => g.FirstOrDefault()), "ShelterRateAmountOfDays", "ShelterRateAmountOfDays");
             ViewData["MileAgeAllowanceAmountOfKm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.MileageAllowanceAmountOfKm).Select(g => g.FirstOrDefault()), "MileAgeAllowanceAmountOfKm", "MileAgeAllowanceAmountOfKm");
 
+            var autoFill = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
+            ViewData["FullName"] = new SelectList(autoFill, "Id", "FullName");
+
         }
 
         // GET: Schematics
@@ -105,11 +108,7 @@ namespace aQord.ASP.Controllers
 
         public ActionResult New()
         {
-            ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
-            //ViewData["Person"] = new SelectList(_dbContext.People, "FirstName", "FirstName");
-
-            var autoFill = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
-            ViewData["FullName"] = new SelectList(autoFill, "Id", "FullName");
+            ViewDatas();
 
             return View("SchematicsForm");
         }
