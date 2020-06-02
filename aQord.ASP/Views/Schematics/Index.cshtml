@@ -31,6 +31,7 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TypeOfWork)
+                @Html.DropDownList("DropDownTypeOfWork", (SelectList)ViewData["TypeOfWork"])
             </th>
 
             <th>
@@ -51,6 +52,7 @@
 
             <th>
                 @Html.DisplayNameFor(model => model.ProjectNumber)
+                @Html.DropDownList("DropDownProjectNumbers", (SelectList)ViewData["ProjectNumbers"])
             </th>
 
             <th>
