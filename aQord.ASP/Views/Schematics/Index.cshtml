@@ -14,7 +14,7 @@
     @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary" })
 </p>
 
-@using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new {@class = "form-inline my-2 my-lg-0"}))
+@*@using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new {@class = "form-inline my-2 my-lg-0"}))
 {
 
     <div data-toggle="tooltip" title="Brug , for at søge efter flere kriterier" class="space">
@@ -23,7 +23,7 @@
 
     </div>
 
-}
+}*@
 
 
 <div class="table-responsive-sm">
@@ -31,40 +31,47 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TypeOfWork)
-                @Html.DropDownList("DropDownTypeOfWork", (SelectList)ViewData["TypeOfWork"])
+                @Html.DropDownList("DropDownTypeOfWork", (SelectList)ViewData["TypeOfWork"],"")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.StaffRepresentative)
+                @Html.DropDownList("DropDownStaffRepresentative", (SelectList)ViewData["StaffRepresentative"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.Year)
+                @Html.DropDownList("DropDownYear", (SelectList)ViewData["Year"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.Firm)
+                @Html.DropDownList("DropDownFirm", (SelectList)ViewData["Firm"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.WorkplaceAddress)
+                @Html.DropDownList("DropDownWorkplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.ProjectNumber)
-                @Html.DropDownList("DropDownProjectNumbers", (SelectList)ViewData["ProjectNumbers"])
+                @Html.DropDownList("DropDownProjectNumbers", (SelectList)ViewData["ProjectNumbers"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.CraftsmanId)
+                @Html.DropDownList("DropDownCraftsmanId", (SelectList)ViewData["CraftsmanId"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.Name)
+                @Html.DropDownList("DropDownName", (SelectList)ViewData["Name"], "")
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.WeekNumber)
+                @Html.DropDownList("DropDownWeekNumber", (SelectList)ViewData["WeekNumber"],"" )
             </th>
 
             <th>
@@ -77,10 +84,12 @@
 
             <th>
                 @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+               
             </th>
 
             <th>
                 @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+               
             </th>
             <th></th>
         </tr>

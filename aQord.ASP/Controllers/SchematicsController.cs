@@ -33,18 +33,18 @@ namespace aQord.ASP.Controllers
         public void ViewDatas()
         {
             ViewData["TypeOfWork"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.TypeOfWork).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["StaffRepresentative"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.StaffRepresentative).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["Year"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Year).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["Firm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Firm).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["WorkplaceAddress"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.WorkplaceAddress).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
+            ViewData["StaffRepresentative"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.StaffRepresentative).Select(g => g.FirstOrDefault()), "StaffRepresentative", "StaffRepresentative");
+            ViewData["Year"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Year).Select(g => g.FirstOrDefault()), "Year", "Year");
+            ViewData["Firm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Firm).Select(g => g.FirstOrDefault()), "Firm", "Firm");
+            ViewData["WorkplaceAddress"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.WorkplaceAddress).Select(g => g.FirstOrDefault()), "WorkplaceAddress", "WorkplaceAddress");
             ViewData["ProjectNumbers"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ProjectNumber).Select(g => g.FirstOrDefault()), "ProjectNumber", "ProjectNumber");
-            ViewData["CraftsmanId"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.CraftsmanId).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["Name"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Name).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["WeekNumber"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.WeekNumber).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["AkkordHours"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.AkkordHours).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["NormalHours"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.NormalHours).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["ShelterRateAmountOfDays"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ShelterRateAmountOfDays).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
-            ViewData["MileAgeAllowanceAmountOfKm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.MileageAllowanceAmountOfKm).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
+            ViewData["CraftsmanId"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.CraftsmanId).Select(g => g.FirstOrDefault()), "CraftsmanId", "CraftsmanId");
+            ViewData["Name"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Name).Select(g => g.FirstOrDefault()), "Name", "Name");
+            ViewData["WeekNumber"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.WeekNumber).Select(g => g.FirstOrDefault()), "WeekNumber", "WeekNumber");
+            ViewData["AkkordHours"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.AkkordHours).Select(g => g.FirstOrDefault()), "AkkordHours", "AkkordHours");
+            ViewData["NormalHours"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.NormalHours).Select(g => g.FirstOrDefault()), "NormalHours", "NormalHours");
+            ViewData["ShelterRateAmountOfDays"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ShelterRateAmountOfDays).Select(g => g.FirstOrDefault()), "ShelterRateAmountOfDays", "ShelterRateAmountOfDays");
+            ViewData["MileAgeAllowanceAmountOfKm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.MileageAllowanceAmountOfKm).Select(g => g.FirstOrDefault()), "MileAgeAllowanceAmountOfKm", "MileAgeAllowanceAmountOfKm");
 
         }
 
