@@ -32,7 +32,7 @@ namespace aQord.ASP.Controllers
 
         public void ViewDatas()
         {
-            // Creating ViewData for our Dropdowns in the Schematics Index.cshtml
+            // Creating ViewData for each Dropdowns in the Schematics Index.cshtml
             ViewData["TypeOfWork"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.TypeOfWork).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
             ViewData["StaffRepresentative"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.StaffRepresentative).Select(g => g.FirstOrDefault()), "StaffRepresentative", "StaffRepresentative");
             ViewData["Year"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Year).Select(g => g.FirstOrDefault()), "Year", "Year");
@@ -54,7 +54,7 @@ namespace aQord.ASP.Controllers
 
         // GET: Schematics
         [Authorize]
-        public ActionResult Index(string searchString, string typeOfWork, string staffRepresentative, int? year, string firm, string workplaceAddress,long? projectNumber,int? craftsmanId, string name, int? weekNumber)
+        public ActionResult Index(string searchString, string typeOfWork, string staffRepresentative, int? year, string firm, string workplaceAddress, long? projectNumber, int? craftsmanId, string name, int? weekNumber)
         {
             ViewDatas();
 
@@ -100,18 +100,62 @@ namespace aQord.ASP.Controllers
             //ViewBag.filter = new SelectList(typeOfWorkList);
 
 
-            if (!string.IsNullOrEmpty(typeOfWork) || !string.IsNullOrEmpty(staffRepresentative) || !string.IsNullOrEmpty(year.ToString()) || !string.IsNullOrEmpty(firm) || !string.IsNullOrEmpty(workplaceAddress) || !string.IsNullOrEmpty(projectNumber.ToString()) || !string.IsNullOrEmpty(craftsmanId.ToString()) || !string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(weekNumber.ToString()))
+            //if (!string.IsNullOrEmpty(typeOfWork) || !string.IsNullOrEmpty(staffRepresentative) || !string.IsNullOrEmpty(year.ToString()) || !string.IsNullOrEmpty(firm) || !string.IsNullOrEmpty(workplaceAddress) || !string.IsNullOrEmpty(projectNumber.ToString()) || !string.IsNullOrEmpty(craftsmanId.ToString()) || !string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(weekNumber.ToString()))
+            //{
+
+
+            if (!string.IsNullOrEmpty(staffRepresentative))
             {
-                schematics = schematics.Where(x => x.TypeOfWork.Equals(typeOfWork) ||
-                                                   x.StaffRepresentative.Equals(staffRepresentative) ||
-                                                   x.Year.Equals(year) ||
-                                                   x.Firm.Equals(firm) ||
-                                                   x.WorkplaceAddress.Equals(workplaceAddress) ||
-                                                   x.ProjectNumber.Equals(projectNumber) ||
-                                                   x.CraftsmanId.Equals(craftsmanId) ||
-                                                   x.Name.Equals(name) ||
-                                                   x.WeekNumber.Equals(weekNumber)) ;
+                schematics = schematics.Where(x => x.StaffRepresentative.Equals(staffRepresentative));
             }
+
+            if (!string.IsNullOrEmpty(year.ToString()))
+            {
+                schematics = schematics.Where(x => x.Year.Equals(year));
+            }
+
+            if (!string.IsNullOrEmpty(firm))
+            {
+                schematics = schematics.Where(x => x.Firm.Equals(firm));
+            }
+
+            if (!string.IsNullOrEmpty(workplaceAddress))
+            {
+                schematics = schematics.Where(x => x.WorkplaceAddress.Equals(workplaceAddress));
+            }
+
+            if (!string.IsNullOrEmpty(projectNumber.ToString()))
+            {
+                schematics = schematics.Where(x => x.ProjectNumber.Equals(projectNumber));
+            }
+
+            if (!string.IsNullOrEmpty(craftsmanId.ToString()))
+            {
+                schematics = schematics.Where(x => x.CraftsmanId.Equals(craftsmanId));
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                schematics = schematics.Where(x => x.Name.Equals(name));
+            }
+
+            if (!string.IsNullOrEmpty(weekNumber.ToString()))
+            {
+                schematics = schematics.Where(x => x.WeekNumber.Equals(weekNumber));
+            }
+
+
+            //schematics = schematics.Where(x => x.TypeOfWork.Equals(typeOfWork) ||
+            //                                   x.StaffRepresentative.Equals(staffRepresentative) ||
+            //                                   x.Year.Equals(year) ||
+            //                                   x.Firm.Equals(firm) ||
+            //                                   x.WorkplaceAddress.Equals(workplaceAddress) ||
+            //                                   x.ProjectNumber.Equals(projectNumber) ||
+            //                                   x.CraftsmanId.Equals(craftsmanId) ||
+            //                                   x.Name.Equals(name) ||
+            //                                   x.WeekNumber.Equals(weekNumber));
+            //}
+
 
 
             return View(schematics);
