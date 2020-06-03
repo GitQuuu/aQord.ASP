@@ -20,7 +20,7 @@ using Microsoft.Azure.Storage.Blob;
 
 namespace aQord.ASP.Controllers
 {
-    
+
     public class SchematicsController : Controller
     {
         public ApplicationDbContext _dbContext;
@@ -53,13 +53,14 @@ namespace aQord.ASP.Controllers
 
         // GET: Schematics
         [Authorize]
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string filter)
         {
-            ViewDatas();
+            //ViewDatas();
 
             IQueryable<Schematics> schematics = _dbContext.Schematics;
-        
-            if (!string.IsNullOrEmpty(searchString))
+
+
+            /*if (!string.IsNullOrEmpty(searchString)) // For the search funtionality 
             {
                 var words = searchString.Split(',');
 
@@ -81,7 +82,25 @@ namespace aQord.ASP.Controllers
                                                        word.Equals(s.ShelterRateAmountOfDays.ToString()) ||
                                                                                                                                                                  word.Contains(s.MileageAllowanceAmountOfKm.ToString()));
                 }
+            }*/
+
+            var typeOfWorkList = new List<string>();
+
+            //IQueryable<string> typeOfWorkQry = _dbContext.Schematics.Where(t=>t.Equals(t.TypeOfWork));
+
+            var typeOfWorkQry = from d in _dbContext.Schematics
+                                               orderby d.TypeOfWork
+                                               select d.TypeOfWork;
+
+
+            typeOfWorkList.AddRange(typeOfWorkQry.Distinct());
+            ViewBag.filter = new SelectList(typeOfWorkList);
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                schematics = schematics.Where(x => x.TypeOfWork == filter);
             }
+
 
             return View(schematics);
         }

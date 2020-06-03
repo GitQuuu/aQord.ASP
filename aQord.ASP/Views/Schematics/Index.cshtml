@@ -13,7 +13,7 @@
 
 <p>
     @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary" })
-   
+
 </p>
 
 @*@using (Html.BeginForm("Index", "Schematics", FormMethod.Get, new {@class = "form-inline my-2 my-lg-0"}))
@@ -29,74 +29,82 @@
 
 
 <div class="table-responsive-sm">
+
     <p style="text-align: center" class="alert alert-dismissible alert-warning">
         Søge/filter funktionalitet under opbydning med dropdown
     </p>
+
     <table class="table table-striped table-hover">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeOfWork)
-                @Html.DropDownList("DropDownTypeOfWork", (SelectList) ViewData["TypeOfWork"], "")
-            </th>
+            @using (Html.BeginForm("Index", "Schematics", FormMethod.Get))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeOfWork)
+                    @Html.DropDownList("filter", "Alle")
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.StaffRepresentative)
-                @Html.DropDownList("DropDownStaffRepresentative", (SelectList) ViewData["StaffRepresentative"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StaffRepresentative)
+                    @*@Html.DropDownList("DropDownStaffRepresentative", (SelectList)ViewData["StaffRepresentative"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-                @Html.DropDownList("DropDownYear", (SelectList) ViewData["Year"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                    @*@Html.DropDownList("DropDownYear", (SelectList)ViewData["Year"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Firm)
-                @Html.DropDownList("DropDownFirm", (SelectList) ViewData["Firm"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Firm)
+                    @*@Html.DropDownList("DropDownFirm", (SelectList)ViewData["Firm"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.WorkplaceAddress)
-                @Html.DropDownList("DropDownWorkplaceAddress", (SelectList) ViewData["WorkplaceAddress"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkplaceAddress)
+                    @*@Html.DropDownList("DropDownWorkplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectNumber)
-                @Html.DropDownList("DropDownProjectNumbers", (SelectList) ViewData["ProjectNumbers"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjectNumber)
+                    @*@Html.DropDownList("DropDownProjectNumbers", (SelectList)ViewData["ProjectNumbers"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.CraftsmanId)
-                @Html.DropDownList("DropDownCraftsmanId", (SelectList) ViewData["CraftsmanId"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CraftsmanId)
+                    @*@Html.DropDownList("DropDownCraftsmanId", (SelectList)ViewData["CraftsmanId"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-                @Html.DropDownList("DropDownName", (SelectList) ViewData["Name"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                    @*@Html.DropDownList("DropDownName", (SelectList)ViewData["Name"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.WeekNumber)
-                @Html.DropDownList("DropDownWeekNumber", (SelectList) ViewData["WeekNumber"], "")
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeekNumber)
+                    @*@Html.DropDownList("DropDownWeekNumber", (SelectList)ViewData["WeekNumber"], "")*@
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.AkkordHours)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AkkordHours)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.NormalHours)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NormalHours)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+                <th>
+                    @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+                </th>
 
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+                <th>
+                    <input type="submit" value="Filter" class="form-group btn btn-info" />
+                </th>
 
-            </th>
-            <th></th>
+            }
+
         </tr>
 
         @foreach (var item in Model)
@@ -155,10 +163,10 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Redigere", "Edit", "Schematics", new {id = item.Id}, new {@class = "btn btn-outline-success"})
-                    @Html.ActionLink("Detalje", "Details", "Schematics", new {@class = "btn btn-outline-info"})
-                    @Html.ActionLink("Slet", "Delete", new {id = item.Id}, new {@class = "btn btn-outline-danger"})
-                    @Html.ActionLink("Export", "ExportToExcel", new {id = item.Id}, new {@class = "btn btn-outline-warning"})
+                    @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                    @Html.ActionLink("Detalje", "Details", "Schematics", new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
                 </td>
             </tr>
         }
