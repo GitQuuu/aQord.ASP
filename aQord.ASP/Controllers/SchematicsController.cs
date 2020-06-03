@@ -32,6 +32,7 @@ namespace aQord.ASP.Controllers
 
         public void ViewDatas()
         {
+            // Creating ViewData for our Dropdowns in the Schematics Index.cshtml
             ViewData["TypeOfWork"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.TypeOfWork).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
             ViewData["StaffRepresentative"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.StaffRepresentative).Select(g => g.FirstOrDefault()), "StaffRepresentative", "StaffRepresentative");
             ViewData["Year"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Year).Select(g => g.FirstOrDefault()), "Year", "Year");
@@ -53,9 +54,9 @@ namespace aQord.ASP.Controllers
 
         // GET: Schematics
         [Authorize]
-        public ActionResult Index(string searchString, string filter)
+        public ActionResult Index(string searchString, string typeOfWork, string staffRepresentative, int? year, string firm, string workplaceAddress,long? projectNumber,int? craftsmanId, string name, int? weekNumber)
         {
-            //ViewDatas();
+            ViewDatas();
 
             IQueryable<Schematics> schematics = _dbContext.Schematics;
 
@@ -84,21 +85,32 @@ namespace aQord.ASP.Controllers
                 }
             }*/
 
-            var typeOfWorkList = new List<string>();
+            //var typeOfWorkList = new List<string>();
 
             //IQueryable<string> typeOfWorkQry = _dbContext.Schematics.Where(t=>t.Equals(t.TypeOfWork));
 
-            var typeOfWorkQry = from d in _dbContext.Schematics
-                                               orderby d.TypeOfWork
-                                               select d.TypeOfWork;
 
 
-            typeOfWorkList.AddRange(typeOfWorkQry.Distinct());
-            ViewBag.filter = new SelectList(typeOfWorkList);
+            //var typeOfWorkQry = from d in _dbContext.Schematics
+            //                                   orderby d.TypeOfWork
+            //                                   select d.TypeOfWork;
 
-            if (!string.IsNullOrEmpty(filter))
+
+            //typeOfWorkList.AddRange(typeOfWorkQry.Distinct());
+            //ViewBag.filter = new SelectList(typeOfWorkList);
+
+
+            if (!string.IsNullOrEmpty(typeOfWork) || !string.IsNullOrEmpty(staffRepresentative) || !string.IsNullOrEmpty(year.ToString()) || !string.IsNullOrEmpty(firm) || !string.IsNullOrEmpty(workplaceAddress) || !string.IsNullOrEmpty(projectNumber.ToString()) || !string.IsNullOrEmpty(craftsmanId.ToString()) || !string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(weekNumber.ToString()))
             {
-                schematics = schematics.Where(x => x.TypeOfWork == filter);
+                schematics = schematics.Where(x => x.TypeOfWork.Equals(typeOfWork) ||
+                                                   x.StaffRepresentative.Equals(staffRepresentative) ||
+                                                   x.Year.Equals(year) ||
+                                                   x.Firm.Equals(firm) ||
+                                                   x.WorkplaceAddress.Equals(workplaceAddress) ||
+                                                   x.ProjectNumber.Equals(projectNumber) ||
+                                                   x.CraftsmanId.Equals(craftsmanId) ||
+                                                   x.Name.Equals(name) ||
+                                                   x.WeekNumber.Equals(weekNumber)) ;
             }
 
 

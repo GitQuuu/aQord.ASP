@@ -40,47 +40,47 @@
             {
                 <th>
                     @Html.DisplayNameFor(model => model.TypeOfWork)
-                    @Html.DropDownList("filter", "Alle")
+                    @Html.DropDownList("typeOfWork", (SelectList)ViewData["TypeOfWork"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.StaffRepresentative)
-                    @*@Html.DropDownList("DropDownStaffRepresentative", (SelectList)ViewData["StaffRepresentative"], "")*@
+                    @Html.DropDownList("staffRepresentative", (SelectList)ViewData["StaffRepresentative"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Year)
-                    @*@Html.DropDownList("DropDownYear", (SelectList)ViewData["Year"], "")*@
+                    @Html.DropDownList("year", (SelectList)ViewData["Year"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Firm)
-                    @*@Html.DropDownList("DropDownFirm", (SelectList)ViewData["Firm"], "")*@
+                    @Html.DropDownList("firm", (SelectList)ViewData["Firm"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.WorkplaceAddress)
-                    @*@Html.DropDownList("DropDownWorkplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "")*@
+                    @Html.DropDownList("workplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.ProjectNumber)
-                    @*@Html.DropDownList("DropDownProjectNumbers", (SelectList)ViewData["ProjectNumbers"], "")*@
+                    @Html.DropDownList("projectNumbers", (SelectList)ViewData["ProjectNumbers"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.CraftsmanId)
-                    @*@Html.DropDownList("DropDownCraftsmanId", (SelectList)ViewData["CraftsmanId"], "")*@
+                    @Html.DropDownList("craftsmanId", (SelectList)ViewData["CraftsmanId"], "")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
-                    @*@Html.DropDownList("DropDownName", (SelectList)ViewData["Name"], "")*@
+                    @Html.DropDownList("name",(SelectList)ViewData["Name"],"")
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.WeekNumber)
-                    @*@Html.DropDownList("DropDownWeekNumber", (SelectList)ViewData["WeekNumber"], "")*@
+                    @Html.DropDownList("weekNumber", (SelectList)ViewData["WeekNumber"], "")
                 </th>
 
                 <th>
