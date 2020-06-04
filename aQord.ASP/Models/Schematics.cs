@@ -28,8 +28,8 @@ namespace aQord.ASP.Models
         [Display(Name = "Arbejdsplads")]
         public string WorkplaceAddress { get; set; }
 
-        [Display(Name = "Akkord/Projekt nr.")]
-        public Int64 ProjectNumber { get; set; }
+        [Display(Name = "Akkord/Projekt")]
+        public long ProjectNumber { get; set; }
 
         [Display(Name = "Arbejds nr.")]
         [DataType(DataType.Text)]
@@ -38,7 +38,7 @@ namespace aQord.ASP.Models
         [Display(Name = "Navn")]
         public string Name { get; set; }
 
-        [Display(Name = "Uge nr.")]
+        [Display(Name = "Uge")]
         [DataType(DataType.Text)]
         public int? WeekNumber { get; set; }
 
@@ -62,7 +62,7 @@ namespace aQord.ASP.Models
             }
         }
 
-        [Display(Name = "Timer i akkord")]
+        [Display(Name = "Akkord timer")]
         public string HoursInAkkordData { get; set; }
 
         [NotMapped]
