@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
+using aQord.ASP.Tools;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using ClosedXML.Excel;
@@ -20,7 +21,7 @@ using Microsoft.Azure.Storage.Blob;
 
 namespace aQord.ASP.Controllers
 {
-
+    [Internationalization] // using this annotation/attribute to specify the culture -da-DK https://stackoverflow.com/questions/1560796/set-culture-in-an-asp-net-mvc-app?rq=1
     public class SchematicsController : Controller
     {
         public ApplicationDbContext _dbContext;
