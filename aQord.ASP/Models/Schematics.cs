@@ -43,7 +43,7 @@ namespace aQord.ASP.Models
         public int? WeekNumber { get; set; }
 
         [NotMapped]
-        [Display(Name = "Timer i akkord")]
+        [Display(Name = "Akkord timer")]
         public List<double> AkkordHours
         {
             get

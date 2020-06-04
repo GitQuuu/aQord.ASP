@@ -54,7 +54,7 @@ namespace aQord.ASP.Controllers
 
         // GET: Schematics
         [Authorize]
-        public ActionResult Index(string searchString, string typeOfWork, string staffRepresentative, int? year, string firm, string workplaceAddress, long? projectNumber, int? craftsmanId, string name, int? weekNumber)
+        public ActionResult Index(string typeOfWork, string staffRepresentative, int? year, string firm, string workplaceAddress, long? projectNumber, int? craftsmanId, string name, int? weekNumber)
         {
             ViewDatas();
 
@@ -87,10 +87,10 @@ namespace aQord.ASP.Controllers
                 schematics = schematics.Where(x => x.ProjectNumber == projectNumber);
             }
 
-            if (!string.IsNullOrEmpty(craftsmanId.ToString()))
-            {
-                schematics = schematics.Where(x => x.CraftsmanId == craftsmanId);
-            }
+            //if (!string.IsNullOrEmpty(craftsmanId.ToString()))
+            //{
+            //    schematics = schematics.Where(x => x.CraftsmanId == craftsmanId);
+            //}
 
             if (!string.IsNullOrEmpty(name))
             {
