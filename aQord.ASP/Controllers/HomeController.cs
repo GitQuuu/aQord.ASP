@@ -23,7 +23,7 @@ namespace aQord.ASP.Controllers
         
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kontakt side.";
 
             return View();
         }
