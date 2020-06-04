@@ -40,6 +40,7 @@
             {
                 <th>
                     @Html.DisplayNameFor(model => model.TypeOfWork)
+                    <!--1st parameter much match the parameter name in the ActionResult-->
                     @Html.DropDownList("typeOfWork", (SelectList)ViewData["TypeOfWork"], "")
                 </th>
 
@@ -65,7 +66,7 @@
 
                 <th>
                     @Html.DisplayNameFor(model => model.ProjectNumber)
-                    @Html.DropDownList("projectNumbers", (SelectList)ViewData["ProjectNumbers"], "")
+                    @Html.DropDownList("projectNumber", (SelectList)ViewData["ProjectNumbers"], "")
                 </th>
 
                 <th>
