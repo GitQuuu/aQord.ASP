@@ -32,7 +32,7 @@ namespace aQord.ASP.Controllers
 
         public void ViewDatas()
         {
-            // Creating ViewData for each Dropdowns in the Schematics Index.cshtml
+            // Creating ViewData for each Dropdowns in the Schematics Index.cshtml - https://stackoverflow.com/questions/12090937/populating-a-dropdown-from-viewdata
             ViewData["TypeOfWork"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.TypeOfWork).Select(g => g.FirstOrDefault()), "TypeOfWork", "TypeOfWork");
             ViewData["StaffRepresentative"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.StaffRepresentative).Select(g => g.FirstOrDefault()), "StaffRepresentative", "StaffRepresentative");
             ViewData["Year"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.Year).Select(g => g.FirstOrDefault()), "Year", "Year");
@@ -61,48 +61,6 @@ namespace aQord.ASP.Controllers
             IQueryable<Schematics> schematics = _dbContext.Schematics;
 
 
-            /*if (!string.IsNullOrEmpty(searchString)) // For the search funtionality 
-            {
-                var words = searchString.Split(',');
-
-                schematics = _dbContext.Schematics;
-
-                foreach (var word in words)
-                {
-                    schematics = schematics.Where(s => word.Equals(s.TypeOfWork) ||
-                                                       word.Equals(s.StaffRepresentative) ||
-                                                       word.Equals(s.Year.ToString()) ||
-                                                       word.Equals(s.Firm) ||
-                                                       word.Equals(s.WorkplaceAddress.ToString()) ||
-                                                       word.Equals(s.ProjectNumber.ToString()) ||
-                                                       word.Equals(s.CraftsmanId.ToString()) ||
-                                                       word.Equals(s.Name) ||
-                                                       word.Equals(s.WeekNumber.ToString()) ||
-                                                       word.Equals(s.HoursInAkkordData.ToString()) ||
-                                                       word.Equals(s.NormalHoursData.ToString()) ||
-                                                       word.Equals(s.ShelterRateAmountOfDays.ToString()) ||
-                                                                                                                                                                 word.Contains(s.MileageAllowanceAmountOfKm.ToString()));
-                }
-            }*/
-
-            //var typeOfWorkList = new List<string>();
-
-            //IQueryable<string> typeOfWorkQry = _dbContext.Schematics.Where(t=>t.Equals(t.TypeOfWork));
-
-
-
-            //var typeOfWorkQry = from d in _dbContext.Schematics
-            //                                   orderby d.TypeOfWork
-            //                                   select d.TypeOfWork;
-
-
-            //typeOfWorkList.AddRange(typeOfWorkQry.Distinct());
-            //ViewBag.filter = new SelectList(typeOfWorkList);
-
-
-            //if (!string.IsNullOrEmpty(typeOfWork) || !string.IsNullOrEmpty(staffRepresentative) || !string.IsNullOrEmpty(year.ToString()) || !string.IsNullOrEmpty(firm) || !string.IsNullOrEmpty(workplaceAddress) || !string.IsNullOrEmpty(projectNumber.ToString()) || !string.IsNullOrEmpty(craftsmanId.ToString()) || !string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(weekNumber.ToString()))
-            //{
-
 
             if (!string.IsNullOrEmpty(staffRepresentative))
             {
@@ -111,7 +69,7 @@ namespace aQord.ASP.Controllers
 
             if (!string.IsNullOrEmpty(year.ToString()))
             {
-                schematics = schematics.Where(x => x.Year.Equals(year));
+                schematics = schematics.Where(x => x.Year == year);
             }
 
             if (!string.IsNullOrEmpty(firm))
@@ -124,14 +82,14 @@ namespace aQord.ASP.Controllers
                 schematics = schematics.Where(x => x.WorkplaceAddress.Equals(workplaceAddress));
             }
 
-            if (!string.IsNullOrEmpty(projectNumber.ToString()))
+            if (!string.IsNullOrEmpty(Convert.ToString(projectNumber)))
             {
-                schematics = schematics.Where(x => x.ProjectNumber.Equals(projectNumber));
+                schematics = schematics.Where(x => x.ProjectNumber == projectNumber);
             }
 
             if (!string.IsNullOrEmpty(craftsmanId.ToString()))
             {
-                schematics = schematics.Where(x => x.CraftsmanId.Equals(craftsmanId));
+                schematics = schematics.Where(x => x.CraftsmanId == craftsmanId);
             }
 
             if (!string.IsNullOrEmpty(name))
@@ -141,20 +99,9 @@ namespace aQord.ASP.Controllers
 
             if (!string.IsNullOrEmpty(weekNumber.ToString()))
             {
-                schematics = schematics.Where(x => x.WeekNumber.Equals(weekNumber));
+                schematics = schematics.Where(x => x.WeekNumber == weekNumber);
             }
 
-
-            //schematics = schematics.Where(x => x.TypeOfWork.Equals(typeOfWork) ||
-            //                                   x.StaffRepresentative.Equals(staffRepresentative) ||
-            //                                   x.Year.Equals(year) ||
-            //                                   x.Firm.Equals(firm) ||
-            //                                   x.WorkplaceAddress.Equals(workplaceAddress) ||
-            //                                   x.ProjectNumber.Equals(projectNumber) ||
-            //                                   x.CraftsmanId.Equals(craftsmanId) ||
-            //                                   x.Name.Equals(name) ||
-            //                                   x.WeekNumber.Equals(weekNumber));
-            //}
 
 
 
