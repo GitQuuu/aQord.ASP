@@ -110,7 +110,7 @@ namespace aQord.ASP.Controllers
 
         //Action Function for dropdown  to populate other input fields in SchematicsForm
         [HttpPost]
-        public ActionResult AutofillSchematicForm(string dropdownSelection)
+        public ActionResult AutoFillSchematicForm(string dropdownSelection)
         {
             var query = _dbContext.Schematics.FirstOrDefault(s => s.ProjectNumber.ToString() == dropdownSelection);
 

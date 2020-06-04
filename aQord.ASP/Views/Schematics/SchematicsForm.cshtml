@@ -21,7 +21,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "AutofillSchematicForm(this.value);", @class = "form-control" })
+            @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "autoFillSchematicForm(this.value);", @class = "form-control" })
 
             @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
@@ -161,7 +161,7 @@
 
     <!--Script for schematic to autofill input fields and reset them-->
     <script type="text/javascript">
-        function AutofillSchematicForm(dropdownSelection) {
+        function autoFillSchematicForm(dropdownSelection) {
 
             //pr default if nothing is selected sets inputs to ''
             $("#ProjectNumber").val('');
@@ -174,7 +174,7 @@
 
             // when onchange on dropdown is being called populate the inputs
             $.ajax({
-                url: '@Url.Action("AutofillSchematicForm", "Schematics")',
+                url: '@Url.Action("AutoFillSchematicForm", "Schematics")',
                 type: "POST",
                 data: { "dropdownSelection": dropdownSelection },
                 "success": function(data) {
