@@ -1,27 +1,19 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
-using aQord.ASP.Tools;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Ajax.Utilities;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 
 namespace aQord.ASP.Controllers
 {
-    [Internationalization] // using this annotation/attribute to specify the culture -da-DK https://stackoverflow.com/questions/1560796/set-culture-in-an-asp-net-mvc-app?rq=1
     public class SchematicsController : Controller
     {
         public ApplicationDbContext _dbContext;
@@ -120,7 +112,7 @@ namespace aQord.ASP.Controllers
 
         //Action Function for dropdown  to populate other input fields in SchematicsForm for people
         [HttpPost]
-        public ActionResult AutofillSchematicFormPeople(string dropdownSelection)
+        public ActionResult AutoFillSchematicFormPeople(string dropdownSelection)
         {
             var query = _dbContext.People.FirstOrDefault(s => s.FirstName == dropdownSelection);
 
