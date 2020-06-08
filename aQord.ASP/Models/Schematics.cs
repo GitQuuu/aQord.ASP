@@ -19,7 +19,6 @@ namespace aQord.ASP.Models
         public string StaffRepresentative { get; set; }
 
         [Display(Name = "Årstal")]
-        [DataType(DataType.Text)]
         public int Year { get; set; }
 
         [Display(Name = "Firma")]
@@ -32,14 +31,12 @@ namespace aQord.ASP.Models
         public long ProjectNumber { get; set; }
 
         [Display(Name = "Arbejds nr.")]
-        [DataType(DataType.Text)]
         public int CraftsmanId { get ; set; }
 
         [Display(Name = "Navn")]
         public string Name { get; set; }
 
         [Display(Name = "Uge")]
-        [DataType(DataType.Text)]
         public int? WeekNumber { get; set; }
 
         [NotMapped]
