@@ -62,24 +62,100 @@
     <p><a href="https://www.linkedin.com/in/quu/" target="_blank" class="btn btn-primary btn-lg">LinkedIn</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <figure class="figure" style="width: 88%">
-            <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--MOKp0Jew--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://www.probytes.net/wp-content/uploads/2018/01/4-1.png" class="figure-img img-fluid rounded"/>
-            <figcaption class="figure-caption text-center"></figcaption>
-        </figure>
-    </div>
-    <div class="col-md-4">
-        <figure class="figure">
-            <img src="https://cdn-images-1.medium.com/max/800/0*6BJ4tCBLBO2M6JSS.jpg" class="figure-img img-fluid rounded" alt="..."/>
-            <figcaption class="figure-caption text-center"></figcaption>
-        </figure>
-    </div>
-    <div class="col-md-4">
-        <figure class="figure">
-            <img src="https://www.memesmonkey.com/images/memesmonkey/0d/0d580111645c718c333e62f3dcbb2b6b.jpeg" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption text-center"></figcaption>
-        </figure>
-    </div>
 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="page-header text-center">
+        <h1 id="timeline">Tidslinje</h1>
+    </div>
+    <ul class="timeline">
+
+        <li class="timeline-inverted">
+            <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="" id=""></i></a></div>
+            <div class="timeline-panel">
+                <div class="timeline-heading">
+                    <img class="img-responsive" src="https://cdn-images-1.medium.com/max/800/0*6BJ4tCBLBO2M6JSS.jpg" />
+
+                </div>
+                <div class="timeline-body">
+                    <p><b>Afsluttede grundforløbet</b></p>
+                    <p>Gør klar til start på skolepraktikken</p>
+
+                </div>
+
+                <div class="timeline-footer primary">
+                    <a class="pull-right">15/01/19</a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="" id=""></i></a></div>
+            <div class="timeline-panel">
+                <div class="timeline-heading">
+                    <img class="img-responsive" src="https://techcollege.dk/media/5453/techcollege_logo_650px_smal.png"/>
+                </div>
+
+                <div class="timeline-body">
+                    <p><b>Uddannelsesstart Tech College Aalborg</b></p>
+                    <p>Skrev min første linie kode denne dag :)</p>
+                </div>
+
+                <div class="timeline-footer primary">
+                    <a class="pull-right">15/08/18</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="clearfix" style="float: none;"></li>
+    </ul>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval", "~/bundles/bootstrap")
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var my_posts = $("[rel=tooltip]");
+
+            var size = $(window).width();
+            for(i=0;i<my_posts.length;i++){
+                the_post = $(my_posts[i]);
+
+                if(the_post.hasClass('invert') && size >=767 ){
+                    the_post.tooltip({ placement: 'left'});
+                    the_post.css("cursor","pointer");
+                }else{
+                    the_post.tooltip({ placement: 'rigth'});
+                    the_post.css("cursor","pointer");
+                }
+            }
+        });
+    </script>
+
+    @*<div class="row">
+            <div class="col-md-4">
+                <figure class="figure" style="width: 88%">
+                    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--MOKp0Jew--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://www.probytes.net/wp-content/uploads/2018/01/4-1.png" class="figure-img img-fluid rounded"/>
+                    <figcaption class="figure-caption text-center"></figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4">
+                <figure class="figure">
+                    <img src="https://cdn-images-1.medium.com/max/800/0*6BJ4tCBLBO2M6JSS.jpg" class="figure-img img-fluid rounded" alt="..."/>
+                    <figcaption class="figure-caption text-center"></figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4">
+                <figure class="figure">
+                    <img src="https://www.memesmonkey.com/images/memesmonkey/0d/0d580111645c718c333e62f3dcbb2b6b.jpeg" class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption text-center"></figcaption>
+                </figure>
+            </div>
+
+        </div>*@
+}
