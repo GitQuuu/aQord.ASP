@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/qunication/databases/QuDev_db",
+      "type": "mssql.azure",
+      "connectionId": "QuDevDB",
+      "secretStore": "AzureAppSettings"
+    },
     "secrets1": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.KeyVault/vaults/aQordASPvault",
       "type": "secrets.keyVault",
