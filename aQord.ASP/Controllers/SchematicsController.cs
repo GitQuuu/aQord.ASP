@@ -142,8 +142,8 @@ namespace aQord.ASP.Controllers
             schematicsToDb.CraftsmanId = schematic.CraftsmanId;
             schematicsToDb.Name = schematic.Name;
             schematicsToDb.WeekNumber = schematic.WeekNumber;
-            schematicsToDb.AkkordHours = schematic.AkkordHours;
-            schematicsToDb.NormalHours = schematic.NormalHours;
+            schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
+            schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
@@ -173,8 +173,8 @@ namespace aQord.ASP.Controllers
             entity.CraftsmanId = schematics.CraftsmanId;
             entity.Name = schematics.Name;
             entity.WeekNumber = schematics.WeekNumber;
-            entity.AkkordHours = schematics.AkkordHours;
-            entity.NormalHours = schematics.NormalHours;
+            entity.HoursInAkkordData = schematics.HoursInAkkordData;
+            entity.NormalHoursData = schematics.NormalHoursData;
             entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
             entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
 
