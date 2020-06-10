@@ -80,7 +80,7 @@
             }
 
         .timeline .timeline-item .timeline-panel {
-            position: relative;
+            position: initial;
             width: 46%;
             float: left;
             right: 16px;
