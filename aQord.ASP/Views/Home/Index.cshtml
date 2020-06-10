@@ -1,11 +1,12 @@
-﻿@{
+﻿@using DocumentFormat.OpenXml.Math
+@{
     ViewBag.Title = "Home Page";
 }
 
 <head>
     @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
     <!---- Include the above in your HEAD tag -------->
 </head>
 <body>
@@ -80,22 +81,51 @@
             <div style="display:inline-block;width:100%;overflow-y:auto;">
                 <ul class="timeline timeline-horizontal">
 
-                    <!-- 1st box -->
+                    <li class="timeline-item">
+                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-check"></i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Uddannelsestart</h4>
+                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15/08/2018</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <img src="https://techcollege.dk/media/5453/techcollege_logo_650px_smal.png" class="figure-img img-fluid rounded w-100" alt="..." />
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="timeline-item">
+                        <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">1 uges praktik</h4>
+                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 01/10/2018</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <img src="https://www.greenclick.dk/wp-content/uploads/2019/02/greenclick-green.svg" class="figure-img img-fluid rounded w-100" alt="..." />
+
+                            </div>
+                        </div>
+                    </li>
+
+
                     <li class="timeline-item">
                         <div class="timeline-badge primary"><i class="glyphicon glyphicon-check"></i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="timeline-title">Grundforløb bestået</h4>
-                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15/02/2019</small></p>
+                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15/01/2019</small></p>
                             </div>
                             <div class="timeline-body">
                                 <img src="https://techcollege.dk/media/5453/techcollege_logo_650px_smal.png" class="figure-img img-fluid rounded w-100" alt="..." />
-                                <p>Uddannelsesstart</p>
+
                             </div>
                         </div>
                     </li>
 
-                    <!-- 2nd box -->
+
+
                     <li class="timeline-item">
                         <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
                         <div class="timeline-panel">
@@ -104,13 +134,12 @@
                                 <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/10/2019</small></p>
                             </div>
                             <div class="timeline-body">
-                                <img src="https://img.devrant.com/devrant/rant/r_2371373_Bmdde.jpg" class="figure-img img-fluid rounded w-100" alt="..." />
-                                <p>Uddannelsesstart</p>
+
                             </div>
                         </div>
                     </li>
 
-                    <!-- 3rd box -->
+
                     <li class="timeline-item">
                         <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
                         <div class="timeline-panel">
@@ -119,9 +148,8 @@
                                 <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/02/2020</small></p>
                             </div>
                             <div class="timeline-body">
-                                <img src="    https://scontent-cph2-1.xx.fbcdn.net/v/t1.0-9/19598865_257434141406962_1640412374804081285_n.png?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=PUCs5CJ02b4AX-swJAW&_nc_ht=scontent-cph2-1.xx&oh=2d01b9756b4673fb50ecd703c269c5e3&oe=5F05D7EF
-" class="figure-img img-fluid rounded w-100" alt="..." />
-                                <p>Uddannelsesstart</p>
+                                <img src="https://scontent-cph2-1.xx.fbcdn.net/v/t1.0-9/19598865_257434141406962_1640412374804081285_n.png?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=PUCs5CJ02b4AX-swJAW&_nc_ht=scontent-cph2-1.xx&oh=2d01b9756b4673fb50ecd703c269c5e3&oe=5F05D7EF" class="figure-img img-fluid rounded w-100" alt="..." />
+
                             </div>
                         </div>
                     </li>
@@ -134,27 +162,4 @@
 
 
 </div>
-
-
-@*<div class="row">
-        <div class="col-md-4">
-            <figure class="figure" style="width: 88%">
-                <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--MOKp0Jew--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://www.probytes.net/wp-content/uploads/2018/01/4-1.png" class="figure-img img-fluid rounded"/>
-                <figcaption class="figure-caption text-center"></figcaption>
-            </figure>
-        </div>
-        <div class="col-md-4">
-            <figure class="figure">
-                <img src="https://cdn-images-1.medium.com/max/800/0*6BJ4tCBLBO2M6JSS.jpg" class="figure-img img-fluid rounded" alt="..."/>
-                <figcaption class="figure-caption text-center"></figcaption>
-            </figure>
-        </div>
-        <div class="col-md-4">
-            <figure class="figure">
-                <img src="https://www.memesmonkey.com/images/memesmonkey/0d/0d580111645c718c333e62f3dcbb2b6b.jpeg" class="figure-img img-fluid rounded" alt="...">
-                <figcaption class="figure-caption text-center"></figcaption>
-            </figure>
-        </div>
-
-    </div>*@
 
