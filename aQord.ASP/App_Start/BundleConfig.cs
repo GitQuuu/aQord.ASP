@@ -25,7 +25,8 @@ namespace aQord.ASP
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-minty.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/timeline.css"));
         }
     }
 }
