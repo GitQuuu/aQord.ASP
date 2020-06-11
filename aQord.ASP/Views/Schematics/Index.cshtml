@@ -151,7 +151,7 @@
 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
-                    @Html.ActionLink("Detalje", "Details", "Schematics", new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info" })
                     @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
                     @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
                 </td>

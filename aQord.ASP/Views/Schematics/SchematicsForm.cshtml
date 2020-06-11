@@ -23,7 +23,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "autoFillSchematicForm(this.value);", @class = "form-control" })
 
-                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,7 +82,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CraftsmanId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.CraftsmanId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,7 +90,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.WeekNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WeekNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.WeekNumber, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.WeekNumber, "", new { @class = "text-danger" })
             </div>
         </div>

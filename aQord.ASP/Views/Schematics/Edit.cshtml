@@ -35,7 +35,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @inputMode="Numeric" } })
             @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -59,7 +59,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control", @inputMode = "Numeric" } })
             @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -67,7 +67,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CraftsmanId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.CraftsmanId, new { htmlAttributes = new { @class = "form-control", @inputMode = "Numeric" } })
             @Html.ValidationMessageFor(model => model.CraftsmanId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -83,7 +83,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.WeekNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.WeekNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.WeekNumber, new { htmlAttributes = new { @class = "form-control", @inputMode = "Numeric" } })
             @Html.ValidationMessageFor(model => model.WeekNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -93,7 +93,7 @@
         @Html.LabelFor(model => model.AkkordHours, htmlAttributes: new { @class = "col-md-2" })
     <div>
         <div class="row col-md-10">
-            @Html.EditorFor(model => model.AkkordHours, new { htmlAttributes = new { @class = "form-control inputSize " } })
+            @Html.EditorFor(model => model.AkkordHours, new { htmlAttributes = new { @class = "form-control inputSize ", @inputMode = "Numeric" } })
 
             @Html.ValidationMessageFor(model => model.AkkordHours, "", new { @class = "text-danger" })
         </div>
@@ -106,7 +106,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.NormalHours, htmlAttributes: new { @class = "col-md-2"})
     <div class="row col-md-10">
-        @Html.EditorFor(model => model.NormalHours, new { htmlAttributes = new { @class = "form-control inputSize" } })
+        @Html.EditorFor(model => model.NormalHours, new { htmlAttributes = new { @class = "form-control inputSize", @inputMode = "Numeric" } })
         @Html.ValidationMessageFor(model => model.NormalHours, "", new { @class = "text-danger" })
     </div>
     </div>
@@ -114,7 +114,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ShelterRateAmountOfDays, htmlAttributes: new { @class = "col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ShelterRateAmountOfDays, new { htmlAttributes = new { @class = "form-control" }})
+            @Html.EditorFor(model => model.ShelterRateAmountOfDays, new { htmlAttributes = new { @class = "form-control", @inputMode = "Numeric" } })
             @Html.ValidationMessageFor(model => model.ShelterRateAmountOfDays, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -122,7 +122,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.MileageAllowanceAmountOfKm, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.MileageAllowanceAmountOfKm, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.MileageAllowanceAmountOfKm, new { htmlAttributes = new { @class = "form-control", @inputMode = "Numeric" } })
             @Html.ValidationMessageFor(model => model.MileageAllowanceAmountOfKm, "", new { @class = "text-danger"})
         </div>
     </div>
