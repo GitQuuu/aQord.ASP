@@ -339,5 +339,11 @@ namespace aQord.ASP.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var entity = _dbContext.Schematics.Find(id);
+            return View(entity);
+        }
     }
 }
