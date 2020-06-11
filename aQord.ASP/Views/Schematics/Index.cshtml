@@ -70,22 +70,6 @@
                     @Html.DropDownList("weekNumber", (SelectList)ViewData["WeekNumber"], "", new {@class="form-control-sm "})
                 </th>
 
-                @*<th>
-                    @Html.DisplayNameFor(model => model.AkkordHours)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.NormalHours)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
-                </th>*@
-
                 <th>
                     <input type="submit" value="Filter" class="form-group btn btn-info" />
                 </th>
@@ -132,22 +116,6 @@
                 <td>
                     @Html.DisplayFor(items => item.WeekNumber)
                 </td>
-
-                @*<td>
-                    @Html.DisplayFor(items => item.AkkordHours)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(items => item.NormalHours)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(items => item.ShelterRateAmountOfDays)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(items => item.MileageAllowanceAmountOfKm)
-                </td>*@
 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
