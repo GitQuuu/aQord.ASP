@@ -120,6 +120,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Redigere", "Edit", new { id = Model.Id }, new{@class= "btn btn-success" }) 
+    @Html.ActionLink("Tilbage til forrig side", "Index", new {}, new{ @class="btn btn-info"})
 </p>
