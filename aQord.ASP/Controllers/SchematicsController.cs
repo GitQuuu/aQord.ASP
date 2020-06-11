@@ -53,6 +53,10 @@ namespace aQord.ASP.Controllers
 
             IQueryable<Schematics> schematics = _dbContext.Schematics;
 
+            if (!string.IsNullOrEmpty(typeOfWork))
+            {
+                schematics = schematics.Where(x => x.TypeOfWork.Equals(typeOfWork));
+            }
 
 
             if (!string.IsNullOrEmpty(staffRepresentative))
