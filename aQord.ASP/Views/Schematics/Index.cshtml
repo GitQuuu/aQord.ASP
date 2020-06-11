@@ -70,7 +70,7 @@
                     @Html.DropDownList("weekNumber", (SelectList)ViewData["WeekNumber"], "", new {@class="form-control-sm "})
                 </th>
 
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.AkkordHours)
                 </th>
 
@@ -84,7 +84,7 @@
 
                 <th>
                     @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
-                </th>
+                </th>*@
 
                 <th>
                     <input type="submit" value="Filter" class="form-group btn btn-info" />
@@ -133,7 +133,7 @@
                     @Html.DisplayFor(items => item.WeekNumber)
                 </td>
 
-                <td>
+                @*<td>
                     @Html.DisplayFor(items => item.AkkordHours)
                 </td>
 
@@ -147,7 +147,7 @@
 
                 <td>
                     @Html.DisplayFor(items => item.MileageAllowanceAmountOfKm)
-                </td>
+                </td>*@
 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
