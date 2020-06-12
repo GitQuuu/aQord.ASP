@@ -28,32 +28,32 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TypeOfWork)
                     <!--1st parameter much match the parameter name in the ActionResult-->
-                    @Html.DropDownList("typeOfWork", (SelectList)ViewData["TypeOfWork"], "", new {@class="form-control-sm"})
+                    @Html.DropDownList("typeOfWork", (SelectList)ViewData["TypeOfWork"], "", new { @class = "form-control-sm" })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.StaffRepresentative)
-                    @Html.DropDownList("staffRepresentative", (SelectList)ViewData["StaffRepresentative"], "", new {@class="form-control-sm"})
+                    @Html.DropDownList("staffRepresentative", (SelectList)ViewData["StaffRepresentative"], "", new { @class = "form-control-sm" })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Year)
-                    @Html.DropDownList("year", (SelectList)ViewData["Year"], "", new {@class="form-control-sm "})
+                    @Html.DropDownList("year", (SelectList)ViewData["Year"], "", new { @class = "form-control-sm " })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Firm)
-                    @Html.DropDownList("firm", (SelectList)ViewData["Firm"], "", new {@class="form-control-sm"})
+                    @Html.DropDownList("firm", (SelectList)ViewData["Firm"], "", new { @class = "form-control-sm" })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.WorkplaceAddress)
-                    @Html.DropDownList("workplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "", new {@class="form-control-sm"})
+                    @Html.DropDownList("workplaceAddress", (SelectList)ViewData["WorkplaceAddress"], "", new { @class = "form-control-sm" })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.ProjectNumber)
-                    @Html.DropDownList("projectNumber", (SelectList)ViewData["ProjectNumbers"], "", new {@class="form-control-sm "})
+                    @Html.DropDownList("projectNumber", (SelectList)ViewData["ProjectNumbers"], "", new { @class = "form-control-sm " })
                 </th>
 
                 <th>
@@ -63,12 +63,12 @@
 
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
-                    @Html.DropDownList("name",(SelectList)ViewData["Name"],"", new {@class="form-control-sm"})
+                    @Html.DropDownList("name", (SelectList)ViewData["Name"], "", new { @class = "form-control-sm" })
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.WeekNumber)
-                    @Html.DropDownList("weekNumber", (SelectList)ViewData["WeekNumber"], "", new {@class="form-control-sm "})
+                    @Html.DropDownList("weekNumber", (SelectList)ViewData["WeekNumber"], "", new { @class = "form-control-sm " })
                 </th>
 
                 <th>
@@ -83,27 +83,27 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(Items => item.TypeOfWork)
+                    @Html.DisplayFor(items => item.TypeOfWork)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => item.StaffRepresentative)
+                    @Html.DisplayFor(items => item.StaffRepresentative)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => item.Year)
+                    @Html.DisplayFor(items => item.Year)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => item.Firm)
+                    @Html.DisplayFor(items => item.Firm)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => item.WorkplaceAddress)
+                    @Html.DisplayFor(items => item.WorkplaceAddress)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(Items => item.ProjectNumber)
+                    @Html.DisplayFor(items => item.ProjectNumber)
                 </td>
 
                 <td>
@@ -120,7 +120,7 @@
 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
-                    @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info "@*, data_toggle="modal", data_target= "#staticBackdrop"*@ })
+                    @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info _details " })
                     @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
                     @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
                 </td>
@@ -128,7 +128,46 @@
         }
     </table>
 
-    
+
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                if this is displayed then u are doing it wrong
+
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+                <p>
+                    @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                    @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+                </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url-->
+<script type="text/javascript">
+
+    $('._details').on('click', function (e) {
+        e.preventDefault();
+        $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
+
+</script>
 
