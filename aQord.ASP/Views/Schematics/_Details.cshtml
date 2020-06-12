@@ -1,158 +1,116 @@
 ﻿@model aQord.ASP.Models.Schematics
 
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.TypeOfWork)
+    </dt>
 
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.TypeOfWork)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.TypeOfWork)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.TypeOfWork)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.StaffRepresentative)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.StaffRepresentative)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.StaffRepresentative)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.StaffRepresentative)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Year)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Year)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Year)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Year)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Firm)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Firm)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Firm)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Firm)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.WorkplaceAddress)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.WorkplaceAddress)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WorkplaceAddress)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.WorkplaceAddress)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.ProjectNumber)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProjectNumber)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.ProjectNumber)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ProjectNumber)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.CraftsmanId)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CraftsmanId)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.CraftsmanId)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CraftsmanId)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Name)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.WeekNumber)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.WeekNumber)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WeekNumber)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.WeekNumber)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.HoursInAkkordData)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.HoursInAkkordData)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.HoursInAkkordData)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.HoursInAkkordData)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.NormalHoursData)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NormalHoursData)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.NormalHoursData)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.NormalHoursData)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.ShelterRateAmountOfDays)
+    </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ShelterRateAmountOfDays)
-                    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+    </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
-                    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.MileageAllowanceAmountOfKm)
+    </dd>
+    
+    @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+    @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
 
-                    <dd>
-                        @Html.DisplayFor(model => model.MileageAllowanceAmountOfKm)
-                    </dd>
-
-                </dl>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-                <p>
-                    @Html.ActionLink("Redigere", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+</dl>
 
 
 
-<script type="text/javascript">
-    $(function () {
 
-        $('body').on('click', 'a.modal-link', function (e) {
-
-            e.preventDefault();
-
-            $("#modal").remove();
-
-            // Get the Details action URL
-            var url = $(this).attr("href");
-
-            //Make the Ajax call and render modal when response is available
-            $.get(url, function (data) {
-                $(data).modal();
-            });
-        }); 
-
-    });
-</script>
