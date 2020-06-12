@@ -4,6 +4,7 @@
 @using DocumentFormat.OpenXml.Drawing
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
+
 @{
     ViewBag.Message = "Index";
 }
@@ -119,12 +120,15 @@
 
                 <td>
                     @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
-                    @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info "@*, data_toggle="modal", data_target= "#staticBackdrop"*@ })
                     @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
                     @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
                 </td>
             </tr>
         }
-
     </table>
+
+    
+
 </div>
+

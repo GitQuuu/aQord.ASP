@@ -347,7 +347,13 @@ namespace aQord.ASP.Controllers
         public ActionResult Details(int id)
         {
             var entity = _dbContext.Schematics.Find(id);
-            return View(entity);
+
+            if (entity == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return PartialView("_Details",entity);
         }
     }
 }
