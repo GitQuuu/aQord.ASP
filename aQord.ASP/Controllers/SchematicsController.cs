@@ -129,7 +129,7 @@ namespace aQord.ASP.Controllers
         {
             ViewDatas();
 
-            return View("SchematicsForm");
+            return PartialView("SchematicsForm");
         }
 
         public ActionResult Save(Schematics schematic)
@@ -160,7 +160,7 @@ namespace aQord.ASP.Controllers
         {
             var entity = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
-            return View(entity);
+            return PartialView(entity);
         }
 
         [HttpPost]
@@ -205,7 +205,7 @@ namespace aQord.ASP.Controllers
                 }
 
 
-                return View(schematic);
+                return PartialView(schematic);
 
             }
 

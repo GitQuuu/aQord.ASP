@@ -13,13 +13,12 @@
 <br />
 
 <p>
-    @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Tilføj ny", "New", "Schematics", new { @class = "btn btn-primary _new" })
 
 </p>
 
 
 <div class="table-responsive-sm">
-
 
     <table class="table table-striped table-hover">
         <tr>
@@ -119,20 +118,18 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                    @Html.ActionLink("Redigere", "Edit", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-success _edit" })
                     @Html.ActionLink("Detalje", "Details", "Schematics", new { id = item.Id }, new { @class = "btn btn-outline-info _details " })
-                    @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("Slet", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger _delete" })
                     @Html.ActionLink("Export", "ExportToExcel", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
                 </td>
             </tr>
         }
     </table>
 
-
-
 </div>
 
-<!-- Modal -->
+<!-- Bootstrap Modal popup for _details https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp -->
 <div class="modal fade" id="staticBackdrop" style="display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -151,23 +148,175 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-                <p>
-                    @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
-                    @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
-                </p>*@
+                    <button type="button" class="btn btn-primary">Understood</button>
+                    <p>
+                        @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                        @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+                    </p>*@
             </div>
         </div>
     </div>
 </div>
 
-<!--https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url-->
+<!-- Bootstrap Modal popup for _edit https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp -->
+<div class="modal fade" id="staticBackdrop" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                if this is displayed then u are doing it wrong
+
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                    <p>
+                        @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                        @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+                    </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal popup for _delete https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp -->
+<div class="modal fade" id="staticBackdrop" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                if this is displayed then u are doing it wrong
+
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                    <p>
+                        @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                        @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+                    </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal popup for _new https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp -->
+<div class="modal fade" id="staticBackdrop" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                if this is displayed then u are doing it wrong
+
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                    <p>
+                        @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                        @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+                    </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--JS to handle the popup  https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url -->
 <script type="text/javascript">
 
     $('._details').on('click', function (e) {
         e.preventDefault();
         $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
     });
+
+    $('._edit').on('click', function (e) {
+        e.preventDefault();
+        $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
+
+    $('._delete').on('click', function (e) {
+        e.preventDefault();
+        $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
+
+    $('._new').on('click', function (e) {
+        e.preventDefault();
+        $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
+
+    function autoFillSchematicForm(dropdownSelection) {
+
+        //pr default if nothing is selected sets inputs to ''
+        $("#ProjectNumber").val('');
+        $("#TypeOfWork").val('');
+        $("#StaffRepresentative").val('');
+        $("#Year").val('');
+        $("#Firm").val('');
+        $("#WorkplaceAddress").val('');
+
+
+        // when onchange on dropdown is being called populate the inputs
+        $.ajax({
+            url: '@Url.Action("AutoFillSchematicForm", "Schematics")',
+            type: "POST",
+            data: { "dropdownSelection": dropdownSelection },
+            "success": function(data) {
+
+                $("#ProjectNumber").val(data.ProjectNumber);
+                $("#TypeOfWork").val(data.TypeOfWork);
+                $("#StaffRepresentative").val(data.StaffRepresentative);
+                $("#Year").val(data.Year);
+                $("#Firm").val(data.Firm);
+                $("#WorkplaceAddress").val(data.WorkplaceAddress);
+
+            }
+        });
+    }
+
+    //Script for schematic to autofill input fields and reset them
+
+    function AutoFillSchematicFormPeople(dropdownSelection) {
+
+        $("#CraftsmanId").val('');
+        $("#Name").val('');
+
+        $.ajax({
+            url: '@Url.Action("AutoFillSchematicFormPeople", "Schematics")',
+            type: "POST",
+            data: { "dropdownSelection": dropdownSelection },
+            "success": function(data) {
+                if (data != null) {
+                    $("#Name").val(data.FirstName + " " + data.LastName);
+                    $("#CraftsmanId").val(data.Id);
+                }
+            }
+        });
+    }
+
 
 </script>
 

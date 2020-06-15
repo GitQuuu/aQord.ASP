@@ -107,7 +107,7 @@
     </dd>
     
     @Html.ActionLink("Redigere", "Edit", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
-    @Html.ActionLink("Tilbage til forrig side", "Index", new { }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Luk", "Index", new { }, new { @class = "btn btn-info", data_dismiss="modal" })
 
 </dl>
 
