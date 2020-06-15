@@ -11,6 +11,10 @@
     "storage1": {
       "type": "storage",
       "connectionId": "qudevaspstorage"
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": "APPINSIGHTS_INSTRUMENTATIONKEY"
     }
   }
 }
