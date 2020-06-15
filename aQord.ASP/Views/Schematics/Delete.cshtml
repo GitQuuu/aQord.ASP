@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Delete";
 }
-<h3>Er du sikker på du vil fjerne denne ugeskema fra databasen</h3>
+<h3>Slet skema fra database?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -79,46 +79,97 @@
             @Html.DisplayFor(model => model.WeekNumber)
         </dd>
 
+        <div id="tableAkkordHours">
+
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
         <dt>
             @Html.DisplayNameFor(model => model.HoursInAkkordData)
         </dt>
+        </tr>
+        </thead>
+        <tbody>
+            <td>Man</td>
+            <td>Tirs</td>
+            <td>Ons</td>
+            <td>Tors</td>
+            <td>Fre</td>
+            <td>Lør</td>
+            <td>Søn</td>
+            <tr>
+                <td>@Html.DisplayFor(model => model.AkkordHours[0])</td>
+                <td>@Html.DisplayFor(model => model.AkkordHours[1])</td>
+                <td>@Html.DisplayFor(model => model.AkkordHours[2])</td>
+                <td>@Html.DisplayFor(model => model.AkkordHours[3])</td>
+                <td>@Html.DisplayFor(model => model.AkkordHours[4])</td>
+                <td>@Html.DisplayFor(model => model.AkkordHours[5])</td>
+                <td style="width: 100%">@Html.DisplayFor(model => model.AkkordHours[6])</td>
+            </tr>
+        </tbody>
 
-        <dd>
-            @Html.DisplayFor(model => model.HoursInAkkordData)
-        </dd>
+        </table>
+</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NormalHoursData)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NormalHoursData)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
-        </dt>
+<div id="tableNormalHours">
 
-        <dd>
-            @Html.DisplayFor(model => model.ShelterRateAmountOfDays)
-        </dd>
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NormalHoursData)
+                </dt>
+            </tr>
+        </thead>
+        <tbody>
+        <td>Man</td>
+        <td>Tirs</td>
+        <td>Ons</td>
+        <td>Tors</td>
+        <td>Fre</td>
+        <td>Lør</td>
+        <td>Søn</td>
+        <tr>
+            <td>@Html.DisplayFor(model => model.NormalHours[0])</td>
+            <td>@Html.DisplayFor(model => model.NormalHours[1])</td>
+            <td>@Html.DisplayFor(model => model.NormalHours[2])</td>
+            <td>@Html.DisplayFor(model => model.NormalHours[3])</td>
+            <td>@Html.DisplayFor(model => model.NormalHours[4])</td>
+            <td>@Html.DisplayFor(model => model.NormalHours[5])</td>
+            <td style="width: 100%">@Html.DisplayFor(model => model.NormalHours[6])</td>
+        </tr>
+        </tbody>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
-        </dt>
+    </table>
+</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MileageAllowanceAmountOfKm)
-        </dd>
+<dt>
+    @Html.DisplayNameFor(model => model.ShelterRateAmountOfDays)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.ShelterRateAmountOfDays)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.MileageAllowanceAmountOfKm)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.MileageAllowanceAmountOfKm)
+</dd>
 
     </dl>
 
-    @using (Html.BeginForm("Delete","Schematics")) {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm("Delete", "Schematics"))
+{
+    @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Slet" class="btn btn-primary" />
-            @Html.ActionLink("Fortryd", "Index", "Schematics", new{@class = "btn btn-danger", data_dismiss="modal"})
-        </div>
-    }
+    <div class="form-actions no-color">
+        <input type="submit" value="Slet" class="btn btn-primary" />
+        @Html.ActionLink("Fortryd", "Index", "Schematics", new { @class = "btn btn-danger", data_dismiss = "modal" })
+    </div>
+}
 </div>
