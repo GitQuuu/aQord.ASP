@@ -1,16 +1,16 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets",
-      "connectionId": "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT"
+    "storage1": {
+      "type": "storage",
+      "connectionId": "qudevaspstorage"
     },
     "mssql1": {
       "type": "mssql",
       "connectionId": "QuDevDB"
     },
-    "storage1": {
-      "type": "storage",
-      "connectionId": "qudevaspstorage"
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT"
     },
     "appInsights1": {
       "type": "appInsights",
