@@ -59,7 +59,7 @@ namespace aQord.ASP
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
             myMessage.From = new EmailAddress(
-                "QuDev@Asp.net", "Qu Kops Le");
+                "NoReply@QuDev.net", "Qu Kops Le");
             myMessage.Subject = message.Subject;
             myMessage.PlainTextContent = message.Body;
             myMessage.HtmlContent = message.Body;
