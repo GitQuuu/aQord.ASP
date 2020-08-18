@@ -51,8 +51,9 @@ namespace aQord.ASP
 
             // Send a Single Email to a Single Recipient using updated sendgrid documentation to get API credentials https://github.com/sendgrid/sendgrid-csharp/blob/master/USE_CASES.md#send-a-single-email-to-a-single-recipient
 
-            var KeyVaultSecret = clientVault.GetSecret("SendGridApiv2").Value;
-            var client = new SendGridClient(KeyVaultSecret.Value);
+            //var KeyVaultSecret = clientVault.GetSecret("SendGridApiv2").Value;
+            //var client = new SendGridClient(KeyVaultSecret);
+            var client = new SendGridClient("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");
 
             // Set up email confirmation using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
 
