@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using aQord.ASP.Models;
+using aQord.ASP.Services;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using ClosedXML.Excel;
@@ -239,18 +240,11 @@ namespace aQord.ASP.Controllers
         // returntype is stream because our ExportToExcel methods requireds a stream to get the file from azure
         public Stream DownloadBlobFile()
         {
-            //// Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
-            var keyVaultName = ConfigurationManager.AppSettings["KEY_VAULT_NAME"];
-            var kvUri = "https://" + keyVaultName + ".vault.azure.net";
-            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
-
-            var keyVaultSecret = clientVault.GetSecret("AzureBlobStorage").Value.Value;
-
             try
             {
 
                 var filename = "UgeSkabelon.xlsx";
-                var storageAccount = CloudStorageAccount.Parse(keyVaultSecret);
+                var storageAccount = CloudStorageAccount.Parse(KeyVaultService.KeyVaultSecret("AzureBlobStorage",KeyVaultService.AuthenticateCreateClient()).Value);
                 var blobClient = storageAccount.CreateCloudBlobClient();
 
                 CloudBlobContainer container = blobClient.GetContainerReference("temp");
@@ -258,24 +252,9 @@ namespace aQord.ASP.Controllers
 
                 Stream blobStream = blob.OpenRead();
                 return blobStream;
-
-                /*
 
                 // How to use file from Azure blob storage https://stackoverflow.com/questions/45442818/how-to-download-files-from-azure-blob-storage-with-a-download-link
 
-                var filename = "UgeSkabelon.xlsx";
-                var storageAccount = CloudStorageAccount.Parse($"{KeyVaultSecret.Value}");
-                var blobClient = storageAccount.CreateCloudBlobClient();
-
-                CloudBlobContainer container = blobClient.GetContainerReference("temp");
-                CloudBlockBlob blob = container.GetBlockBlobReference(filename);
-
-                Stream blobStream = blob.OpenRead();
-
-                return blobStream;
-
-                //return File(blobStream, blob.Properties.ContentType, filename);
-                */
             }
             catch (Exception)
             {
