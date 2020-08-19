@@ -240,17 +240,17 @@ namespace aQord.ASP.Controllers
         public Stream DownloadBlobFile()
         {
             //// Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
-            //var KeyVaultName = ConfigurationManager.AppSettings["KeyVaultName"];
-            //var kvUri = "https://" + KeyVaultName + ".vault.azure.net";
-            //var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+            var keyVaultName = ConfigurationManager.AppSettings["KEY_VAULT_NAME"];
+            var kvUri = "https://" + keyVaultName + ".vault.azure.net";
+            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
 
-            //var KeyVaultSecret = clientVault.GetSecret("AzureBlobStorage").Value;
+            var keyVaultSecret = clientVault.GetSecret("AzureBlobStorage").Value.Value;
 
             try
             {
 
                 var filename = "UgeSkabelon.xlsx";
-                var storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=qudevaspstorage;AccountKey=P3ANGJp2XV1hpRgV26zrfGQJTtkRzQSvMfEVGFQb9FAlPC0v3oChfdhPiU6mj+z8hQTin/ActNF7Kh0yaBDu6A==;EndpointSuffix=core.windows.net");
+                var storageAccount = CloudStorageAccount.Parse(keyVaultSecret);
                 var blobClient = storageAccount.CreateCloudBlobClient();
 
                 CloudBlobContainer container = blobClient.GetContainerReference("temp");
