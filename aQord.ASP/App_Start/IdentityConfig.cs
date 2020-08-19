@@ -43,15 +43,10 @@ namespace aQord.ASP
         {
             // Follow this first to enable appservice to access keyvault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
 
-            // Authenticate and create a client to retrieve keys&Secrets from the KeyVault https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-net
-            var keyVaultName = ConfigurationManager.AppSettings["KEY_VAULT_NAME"]; // Read webconfig value and azure app settings. https://stackoverflow.com/questions/44542409/how-to-read-azure-web-site-app-settings-values , https://docs.microsoft.com/en-us/dotnet/api/system.configuration.configurationmanager.appsettings?redirectedfrom=MSDN&view=dotnet-plat-ext-3.1
-            var kvUri = "https://" + keyVaultName + ".vault.azure.net";
-            var clientVault = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
-            var keyVaultSecret = clientVault.GetSecret("APIKeySendgrid");
 
             // Send a Single Email to a Single Recipient using updated sendgrid documentation to get API credentials(Keyvault preferred or hardcode api value) https://github.com/sendgrid/sendgrid-csharp/blob/master/USE_CASES.md#send-a-single-email-to-a-single-recipient
 
-            var client = new SendGridClient(keyVaultSecret.Value.Value);
+            var client = new SendGridClient(KeyVaultService.KeyVaultSecret("APIKeySendGrid", KeyVaultService.AuthenticateCreateClient()).Value);
 
             // Set up email confirmation using part of an outdated documentation from microsoft https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity#examine-the-code-in-app_startidentityconfigcs
 
