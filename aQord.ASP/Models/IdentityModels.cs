@@ -23,8 +23,8 @@ namespace aQord.ASP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private static KeyVaultSecret secret =
-            KeyVaultService.KeyVaultSecret("QuDevConnectionString", KeyVaultService.AuthenticateCreateClient());
+        // Get Connectionstring from Keyvault to be used in ApplicationDbContext
+        private static KeyVaultSecret secret = KeyVaultService.KeyVaultSecret("QuDevConnectionString", KeyVaultService.AuthenticateCreateClient());
 
         public DbSet<Person> People  { get; set; } 
         public DbSet<Schematics> Schematics { get; set; }
