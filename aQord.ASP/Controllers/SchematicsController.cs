@@ -54,6 +54,7 @@ namespace aQord.ASP.Controllers
         {
             ViewDatas();
 
+            // if user logon is in Admin role show everything from table, if not show only table data related to logon user name.
             var schematics = HttpContext.User.IsInRole("Admin") ? _dbContext.Schematics : _dbContext.Schematics.Where(s => s.CreatedBy == HttpContext.User.Identity.Name);
 
             if (!string.IsNullOrEmpty(typeOfWork))
