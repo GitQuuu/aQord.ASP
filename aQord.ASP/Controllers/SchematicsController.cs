@@ -54,7 +54,19 @@ namespace aQord.ASP.Controllers
         {
             ViewDatas();
 
-            IQueryable<Schematics> schematics = _dbContext.Schematics;
+            IQueryable<Schematics> schematics;
+
+            if (HttpContext.User.IsInRole("Admin"))
+            {
+
+                schematics = _dbContext.Schematics;
+            }
+            else
+            {
+                schematics = _dbContext.Schematics.Where(s => s.CreatedBy == HttpContext.User.Identity.Name);
+            }
+
+          
 
             if (!string.IsNullOrEmpty(typeOfWork))
             {
@@ -101,8 +113,6 @@ namespace aQord.ASP.Controllers
             {
                 schematics = schematics.Where(x => x.WeekNumber == weekNumber);
             }
-
-
 
 
             return View(schematics);
