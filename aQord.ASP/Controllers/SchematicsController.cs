@@ -54,19 +54,7 @@ namespace aQord.ASP.Controllers
         {
             ViewDatas();
 
-            IQueryable<Schematics> schematics;
-
-            if (HttpContext.User.IsInRole("Admin"))
-            {
-
-                schematics = _dbContext.Schematics;
-            }
-            else
-            {
-                schematics = _dbContext.Schematics.Where(s => s.CreatedBy == HttpContext.User.Identity.Name);
-            }
-
-          
+            var schematics = HttpContext.User.IsInRole("Admin") ? _dbContext.Schematics : _dbContext.Schematics.Where(s => s.CreatedBy == HttpContext.User.Identity.Name);
 
             if (!string.IsNullOrEmpty(typeOfWork))
             {
