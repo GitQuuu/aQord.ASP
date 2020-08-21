@@ -1,6 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using aQord.ASP.Services;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -18,12 +20,16 @@ namespace aQord.ASP.Models
         }
     }
 
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        // Get Connectionstring from Keyvault to be used in ApplicationDbContext
+        private static KeyVaultSecret secret = KeyVaultService.KeyVaultSecret("QuDevConnectionString", KeyVaultService.AuthenticateCreateClient());
+
         public DbSet<Person> People  { get; set; } 
         public DbSet<Schematics> Schematics { get; set; }
         public ApplicationDbContext()
-            : base("QuDevConnectionString", throwIfV1Schema: false)
+            : base($"{secret.Value}", throwIfV1Schema: false)
         {
         }
 
