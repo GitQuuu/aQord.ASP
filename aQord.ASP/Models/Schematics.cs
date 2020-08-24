@@ -101,5 +101,6 @@ namespace aQord.ASP.Models
 
         public string CreatedBy { get; set; }
 
+        public byte[] MySignature { get; set; }
     }
 }
