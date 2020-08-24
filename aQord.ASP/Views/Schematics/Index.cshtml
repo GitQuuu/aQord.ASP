@@ -4,7 +4,6 @@
 @using DocumentFormat.OpenXml.Drawing
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
-
 @{
     ViewBag.Message = "Index";
 }
@@ -251,6 +250,10 @@
         </div>
     </div>
 </div>
+
+@* For some reason these scripts has to be define here and in schematicsform for the SchematicsForm signature js to work https://www.thewebflash.com/using-signature-pad-with-asp-net-mvc/ *@
+<script src="~/Scripts/signature_pad.min.js"></script>
+<script src="~/Scripts/SignaturePadInit.js"></script>
 
 <!--JS to handle the popup  https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url -->
 <script type="text/javascript">
