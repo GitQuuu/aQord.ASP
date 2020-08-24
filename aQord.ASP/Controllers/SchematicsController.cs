@@ -151,7 +151,7 @@ namespace aQord.ASP.Controllers
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
-            // save current user into a local variabel then put the variabel into schematic to save into schematicsToDb
+            // save current user into a local variabel then put the variabel into schematic to save into schematicsToDb - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
             schematicsToDb.CreatedBy = schematic.CreatedBy;
 
