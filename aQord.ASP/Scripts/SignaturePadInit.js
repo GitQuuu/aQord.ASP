@@ -1,4 +1,4 @@
-﻿console.log("load from js");
+﻿console.log("load from SignaturePadInit.js");
 var signaturePadWrappers = document.querySelectorAll(".signature-pad");
 Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
     var canvas = wrapper.querySelector("canvas");

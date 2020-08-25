@@ -165,100 +165,47 @@
 
 @*For some reason we have to put the code inside SignaturePadInit.js here aswell for it to work  use this guide to work with signaturepad https://asp.net-hacker.rocks/2018/06/05/signature-pad.html *@
 <script type="text/javascript">
-    console.log("Loaded from form");
-    var signaturePadWrappers = document.querySelectorAll(".signature-pad");
-    Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
-        var canvas = wrapper.querySelector("canvas");
-        var clearButton = wrapper.querySelector(".btn-clear-canvas");
-        var hiddenInput = wrapper.querySelector('input[type="hidden"]');
+        console.log("Loaded from SchematicsForm");
+        var signaturePadWrappers = document.querySelectorAll(".signature-pad");
+        Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
+            var canvas = wrapper.querySelector("canvas");
+            var clearButton = wrapper.querySelector(".btn-clear-canvas");
+            var hiddenInput = wrapper.querySelector('input[type="hidden"]');
 
-        var signaturePad = new SignaturePad(canvas);
+            var signaturePad = new SignaturePad(canvas);
 
-        // Read base64 string from hidden input
-        var base64str = hiddenInput.value;
+            // Read base64 string from hidden input
+            var base64str = hiddenInput.value;
 
-        if (base64str) {
-            // Draws signature image from data URL
-            signaturePad.fromDataURL("data:image/png;base64," + base64str);
-        }
+            if (base64str) {
+                // Draws signature image from data URL
+                signaturePad.fromDataURL("data:image/png;base64," + base64str);
+            }
 
-        if (hiddenInput.disabled) {
-            signaturePad.off();
-        } else {
-            signaturePad.onEnd = function () {
-                // Returns signature image as data URL and set it to hidden input
-                base64str = signaturePad.toDataURL().split(',')[1];
-                hiddenInput.value = base64str;
-            };
+            if (hiddenInput.disabled) {
+                signaturePad.off();
+            } else {
+                signaturePad.onEnd = function () {
+                    // Returns signature image as data URL and set it to hidden input
+                    base64str = signaturePad.toDataURL().split(',')[1];
+                    hiddenInput.value = base64str;
+                };
 
-            clearButton.addEventListener("click", function () {
-                // Clear the canvas and hidden input
-                signaturePad.clear();
-                hiddenInput.value = "";
-            });
-        }
+                clearButton.addEventListener("click", function () {
+                    // Clear the canvas and hidden input
+                    signaturePad.clear();
+                    hiddenInput.value = "";
+                });
+            }
 
 
-    });
-</script>
+        });
+    </script>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <!--https://forums.asp.net/t/2055772.aspx?Auto+populate+text+field+based+on+selection+in+a+dropdown+list-->
-    <!--Script for schematic to autofill input fields and reset them-->
 
-    <script type="text/javascript">
-        function autoFillSchematicForm(dropdownSelection) {
-
-            //pr default if nothing is selected sets inputs to ''
-            $("#ProjectNumber").val('');
-            $("#TypeOfWork").val('');
-            $("#StaffRepresentative").val('');
-            $("#Year").val('');
-            $("#Firm").val('');
-            $("#WorkplaceAddress").val('');
-
-
-            // when onchange on dropdown is being called populate the inputs
-            $.ajax({
-                url: '@Url.Action("AutoFillSchematicForm", "Schematics")',
-                type: "POST",
-                data: { "dropdownSelection": dropdownSelection },
-                "success": function(data) {
-
-                    $("#ProjectNumber").val(data.ProjectNumber);
-                    $("#TypeOfWork").val(data.TypeOfWork);
-                    $("#StaffRepresentative").val(data.StaffRepresentative);
-                    $("#Year").val(data.Year);
-                    $("#Firm").val(data.Firm);
-                    $("#WorkplaceAddress").val(data.WorkplaceAddress);
-
-                }
-            });
-        }
-
-        //Script for schematic to autofill input fields and reset them
-
-        function AutoFillSchematicFormPeople(dropdownSelection) {
-
-            $("#CraftsmanId").val('');
-            $("#Name").val('');
-
-            $.ajax({
-                url: '@Url.Action("AutoFillSchematicFormPeople", "Schematics")',
-                type: "POST",
-                data: { "dropdownSelection": dropdownSelection },
-                "success": function(data) {
-                    if (data != null) {
-                        $("#Name").val(data.FirstName + " " + data.LastName);
-                        $("#CraftsmanId").val(data.Id);
-                    }
-                }
-            });
-        }
-
-    </script>
 
 }
 
