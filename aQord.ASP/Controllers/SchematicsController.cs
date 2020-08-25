@@ -155,6 +155,9 @@ namespace aQord.ASP.Controllers
             schematic.CreatedBy = HttpContext.User.Identity.Name;
             schematicsToDb.CreatedBy = schematic.CreatedBy;
 
+            // store the hiddenfield in our model properties
+            schematicsToDb.MySignature = schematic.MySignature;
+
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
 
