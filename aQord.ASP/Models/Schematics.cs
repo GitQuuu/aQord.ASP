@@ -102,7 +102,8 @@ namespace aQord.ASP.Models
 
         public string CreatedBy { get; set; }
 
-        [Display(Name = " Underskrift ")]
+        
+        [Display(Name = " Min underskrift ")]
         [UIHint("SignaturePad")]
         public byte[] MySignature { get; set; }
     }

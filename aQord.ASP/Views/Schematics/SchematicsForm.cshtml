@@ -126,7 +126,7 @@
             </div>
 
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.ShelterRateAmountOfDays, htmlAttributes: new { @class = "col-md-2" })
 
@@ -149,9 +149,11 @@
             @Html.LabelFor(model => model.MySignature, new { @class = "col-md-2" })
 
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MySignature, new { htmlAttributes = new { @style = "" } })
+                @Html.EditorFor(model => model.MySignature, new { htmlAttributes = new { } })
+
             </div>
 
+         
         </div>
 
         <div class="form-group">

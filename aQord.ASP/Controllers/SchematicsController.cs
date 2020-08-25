@@ -352,7 +352,7 @@ namespace aQord.ASP.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return PartialView("Details",entity);
         }
     }
