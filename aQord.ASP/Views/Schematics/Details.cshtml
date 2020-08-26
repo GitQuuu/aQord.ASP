@@ -5,7 +5,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalje</h2>
 
 <div>
     <hr />
@@ -173,9 +173,20 @@
             @{
                 if (Model.MySignature != null)
                 {
-                @Html.Image(Model.MySignature)
-                }
+                    @Html.Image(Model.MySignature)
+                } 
             }
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model=>model.EmployerSignature)
+        </dt>
+        
+        <dd>
+            @if (Model.EmployerSignature != null)
+            {
+            @Html.Image(Model.EmployerSignature)
+            } 
         </dd>
     </dl>
 </div>
