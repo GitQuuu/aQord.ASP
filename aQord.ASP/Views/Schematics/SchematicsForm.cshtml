@@ -144,17 +144,23 @@
                 @Html.ValidationMessageFor(model => model.MileageAllowanceAmountOfKm, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        @if (HttpContext.Current.User.IsInRole("Admin"))
+        {
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MySignature, new { @class = "col-md-2" })
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.MySignature, new { @class = "col-md-2" })
 
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MySignature, new { htmlAttributes = new { } })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MySignature, new { htmlAttributes = new { } })
 
+                </div>
             </div>
-
-         
-        </div>
+        }
+       
 
         <div class="form-group">
             <div>
