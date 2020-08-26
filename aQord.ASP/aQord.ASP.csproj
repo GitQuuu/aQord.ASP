@@ -430,6 +430,7 @@
     <Compile Include="Models\Schematics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\KeyVaultService.cs" />
+    <Compile Include="Services\SignaturePadService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\PeopleFormViewModels.cs" />
   </ItemGroup>

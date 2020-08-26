@@ -1,4 +1,5 @@
-﻿@model aQord.ASP.Models.Schematics
+﻿@using aQord.ASP.Services
+@model aQord.ASP.Models.Schematics
 
 @{
     ViewBag.Title = "Details";
@@ -168,18 +169,13 @@
         </dt>
 
         <dd>
-            @*How to display a bute array image from model https://stackoverflow.com/questions/17952514/asp-net-mvc-how-to-display-a-byte-array-image-from-model*@
+            @*How to display a byte array image from model https://stackoverflow.com/questions/17952514/asp-net-mvc-how-to-display-a-byte-array-image-from-model*@
             @{
                 if (Model.MySignature != null)
                 {
-                    var base64 = Convert.ToBase64String(Model.MySignature);
-                    var imgSrc = String.Format("data:image/png;base64,{0}", base64);
-
-                    <img src="@imgSrc" />
+                @Html.Image(Model.MySignature)
                 }
-
             }
-          
         </dd>
     </dl>
 </div>
