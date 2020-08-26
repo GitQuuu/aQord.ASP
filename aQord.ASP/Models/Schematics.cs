@@ -5,12 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Xml;
+using Microsoft.AspNet.Identity;
 
 namespace aQord.ASP.Models
 {
     public class Schematics
     {
+        
         public int Id { get; set; }
+
 
         [Display(Name = "Arbejdets art")]
         public string TypeOfWork { get; set; }
@@ -95,6 +98,9 @@ namespace aQord.ASP.Models
 
         [Display(Name = "Kørepenge antal km.")]
         public double? MileageAllowanceAmountOfKm { get; set; }
-        
+
+        public string CreatedBy { get; set; }
+
+        public byte[] MySignature { get; set; }
     }
 }

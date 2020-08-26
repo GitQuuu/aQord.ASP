@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using aQord.ASP.Models;
 using aQord.ASP.Services;
@@ -10,6 +11,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using ClosedXML.Excel;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 
@@ -52,7 +54,8 @@ namespace aQord.ASP.Controllers
         {
             ViewDatas();
 
-            IQueryable<Schematics> schematics = _dbContext.Schematics;
+            // if user logon is in Admin role show everything from table, if not show only table data related to logon user name.
+            var schematics = HttpContext.User.IsInRole("Admin") ? _dbContext.Schematics : _dbContext.Schematics.Where(s => s.CreatedBy == HttpContext.User.Identity.Name);
 
             if (!string.IsNullOrEmpty(typeOfWork))
             {
@@ -101,8 +104,6 @@ namespace aQord.ASP.Controllers
             }
 
 
-
-
             return View(schematics);
         }
 
@@ -136,7 +137,7 @@ namespace aQord.ASP.Controllers
         public ActionResult Save(Schematics schematic)
         {
             var schematicsToDb = _dbContext.Schematics.Create();
-
+            
             schematicsToDb.Id = schematic.Id;
             schematicsToDb.TypeOfWork = schematic.TypeOfWork;
             schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
@@ -149,6 +150,10 @@ namespace aQord.ASP.Controllers
             schematicsToDb.WeekNumber = schematic.WeekNumber;
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
+
+            // save current user into a local variabel then put the variabel into schematic to save into schematicsToDb - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
+            schematic.CreatedBy = HttpContext.User.Identity.Name;
+            schematicsToDb.CreatedBy = schematic.CreatedBy;
 
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
