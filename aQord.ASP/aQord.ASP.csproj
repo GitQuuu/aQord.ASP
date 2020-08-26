@@ -73,6 +73,10 @@
     <Reference Include="Azure.Storage.Queues, Version=12.1.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Storage.Queues.12.1.1\lib\netstandard2.0\Azure.Storage.Queues.dll</HintPath>
     </Reference>
+    <Reference Include="Blazor.SignaturePad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Blazor.SignaturePad.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.95.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.95.2\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
@@ -418,6 +422,10 @@
     <Compile Include="Migrations\202008240811574_addPropertiesToStoreSignature.designer.cs">
       <DependentUpon>202008240811574_addPropertiesToStoreSignature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.cs" />
+    <Compile Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.designer.cs">
+      <DependentUpon>202008261804537_addEmployterSignaturePropToSchematicModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -426,6 +434,7 @@
     <Compile Include="Models\Schematics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\KeyVaultService.cs" />
+    <Compile Include="Services\SignaturePadService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\PeopleFormViewModels.cs" />
   </ItemGroup>
@@ -485,6 +494,9 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\SignaturePadInit.js" />
+    <Content Include="Scripts\signature_pad.js" />
+    <Content Include="Scripts\signature_pad.min.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -608,6 +620,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Schematics\Details.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SignaturePad.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SignaturePad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -642,6 +656,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008240811574_addPropertiesToStoreSignature.resx">
       <DependentUpon>202008240811574_addPropertiesToStoreSignature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.resx">
+      <DependentUpon>202008261804537_addEmployterSignaturePropToSchematicModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

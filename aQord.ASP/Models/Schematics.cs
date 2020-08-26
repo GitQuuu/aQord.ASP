@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -101,6 +102,15 @@ namespace aQord.ASP.Models
 
         public string CreatedBy { get; set; }
 
+        
+        [Display(Name = " Min underskrift ")]
+        [UIHint("SignaturePad")]
         public byte[] MySignature { get; set; }
+
+        [Display(Name = "Mester underskrift")]
+        [UIHint("SignaturePad")]
+        public byte[] EmployerSignature { get; set; }
+
+
     }
 }

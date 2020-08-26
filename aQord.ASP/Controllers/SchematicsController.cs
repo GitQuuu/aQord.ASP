@@ -151,9 +151,8 @@ namespace aQord.ASP.Controllers
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
-            // save current user into a local variabel then put the variabel into schematic to save into schematicsToDb - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
+            // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
-            schematicsToDb.CreatedBy = schematic.CreatedBy;
 
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
@@ -187,6 +186,18 @@ namespace aQord.ASP.Controllers
             entity.NormalHoursData = schematics.NormalHoursData;
             entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
             entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
+
+            if (entity.MySignature == null)
+            {
+                entity.MySignature = schematics.MySignature;
+            }
+
+            if (entity.EmployerSignature == null)
+            {
+                entity.EmployerSignature = schematics.EmployerSignature;
+            }
+            
+            
 
             _dbContext.SaveChanges();
 
@@ -349,7 +360,7 @@ namespace aQord.ASP.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return PartialView("Details",entity);
         }
     }

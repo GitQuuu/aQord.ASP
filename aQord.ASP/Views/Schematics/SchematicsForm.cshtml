@@ -3,7 +3,7 @@
 @model aQord.ASP.Models.Schematics
 
 @{
-    ViewBag.Title = "SchematicsForm";
+    ViewBag.Title = "Ny ugeskema";
 }
 
 <h2>Opret nyt skema</h2>
@@ -126,12 +126,12 @@
             </div>
 
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.ShelterRateAmountOfDays, htmlAttributes: new { @class = "col-md-2" })
 
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ShelterRateAmountOfDays, new { htmlAttributes = new { @class = "form-control", @inputMode="numeric" } })
+                @Html.EditorFor(model => model.ShelterRateAmountOfDays, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.ShelterRateAmountOfDays, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -146,7 +146,7 @@
         </div>
 
         <div class="form-group">
-            <div class="mr-2">
+            <div>
                 <input type="submit" value="Gem" class="btn btn-primary" />
                 @Html.ActionLink("Fortryd", "Index", "Schematics", new { @class = "btn btn-danger", data_dismiss = "modal" })
             </div>
@@ -158,60 +158,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <!--https://forums.asp.net/t/2055772.aspx?Auto+populate+text+field+based+on+selection+in+a+dropdown+list-->
-    <!--Script for schematic to autofill input fields and reset them-->
 
-    <script type="text/javascript">
-        function autoFillSchematicForm(dropdownSelection) {
-
-            //pr default if nothing is selected sets inputs to ''
-            $("#ProjectNumber").val('');
-            $("#TypeOfWork").val('');
-            $("#StaffRepresentative").val('');
-            $("#Year").val('');
-            $("#Firm").val('');
-            $("#WorkplaceAddress").val('');
-
-
-            // when onchange on dropdown is being called populate the inputs
-            $.ajax({
-                url: '@Url.Action("AutoFillSchematicForm", "Schematics")',
-                type: "POST",
-                data: { "dropdownSelection": dropdownSelection },
-                "success": function(data) {
-
-                    $("#ProjectNumber").val(data.ProjectNumber);
-                    $("#TypeOfWork").val(data.TypeOfWork);
-                    $("#StaffRepresentative").val(data.StaffRepresentative);
-                    $("#Year").val(data.Year);
-                    $("#Firm").val(data.Firm);
-                    $("#WorkplaceAddress").val(data.WorkplaceAddress);
-
-                }
-            });
-        }
-
-        //Script for schematic to autofill input fields and reset them
-
-        function AutoFillSchematicFormPeople(dropdownSelection) {
-
-            $("#CraftsmanId").val('');
-            $("#Name").val('');
-
-            $.ajax({
-                url: '@Url.Action("AutoFillSchematicFormPeople", "Schematics")',
-                type: "POST",
-                data: { "dropdownSelection": dropdownSelection },
-                "success": function(data) {
-                    if (data != null) {
-                        $("#Name").val(data.FirstName + " " + data.LastName);
-                        $("#CraftsmanId").val(data.Id);
-                    }
-                }
-            });
-        }
-
-    </script>
 }
 
 

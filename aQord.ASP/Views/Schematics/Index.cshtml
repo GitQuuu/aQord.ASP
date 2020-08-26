@@ -4,7 +4,6 @@
 @using DocumentFormat.OpenXml.Drawing
 @model IEnumerable<aQord.ASP.Models.Schematics>
 
-
 @{
     ViewBag.Message = "Index";
 }
@@ -252,8 +251,14 @@
     </div>
 </div>
 
-<!--JS to handle the popup  https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url -->
-<script type="text/javascript">
+
+@section Scripts {
+    @*SignaturePad move the @RenderSection from _layout out from head for this to work follow this guide for signaturepad https://www.thewebflash.com/using-signature-pad-with-asp-net-mvc/*@
+    <script src="~/Scripts/signature_pad.min.js"></script>
+    <script src="~/Scripts/SignaturePadInit.js"></script>
+
+    <!--JS to handle the popup  https://stackoverflow.com/questions/34503683/jquery-to-open-bootstrap-v3-modal-of-remote-url -->
+    <script type="text/javascript">
 
     $('._details').on('click', function (e) {
         e.preventDefault();
@@ -275,6 +280,8 @@
         $('#staticBackdrop').modal('show').find('.modal-body').load($(this).attr('href'));
     });
 
+
+    // Script for schematic to autofill input fields and reset them https://forums.asp.net/t/2055772.aspx?Auto+populate+text+field+based+on+selection+in+a+dropdown+list-->
     function autoFillSchematicForm(dropdownSelection) {
 
         //pr default if nothing is selected sets inputs to ''
@@ -305,7 +312,6 @@
     }
 
     //Script for schematic to autofill input fields and reset them
-
     function AutoFillSchematicFormPeople(dropdownSelection) {
 
         $("#CraftsmanId").val('');
@@ -325,5 +331,8 @@
     }
 
 
-</script>
+    </script>
+}
+
+
 
