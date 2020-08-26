@@ -422,6 +422,10 @@
     <Compile Include="Migrations\202008240811574_addPropertiesToStoreSignature.designer.cs">
       <DependentUpon>202008240811574_addPropertiesToStoreSignature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.cs" />
+    <Compile Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.designer.cs">
+      <DependentUpon>202008261804537_addEmployterSignaturePropToSchematicModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -652,6 +656,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008240811574_addPropertiesToStoreSignature.resx">
       <DependentUpon>202008240811574_addPropertiesToStoreSignature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008261804537_addEmployterSignaturePropToSchematicModel.resx">
+      <DependentUpon>202008261804537_addEmployterSignaturePropToSchematicModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
