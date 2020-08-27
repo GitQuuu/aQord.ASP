@@ -137,7 +137,7 @@
             </div>
         </div>
     }
-    else
+    else if(HttpContext.Current.User.IsInRole("Tillidsmand/Akkordholder"))
     {
         <div class="form-group">
             @Html.LabelFor(model=>model.MySignature, new { @class="col-md-2"})
