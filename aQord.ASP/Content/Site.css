@@ -52,3 +52,14 @@ input[type=number] {
     height: 150px;
     margin-bottom: 5px;
 }
+
+.LogoPlacement {
+    padding-left: 500%;
+}
+
+imgLogo {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
