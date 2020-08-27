@@ -9,6 +9,7 @@ using aQord.ASP.Models;
 using aQord.ASP.Services;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using ClosedXML;
 using ClosedXML.Excel;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
@@ -281,33 +282,52 @@ namespace aQord.ASP.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExportToExcel(int id, long projectNumber = 0)
+        public ActionResult ExportToExcel(int id)
         {
+            // Select a schematic by ID to export
             Schematics selected = _dbContext.Schematics.FirstOrDefault(s => s.Id == id);
 
-            var selectionMatched = ImportToCollection(selected.ProjectNumber);
-
-            projectNumber = selected.ProjectNumber;
+            // Find all schematics that have the same ProjectNumber
+            ObservableCollection<Schematics> selectionMatched = ImportToCollection(selected.ProjectNumber);
 
             var getDownloadBlobFile = DownloadBlobFile();
 
-
+            // https://github.com/ClosedXML/ClosedXML/wiki
             IXLWorkbook workbook = new XLWorkbook(getDownloadBlobFile); // since XLWorkBook use a stream our DownloadBlobFile returns a stream
             IXLWorksheet pageTab = workbook.Worksheets.Worksheet(1);
 
             int row = 8;
 
+            // export data from the selected to excel
             pageTab.Cell($"T{3}").Value = selected.ProjectNumber;
             pageTab.Cell($"B{1}").Value = selected.TypeOfWork;
             pageTab.Cell($"J{1}").Value = selected.StaffRepresentative;
             pageTab.Cell($"U{1}").Value = selected.Year;
             pageTab.Cell($"B{3}").Value = selected.Firm;
             pageTab.Cell($"I{3}").Value = selected.WorkplaceAddress;
-            pageTab.Cell($"B{6}").Value = selected.WeekNumber;
 
-            foreach (var schemas in selectionMatched)
+
+            if (selected.EmployerSignature != null)
             {
-                if (schemas.ProjectNumber == projectNumber && schemas.WeekNumber == selected.WeekNumber)
+                // Exporting byte[] to an image to use in excel https://forums.asp.net/t/1570944.aspx?Exporting+image+byte+stream+to+Excel
+                var employerSignature = pageTab.Pictures.Add(new MemoryStream(selected.EmployerSignature));
+                // How to insert an image image  https://github.com/ClosedXML/ClosedXML/wiki/How-can-I-insert-an-image
+                employerSignature.MoveTo(pageTab.Cell($"H{22}")).Scale(.3);
+            }
+
+
+            if (selected.MySignature != null)
+            {
+                var mySignature = pageTab.Pictures.Add(new MemoryStream(selected.MySignature));
+                mySignature.MoveTo(pageTab.Cell($"H{24}")).Scale(.3);
+                
+            }
+
+          
+            
+            foreach (var schemas in selectionMatched)
+            { // base on selectionMatched only export data from db to excel with schemas that contains Projectnumber and weeknumber
+                if (schemas.ProjectNumber == selected.ProjectNumber && schemas.WeekNumber == selected.WeekNumber)
                 {
                     pageTab.Cell($"A{row}").Value = schemas.CraftsmanId;
                     pageTab.Cell($"B{row}").Value = schemas.Name;
@@ -337,7 +357,7 @@ namespace aQord.ASP.Controllers
 
             }
 
-            // How to export to excel without saving file on the server
+            // How to export to excel without saving file on the server https://stackoverflow.com/questions/22296136/download-file-with-closedxml/22298678 scroll down to Phils solutions
             using (var stream = new MemoryStream())
             {
                 workbook.SaveAs(stream);
