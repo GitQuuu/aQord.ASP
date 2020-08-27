@@ -45,10 +45,10 @@ namespace aQord.ASP.Controllers
             ViewData["MileAgeAllowanceAmountOfKm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.MileageAllowanceAmountOfKm).Select(g => g.FirstOrDefault()), "MileAgeAllowanceAmountOfKm", "MileAgeAllowanceAmountOfKm");
 
             // combining multiple information in one dropdown
-            var combineForDropdownPerson = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + ": " + x.LastName).ToString() });
+            var combineForDropdownPerson = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + ": " + x.FirstName + " " + x.LastName).ToString() });
             ViewData["FullName"] = new SelectList(combineForDropdownPerson, "Id", "FullName");
 
-            var combineForDropdownProject = _dbContext.Schematics.AsEnumerable().Select(x => new { ProjectNumber = x.ProjectNumber, TypeOfWork = (x.ProjectNumber + ": " + x.TypeOfWork ).ToString() }).Distinct();
+            var combineForDropdownProject = _dbContext.Schematics.AsEnumerable().Select(x => new { ProjectNumber = x.ProjectNumber, TypeOfWork = (x.ProjectNumber + ": " + x.TypeOfWork + ", " + x.Firm ).ToString() }).Distinct();
             ViewData["ProjectNumberDescription"] = new SelectList(combineForDropdownProject,"ProjectNumber","TypeOfWork");
 
         }
