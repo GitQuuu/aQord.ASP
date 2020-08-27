@@ -103,11 +103,11 @@ namespace aQord.ASP.Models
         public string CreatedBy { get; set; }
 
         
-        [Display(Name = " Min underskrift ")]
+        [Display(Name = " Tillidsmandens/Akkordholders underskrift ")]
         [UIHint("SignaturePad")]
         public byte[] MySignature { get; set; }
 
-        [Display(Name = "Mester underskrift")]
+        [Display(Name = "Firmaets/Mester underskrift")]
         [UIHint("SignaturePad")]
         public byte[] EmployerSignature { get; set; }
 
