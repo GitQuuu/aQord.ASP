@@ -44,8 +44,12 @@ namespace aQord.ASP.Controllers
             ViewData["ShelterRateAmountOfDays"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.ShelterRateAmountOfDays).Select(g => g.FirstOrDefault()), "ShelterRateAmountOfDays", "ShelterRateAmountOfDays");
             ViewData["MileAgeAllowanceAmountOfKm"] = new SelectList(_dbContext.Schematics.GroupBy(a => a.MileageAllowanceAmountOfKm).Select(g => g.FirstOrDefault()), "MileAgeAllowanceAmountOfKm", "MileAgeAllowanceAmountOfKm");
 
-            var autoFill = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + " " + x.LastName).ToString() });
-            ViewData["FullName"] = new SelectList(autoFill, "Id", "FullName");
+            // combining multiple information in one dropdown
+            var combineForDropdownPerson = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + " " + x.FirstName + ": " + x.LastName).ToString() });
+            ViewData["FullName"] = new SelectList(combineForDropdownPerson, "Id", "FullName");
+
+            var combineForDropdownProject = _dbContext.Schematics.AsEnumerable().Select(x => new { ProjectNumber = x.ProjectNumber, TypeOfWork = (x.ProjectNumber + ": " + x.TypeOfWork ).ToString() }).Distinct();
+            ViewData["ProjectNumberDescription"] = new SelectList(combineForDropdownProject,"ProjectNumber","TypeOfWork");
 
         }
 

@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumbers"], "vælg eksisterende eller tilføj ny under", new { onchange = "autoFillSchematicForm(this.value);", @class = "form-control" })
+                @Html.DropDownList("DropdownIds", (SelectList)ViewData["ProjectNumberDescription"], "vælg eksisterende eller tilføj ny under", new { onchange = "autoFillSchematicForm(this.value);", @class = "form-control" })
 
                 @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control", @inputMode = "numeric" } })
                 @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
