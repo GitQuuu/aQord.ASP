@@ -434,6 +434,18 @@
     <Compile Include="Migrations\202008280954262_CreateNewTableHoursWith1ToManyRelation.designer.cs">
       <DependentUpon>202008280954262_CreateNewTableHoursWith1ToManyRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008281736274_Revert.cs" />
+    <Compile Include="Migrations\202008281736274_Revert.designer.cs">
+      <DependentUpon>202008281736274_Revert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008281739217_HelpFromBanke.cs" />
+    <Compile Include="Migrations\202008281739217_HelpFromBanke.designer.cs">
+      <DependentUpon>202008281739217_HelpFromBanke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008281804476_WhatsgoingON.cs" />
+    <Compile Include="Migrations\202008281804476_WhatsgoingON.designer.cs">
+      <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Hours.cs" />
@@ -676,6 +688,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008280954262_CreateNewTableHoursWith1ToManyRelation.resx">
       <DependentUpon>202008280954262_CreateNewTableHoursWith1ToManyRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008281736274_Revert.resx">
+      <DependentUpon>202008281736274_Revert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008281739217_HelpFromBanke.resx">
+      <DependentUpon>202008281739217_HelpFromBanke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008281804476_WhatsgoingON.resx">
+      <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

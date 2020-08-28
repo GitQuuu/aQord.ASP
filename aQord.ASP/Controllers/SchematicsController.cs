@@ -11,6 +11,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using ClosedXML;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.Azure.Storage;
@@ -142,7 +143,28 @@ namespace aQord.ASP.Controllers
         public ActionResult Save(Schematics schematic)
         {
             var schematicsToDb = _dbContext.Schematics.Create();
-            
+            var test = schematicsToDb.HoursICollection;
+            test.Add(new Hours
+            {
+               
+               AkkordHours = schematic.AkkordHours[0],
+               NormalHours = schematic.NormalHours[0],
+               Day = "Mon",
+            }
+            );
+
+            test.Add(new Hours
+                {
+
+                    AkkordHours = schematic.AkkordHours[1],
+                    NormalHours = schematic.NormalHours[1],
+                    Day = "Tues",
+                }
+            );
+
+
+
+
             schematicsToDb.Id = schematic.Id;
             schematicsToDb.TypeOfWork = schematic.TypeOfWork;
             schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
@@ -153,11 +175,16 @@ namespace aQord.ASP.Controllers
             schematicsToDb.CraftsmanId = schematic.CraftsmanId;
             schematicsToDb.Name = schematic.Name;
             schematicsToDb.WeekNumber = schematic.WeekNumber;
+
+            
+
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
             // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
+
+            schematic.HoursICollection = test;
 
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();

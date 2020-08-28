@@ -111,5 +111,6 @@ namespace aQord.ASP.Models
         public byte[] EmployerSignature { get; set; }
 
 
+        public ICollection<Hours> HoursICollection { get; set; } = new List<Hours>();
     }
 }
