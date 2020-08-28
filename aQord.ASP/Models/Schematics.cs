@@ -15,7 +15,6 @@ namespace aQord.ASP.Models
         
         public int Id { get; set; }
 
-
         [Display(Name = "Arbejdets art")]
         public string TypeOfWork { get; set; }
 

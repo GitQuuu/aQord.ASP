@@ -28,6 +28,8 @@ namespace aQord.ASP.Models
 
         public DbSet<Person> People  { get; set; } 
         public DbSet<Schematics> Schematics { get; set; }
+
+        public DbSet<Hours> Hours { get; set; }
         public ApplicationDbContext()
             : base($"{secret.Value}", throwIfV1Schema: false)
         {
