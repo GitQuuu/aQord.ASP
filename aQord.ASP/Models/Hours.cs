@@ -14,6 +14,6 @@ namespace aQord.ASP.Models
         // Convention 2 - https://www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx
         /*In the above example, the Grade entity includes a collection navigation property of type ICollection<Schematics>.
          This results in a one-to-many relationship between the Schematic and Hours entities. */
-        public ICollection<Schematics> SchemaHours { get; set; }
+        public ICollection<Schematics> schematics { get; set; }
     }
 }
