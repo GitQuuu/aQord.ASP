@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
@@ -49,8 +50,8 @@ namespace aQord.ASP.Controllers
             var combineForDropdownPerson = _dbContext.People.AsEnumerable().Select(x => new { Id = x.FirstName, FullName = (x.Id + ": " + x.FirstName + " " + x.LastName).ToString() });
             ViewData["FullName"] = new SelectList(combineForDropdownPerson, "Id", "FullName");
 
-            var combineForDropdownProject = _dbContext.Schematics.AsEnumerable().Select(x => new { ProjectNumber = x.ProjectNumber, TypeOfWork = (x.ProjectNumber + ": " + x.TypeOfWork + ", " + x.Firm ).ToString() }).Distinct();
-            ViewData["ProjectNumberDescription"] = new SelectList(combineForDropdownProject,"ProjectNumber","TypeOfWork");
+            var combineForDropdownProject = _dbContext.Schematics.AsEnumerable().Select(x => new { ProjectNumber = x.ProjectNumber, TypeOfWork = (x.ProjectNumber + ": " + x.TypeOfWork + ", " + x.Firm).ToString() }).Distinct();
+            ViewData["ProjectNumberDescription"] = new SelectList(combineForDropdownProject, "ProjectNumber", "TypeOfWork");
 
         }
 
@@ -143,24 +144,74 @@ namespace aQord.ASP.Controllers
         public ActionResult Save(Schematics schematic)
         {
             var schematicsToDb = _dbContext.Schematics.Create();
-            var test = schematicsToDb.HoursICollection;
-            test.Add(new Hours
+
+            // Instantiate a Icollection to store the data from our view input fields ( akkordhours, normalhours );+
+
+            ICollection<Hours> hoursICollection = schematicsToDb.HoursICollection;
+
+            hoursICollection.Add(new Hours
             {
-               
-               AkkordHours = schematic.AkkordHours[0],
-               NormalHours = schematic.NormalHours[0],
-               Day = "Mon",
+
+                AkkordHours = schematic.AkkordHours[0],
+                NormalHours = schematic.NormalHours[0],
+                Day = "Mon",
             }
             );
 
-            test.Add(new Hours
+            hoursICollection.Add(new Hours
+            {
+
+                AkkordHours = schematic.AkkordHours[1],
+                NormalHours = schematic.NormalHours[1],
+                Day = "Tue",
+            }
+            );
+
+            hoursICollection.Add(new Hours
                 {
 
-                    AkkordHours = schematic.AkkordHours[1],
-                    NormalHours = schematic.NormalHours[1],
-                    Day = "Tues",
+                    AkkordHours = schematic.AkkordHours[2],
+                    NormalHours = schematic.NormalHours[2],
+                    Day = "Wed",
                 }
             );
+
+            hoursICollection.Add(new Hours
+                {
+
+                    AkkordHours = schematic.AkkordHours[3],
+                    NormalHours = schematic.NormalHours[3],
+                    Day = "Thu",
+                }
+            );
+
+            hoursICollection.Add(new Hours
+                {
+
+                    AkkordHours = schematic.AkkordHours[4],
+                    NormalHours = schematic.NormalHours[4],
+                    Day = "Fri",
+                }
+            );
+
+            hoursICollection.Add(new Hours
+                {
+
+                    AkkordHours = schematic.AkkordHours[5],
+                    NormalHours = schematic.NormalHours[5],
+                    Day = "Sat",
+                }
+            );
+
+            hoursICollection.Add(new Hours
+                {
+
+                    AkkordHours = schematic.AkkordHours[6],
+                    NormalHours = schematic.NormalHours[6],
+                    Day = "Sun",
+                }
+            );
+
 
 
 
@@ -176,7 +227,7 @@ namespace aQord.ASP.Controllers
             schematicsToDb.Name = schematic.Name;
             schematicsToDb.WeekNumber = schematic.WeekNumber;
 
-            
+
 
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
@@ -184,7 +235,8 @@ namespace aQord.ASP.Controllers
             // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
 
-            schematic.HoursICollection = test;
+            // Store the local variabel of this scope to HoursInCollectionProperty, then when we add schematic to db, data from hoursInCollection will populate Schema.HoursICollection
+            schematic.HoursICollection = hoursICollection;
 
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
@@ -228,8 +280,8 @@ namespace aQord.ASP.Controllers
             {
                 entity.EmployerSignature = schematics.EmployerSignature;
             }
-            
-            
+
+
 
             _dbContext.SaveChanges();
 
@@ -292,7 +344,7 @@ namespace aQord.ASP.Controllers
             {
 
                 var filename = "UgeSkabelon.xlsx";
-                var storageAccount = CloudStorageAccount.Parse(KeyVaultService.KeyVaultSecret("AzureBlobStorage",KeyVaultService.AuthenticateCreateClient()).Value);
+                var storageAccount = CloudStorageAccount.Parse(KeyVaultService.KeyVaultSecret("AzureBlobStorage", KeyVaultService.AuthenticateCreateClient()).Value);
                 var blobClient = storageAccount.CreateCloudBlobClient();
 
                 CloudBlobContainer container = blobClient.GetContainerReference("temp");
@@ -351,11 +403,11 @@ namespace aQord.ASP.Controllers
             {
                 var mySignature = pageTab.Pictures.Add(new MemoryStream(selected.MySignature));
                 mySignature.MoveTo(pageTab.Cell($"H{24}")).Scale(.3);
-                
+
             }
 
-          
-            
+
+
             foreach (var schemas in selectionMatched)
             { // base on selectionMatched only export data from db to excel with schemas that contains Projectnumber and weeknumber
                 if (schemas.ProjectNumber == selected.ProjectNumber && schemas.WeekNumber == selected.WeekNumber)
@@ -412,7 +464,7 @@ namespace aQord.ASP.Controllers
                 return HttpNotFound();
             }
 
-            return PartialView("Details",entity);
+            return PartialView("Details", entity);
         }
     }
 }
