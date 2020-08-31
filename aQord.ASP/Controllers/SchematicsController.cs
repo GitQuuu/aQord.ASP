@@ -142,7 +142,6 @@ namespace aQord.ASP.Controllers
             return PartialView("SchematicsForm");
         }
 
-        // Save data to Hours model collection, from Schematics 
         /// <summary>
         /// Save data to a collection, from a view  
         /// </summary>
