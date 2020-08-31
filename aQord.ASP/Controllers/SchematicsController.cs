@@ -182,28 +182,11 @@ namespace aQord.ASP.Controllers
 
         public ActionResult Save(Schematics schematic)
         {
-            var schematicsToDb = _dbContext.Schematics.Create();
-
-            schematicsToDb.Id = schematic.Id;
-            schematicsToDb.TypeOfWork = schematic.TypeOfWork;
-            schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
-            schematicsToDb.Year = schematic.Year;
-            schematicsToDb.Firm = schematic.Firm;
-            schematicsToDb.WorkplaceAddress = schematic.WorkplaceAddress;
-            schematicsToDb.ProjectNumber = schematic.ProjectNumber;
-            schematicsToDb.CraftsmanId = schematic.CraftsmanId;
-            schematicsToDb.Name = schematic.Name;
-            schematicsToDb.WeekNumber = schematic.WeekNumber;
-
-
-            schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
-            schematicsToDb.NormalHoursData = schematic.NormalHoursData;
-
             // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
 
             // Using a method that handles data input from view , to save to HoursICollection in model
-            schematic.HoursICollection = SaveHoursToICollection(schematic);
+            SaveHoursToICollection(schematic);
             
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
@@ -292,6 +275,7 @@ namespace aQord.ASP.Controllers
 
 
             var entity = _dbContext.Schematics.FirstOrDefault(s => s.Id == schematics.Id);
+
             _dbContext.Schematics.Remove(entity);
             _dbContext.SaveChanges();
 
