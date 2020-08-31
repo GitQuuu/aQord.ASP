@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Xml;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace aQord.ASP.Models
@@ -111,6 +113,45 @@ namespace aQord.ASP.Models
         public byte[] EmployerSignature { get; set; }
 
         // This is a collection reference to Hours and its properties
-        public ICollection<Hours> HoursICollection { get; set; } = new List<Hours>();
+        public ICollection<Hours> HoursICollection
+        {
+            get
+            {
+                ICollection<Hours> test = new List<Hours>();
+
+                if (!string.IsNullOrEmpty(HoursInAkkordData))
+                {
+                    var test2 = Array.ConvertAll(HoursInAkkordData.Split(), double.Parse).ToList();
+
+                    foreach (var VARIABLE in test2)
+                    {
+                        int i = 0;
+
+                        test.Add(new Hours
+                        {
+                            
+                            AkkordHours = VARIABLE, 
+                            Day = ((i == 0) ? (DayOfWeek)6 : (DayOfWeek)i - 1 )
+                        });
+
+                        i++;
+                    }
+
+                    return test;
+                }
+                else
+                {
+                    return new List<Hours>();
+                }
+            }
+            set
+            {
+                
+                foreach (var VARIABLE in value)
+                {
+                    HoursInAkkordData += VARIABLE.AkkordHours+ " ";
+                }
+            }
+        }
     }
 }

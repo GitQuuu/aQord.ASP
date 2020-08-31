@@ -3,6 +3,8 @@ using System.Activities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -147,100 +149,65 @@ namespace aQord.ASP.Controllers
         /// </summary>
         /// <param name="schematic"></param>
         /// <returns>ICollection</returns>
-        public ICollection<Hours> SaveHoursToICollection(Schematics schematic)
-        {
-            ICollection<Hours> hoursICollection = schematic.HoursICollection;
+        //public ICollection<Hours> SaveHoursToICollection(Schematics schematic)
+        //{
+        //    _dbContext.Schematics.Attach(schematic);
 
-            hoursICollection.Add(new Hours
-                {
+        //    _dbContext.Entry(schematic).Collection(h => h.HoursICollection).Load();
+            
+        //    var entity = _dbContext.Schematics.FirstOrDefault(s => s.Id == schematic.Id);
 
-                    AkkordHours = schematic.AkkordHours[0],
-                    NormalHours = schematic.NormalHours[0],
-                    Day = "Mon",
-                }
-            );
+        //    for (int i = 0; i <= 6; i++)
+        //    {
+        //        if (schematic.HoursICollection.Any(h => h.Day == (DayOfWeek)i))
+        //        {
+        //            var hours = schematic.HoursICollection.FirstOrDefault(s => s.Day == (DayOfWeek) i);
 
-            hoursICollection.Add(new Hours
-                {
+        //            hours.AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i-1];
+        //            hours.NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1];
+        //        }
+        //        else
+        //        {
 
-                    AkkordHours = schematic.AkkordHours[1],
-                    NormalHours = schematic.NormalHours[1],
-                    Day = "Tue",
-                }
-            );
+        //            schematic.HoursICollection.Add(new Hours
+        //                {
 
-            hoursICollection.Add(new Hours
-                {
+        //                    AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i - 1],
+        //                    NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1],
+        //                    Day = (DayOfWeek)i,
+        //                }
+        //            );
+        //        }
+        //    }
 
-                    AkkordHours = schematic.AkkordHours[2],
-                    NormalHours = schematic.NormalHours[2],
-                    Day = "Wed",
-                }
-            );
 
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[3],
-                    NormalHours = schematic.NormalHours[3],
-                    Day = "Thu",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[4],
-                    NormalHours = schematic.NormalHours[4],
-                    Day = "Fri",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[5],
-                    NormalHours = schematic.NormalHours[5],
-                    Day = "Sat",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[6],
-                    NormalHours = schematic.NormalHours[6],
-                    Day = "Sun",
-                }
-            );
-
-            return hoursICollection;
-        }
+        //    return schematic.HoursICollection;
+        //}
 
         public ActionResult Save(Schematics schematic)
         {
-            var schematicsToDb = _dbContext.Schematics.Create();
+            //var schematicsToDb = _dbContext.Schematics.Create();
 
-            schematicsToDb.Id = schematic.Id;
-            schematicsToDb.TypeOfWork = schematic.TypeOfWork;
-            schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
-            schematicsToDb.Year = schematic.Year;
-            schematicsToDb.Firm = schematic.Firm;
-            schematicsToDb.WorkplaceAddress = schematic.WorkplaceAddress;
-            schematicsToDb.ProjectNumber = schematic.ProjectNumber;
-            schematicsToDb.CraftsmanId = schematic.CraftsmanId;
-            schematicsToDb.Name = schematic.Name;
-            schematicsToDb.WeekNumber = schematic.WeekNumber;
+            //schematicsToDb.Id = schematic.Id;
+            //schematicsToDb.TypeOfWork = schematic.TypeOfWork;
+            //schematicsToDb.StaffRepresentative = schematic.StaffRepresentative;
+            //schematicsToDb.Year = schematic.Year;
+            //schematicsToDb.Firm = schematic.Firm;
+            //schematicsToDb.WorkplaceAddress = schematic.WorkplaceAddress;
+            //schematicsToDb.ProjectNumber = schematic.ProjectNumber;
+            //schematicsToDb.CraftsmanId = schematic.CraftsmanId;
+            //schematicsToDb.Name = schematic.Name;
+            //schematicsToDb.WeekNumber = schematic.WeekNumber;
 
 
-            schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
-            schematicsToDb.NormalHoursData = schematic.NormalHoursData;
+            //schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
+            //schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
             // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
 
-            // Using a method that handles data input from view , to save to HoursICollection in model
-            schematic.HoursICollection = SaveHoursToICollection(schematic);
+            //// Using a method that handles data input from view , to save to HoursICollection in model
+            //schematic.HoursICollection = SaveHoursToICollection(schematic);
             
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
@@ -260,34 +227,38 @@ namespace aQord.ASP.Controllers
         [HttpPost]
         public ActionResult Update(Schematics schematics)
         {
-            var entity = _dbContext.Schematics.FirstOrDefault(p => p.Id == schematics.Id);
+            //var entity = _dbContext.Schematics.FirstOrDefault(p => p.Id == schematics.Id);
 
-            entity.TypeOfWork = schematics.TypeOfWork;
-            entity.StaffRepresentative = schematics.StaffRepresentative;
-            entity.Year = schematics.Year;
-            entity.Firm = schematics.Firm;
-            entity.WorkplaceAddress = schematics.WorkplaceAddress;
-            entity.ProjectNumber = schematics.ProjectNumber;
-            entity.CraftsmanId = schematics.CraftsmanId;
-            entity.Name = schematics.Name;
-            entity.WeekNumber = schematics.WeekNumber;
-            entity.HoursInAkkordData = schematics.HoursInAkkordData;
-            entity.NormalHoursData = schematics.NormalHoursData;
-            entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
-            entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
+            //entity.TypeOfWork = schematics.TypeOfWork;
+            //entity.StaffRepresentative = schematics.StaffRepresentative;
+            //entity.Year = schematics.Year;
+            //entity.Firm = schematics.Firm;
+            //entity.WorkplaceAddress = schematics.WorkplaceAddress;
+            //entity.ProjectNumber = schematics.ProjectNumber;
+            //entity.CraftsmanId = schematics.CraftsmanId;
+            //entity.Name = schematics.Name;
+            //entity.WeekNumber = schematics.WeekNumber;
+            //entity.HoursInAkkordData = schematics.HoursInAkkordData;
+            //entity.NormalHoursData = schematics.NormalHoursData;
+            //entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
+            //entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
 
-            if (entity.MySignature == null)
-            {
-                entity.MySignature = schematics.MySignature;
-            }
+            //if (entity.MySignature == null)
+            //{
+            //    entity.MySignature = schematics.MySignature;
+            //}
 
-            if (entity.EmployerSignature == null)
-            {
-                entity.EmployerSignature = schematics.EmployerSignature;
-            }
+            //if (entity.EmployerSignature == null)
+            //{
+            //    entity.EmployerSignature = schematics.EmployerSignature;
+            //}
 
+            schematics.CreatedBy = HttpContext.User.Identity.Name;
 
+            //SaveHoursToICollection(entity);
 
+            _dbContext.Schematics.Attach(schematics);
+            _dbContext.Entry(schematics).State = EntityState.Modified;
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Schematics");

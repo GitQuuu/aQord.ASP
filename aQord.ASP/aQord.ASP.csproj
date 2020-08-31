@@ -447,6 +447,14 @@
     <Compile Include="Migrations\202008281804476_WhatsgoingON.designer.cs">
       <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008311729162_BirkeHelpChangeDataTypeOfDay.cs" />
+    <Compile Include="Migrations\202008311729162_BirkeHelpChangeDataTypeOfDay.designer.cs">
+      <DependentUpon>202008311729162_BirkeHelpChangeDataTypeOfDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008311859244_AddRequiredToProp.cs" />
+    <Compile Include="Migrations\202008311859244_AddRequiredToProp.designer.cs">
+      <DependentUpon>202008311859244_AddRequiredToProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Hours.cs" />
@@ -698,6 +706,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008281804476_WhatsgoingON.resx">
       <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008311729162_BirkeHelpChangeDataTypeOfDay.resx">
+      <DependentUpon>202008311729162_BirkeHelpChangeDataTypeOfDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008311859244_AddRequiredToProp.resx">
+      <DependentUpon>202008311859244_AddRequiredToProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
