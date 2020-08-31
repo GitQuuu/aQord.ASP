@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
@@ -141,30 +142,32 @@ namespace aQord.ASP.Controllers
             return PartialView("SchematicsForm");
         }
 
-        public ActionResult Save(Schematics schematic)
+        // Save data to Hours model collection, from Schematics 
+        /// <summary>
+        /// Save data to Hours model collection, from Schematics 
+        /// </summary>
+        /// <param name="schematic"></param>
+        /// <returns>ICollection</returns>
+        public ICollection<Hours> SaveHoursToICollection(Schematics schematic)
         {
-            var schematicsToDb = _dbContext.Schematics.Create();
-
-            // Instantiate a Icollection to store the data from our view input fields ( akkordhours, normalhours );+
-
-            ICollection<Hours> hoursICollection = schematicsToDb.HoursICollection;
+            ICollection<Hours> hoursICollection = schematic.HoursICollection;
 
             hoursICollection.Add(new Hours
-            {
+                {
 
-                AkkordHours = schematic.AkkordHours[0],
-                NormalHours = schematic.NormalHours[0],
-                Day = "Mon",
-            }
+                    AkkordHours = schematic.AkkordHours[0],
+                    NormalHours = schematic.NormalHours[0],
+                    Day = "Mon",
+                }
             );
 
             hoursICollection.Add(new Hours
-            {
+                {
 
-                AkkordHours = schematic.AkkordHours[1],
-                NormalHours = schematic.NormalHours[1],
-                Day = "Tue",
-            }
+                    AkkordHours = schematic.AkkordHours[1],
+                    NormalHours = schematic.NormalHours[1],
+                    Day = "Tue",
+                }
             );
 
             hoursICollection.Add(new Hours
@@ -212,9 +215,12 @@ namespace aQord.ASP.Controllers
                 }
             );
 
+            return hoursICollection;
+        }
 
-
-
+        public ActionResult Save(Schematics schematic)
+        {
+            var schematicsToDb = _dbContext.Schematics.Create();
 
             schematicsToDb.Id = schematic.Id;
             schematicsToDb.TypeOfWork = schematic.TypeOfWork;
@@ -228,21 +234,21 @@ namespace aQord.ASP.Controllers
             schematicsToDb.WeekNumber = schematic.WeekNumber;
 
 
-
             schematicsToDb.HoursInAkkordData = schematic.HoursInAkkordData;
             schematicsToDb.NormalHoursData = schematic.NormalHoursData;
 
             // Save current user directly to the database when creating a new schematic and click on save actionresult - https://stackoverflow.com/questions/263486/how-to-get-the-current-user-in-asp-net-mvc
             schematic.CreatedBy = HttpContext.User.Identity.Name;
 
-            // Store the local variabel of this scope to HoursInCollectionProperty, then when we add schematic to db, data from hoursInCollection will populate Schema.HoursICollection
-            schematic.HoursICollection = hoursICollection;
-
+            // Using a method that handles data input from view , to save to HoursICollection in model
+            schematic.HoursICollection = SaveHoursToICollection(schematic);
+            
             _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Schematics");
         }
+
 
         [HttpGet]
         public ActionResult Edit(int id)
