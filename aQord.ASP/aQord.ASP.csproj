@@ -447,6 +447,10 @@
     <Compile Include="Migrations\202008281804476_WhatsgoingON.designer.cs">
       <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008311921255_ChangeDatatypeOfDayinHours.cs" />
+    <Compile Include="Migrations\202008311921255_ChangeDatatypeOfDayinHours.designer.cs">
+      <DependentUpon>202008311921255_ChangeDatatypeOfDayinHours.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Hours.cs" />
@@ -698,6 +702,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008281804476_WhatsgoingON.resx">
       <DependentUpon>202008281804476_WhatsgoingON.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008311921255_ChangeDatatypeOfDayinHours.resx">
+      <DependentUpon>202008311921255_ChangeDatatypeOfDayinHours.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

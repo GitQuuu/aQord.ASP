@@ -149,72 +149,35 @@ namespace aQord.ASP.Controllers
         /// <returns>ICollection</returns>
         public ICollection<Hours> SaveHoursToICollection(Schematics schematic)
         {
-            ICollection<Hours> hoursICollection = schematic.HoursICollection;
+            _dbContext.Schematics.Attach(schematic);
 
-            hoursICollection.Add(new Hours
+            _dbContext.Entry(schematic).Collection(h => h.HoursICollection).Load();
+
+            for (int i = 0; i <= 6; i++)
+            {
+                if (schematic.HoursICollection.Any(h => h.Day == (DayOfWeek)i))
+                {
+                    var hours = schematic.HoursICollection.FirstOrDefault(s => s.Day == (DayOfWeek)i);
+
+                    hours.AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i - 1];
+                    hours.NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1];
+                }
+                else
                 {
 
-                    AkkordHours = schematic.AkkordHours[0],
-                    NormalHours = schematic.NormalHours[0],
-                    Day = "Mon",
+                    schematic.HoursICollection.Add(new Hours
+                        {
+
+                            AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i - 1],
+                            NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1],
+                            Day = (DayOfWeek)i,
+                        }
+                    );
                 }
-            );
+            }
 
-            hoursICollection.Add(new Hours
-                {
 
-                    AkkordHours = schematic.AkkordHours[1],
-                    NormalHours = schematic.NormalHours[1],
-                    Day = "Tue",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[2],
-                    NormalHours = schematic.NormalHours[2],
-                    Day = "Wed",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[3],
-                    NormalHours = schematic.NormalHours[3],
-                    Day = "Thu",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[4],
-                    NormalHours = schematic.NormalHours[4],
-                    Day = "Fri",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[5],
-                    NormalHours = schematic.NormalHours[5],
-                    Day = "Sat",
-                }
-            );
-
-            hoursICollection.Add(new Hours
-                {
-
-                    AkkordHours = schematic.AkkordHours[6],
-                    NormalHours = schematic.NormalHours[6],
-                    Day = "Sun",
-                }
-            );
-
-            return hoursICollection;
+            return schematic.HoursICollection;
         }
 
         public ActionResult Save(Schematics schematic)
@@ -286,7 +249,7 @@ namespace aQord.ASP.Controllers
                 entity.EmployerSignature = schematics.EmployerSignature;
             }
 
-
+            SaveHoursToICollection(entity);
 
             _dbContext.SaveChanges();
 

@@ -10,7 +10,7 @@ namespace aQord.ASP.Models
         public int HoursId { get; set; }
         public double AkkordHours { get; set; }
         public double NormalHours { get; set; }
-        public string Day { get; set; }
+        public DayOfWeek Day { get; set; }
         // By adding this properties EF will create a columnn that has a relation to Schematics Table in the database
         public Schematics Schematics { get; set; }
 
