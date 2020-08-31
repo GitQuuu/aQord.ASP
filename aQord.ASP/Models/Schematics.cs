@@ -110,7 +110,7 @@ namespace aQord.ASP.Models
         [UIHint("SignaturePad")]
         public byte[] EmployerSignature { get; set; }
 
-
+        // This is so we have a collection of our Hours and its properties
         public ICollection<Hours> HoursICollection { get; set; } = new List<Hours>();
     }
 }

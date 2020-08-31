@@ -144,7 +144,7 @@ namespace aQord.ASP.Controllers
 
         // Save data to Hours model collection, from Schematics 
         /// <summary>
-        /// Save data to Hours model collection, from Schematics 
+        /// Save data to a collection, from a view  
         /// </summary>
         /// <param name="schematic"></param>
         /// <returns>ICollection</returns>

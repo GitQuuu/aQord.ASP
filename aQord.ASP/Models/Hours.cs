@@ -11,6 +11,7 @@ namespace aQord.ASP.Models
         public double AkkordHours { get; set; }
         public double NormalHours { get; set; }
         public string Day { get; set; }
+        // By adding this properties EF will create a columnn that has a relation to Schematics Table in the database
         public Schematics Schematics { get; set; }
 
         // Convention 2 - https://www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx
