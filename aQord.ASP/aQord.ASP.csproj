@@ -451,6 +451,10 @@
     <Compile Include="Migrations\202008311921255_ChangeDatatypeOfDayinHours.designer.cs">
       <DependentUpon>202008311921255_ChangeDatatypeOfDayinHours.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009011058112_RequiredAnnotationToPropInHours.cs" />
+    <Compile Include="Migrations\202009011058112_RequiredAnnotationToPropInHours.designer.cs">
+      <DependentUpon>202009011058112_RequiredAnnotationToPropInHours.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Hours.cs" />
@@ -705,6 +709,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008311921255_ChangeDatatypeOfDayinHours.resx">
       <DependentUpon>202008311921255_ChangeDatatypeOfDayinHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009011058112_RequiredAnnotationToPropInHours.resx">
+      <DependentUpon>202009011058112_RequiredAnnotationToPropInHours.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
