@@ -389,7 +389,7 @@ namespace aQord.ASP.Controllers
 
             foreach (var schemas in selectionMatched)
             { // base on selectionMatched only export data from db to excel with schemas that contains Projectnumber and weeknumber
-                if (schemas.ProjectNumber == selected.ProjectNumber && schemas.WeekNumber == selected.WeekNumber && selected.WorkplaceAddress == schemas.WorkplaceAddress)
+                if (schemas.ProjectNumber == selected.ProjectNumber && schemas.WeekNumber == selected.WeekNumber && schemas.WorkplaceAddress == selected.WorkplaceAddress)
                 {
                     pageTab.Cell($"A{row}").Value = schemas.CraftsmanId;
                     pageTab.Cell($"B{row}").Value = schemas.Name;
