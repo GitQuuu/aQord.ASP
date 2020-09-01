@@ -214,32 +214,49 @@ namespace aQord.ASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Schematics schematics)
+        public ActionResult Update(Schematics schematic)
         {
-            var entity = _dbContext.Schematics.FirstOrDefault(p => p.Id == schematics.Id);
+            var entity = _dbContext.Schematics.FirstOrDefault(p => p.Id == schematic.Id);
 
-            entity.TypeOfWork = schematics.TypeOfWork;
-            entity.StaffRepresentative = schematics.StaffRepresentative;
-            entity.Year = schematics.Year;
-            entity.Firm = schematics.Firm;
-            entity.WorkplaceAddress = schematics.WorkplaceAddress;
-            entity.ProjectNumber = schematics.ProjectNumber;
-            entity.CraftsmanId = schematics.CraftsmanId;
-            entity.Name = schematics.Name;
-            entity.WeekNumber = schematics.WeekNumber;
-            entity.HoursInAkkordData = schematics.HoursInAkkordData;
-            entity.NormalHoursData = schematics.NormalHoursData;
-            entity.ShelterRateAmountOfDays = schematics.ShelterRateAmountOfDays;
-            entity.MileageAllowanceAmountOfKm = schematics.MileageAllowanceAmountOfKm;
+            entity.TypeOfWork = schematic.TypeOfWork;
+            entity.StaffRepresentative = schematic.StaffRepresentative;
+            entity.Year = schematic.Year;
+            entity.Firm = schematic.Firm;
+            entity.WorkplaceAddress = schematic.WorkplaceAddress;
+            entity.ProjectNumber = schematic.ProjectNumber;
+            entity.CraftsmanId = schematic.CraftsmanId;
+            entity.Name = schematic.Name;
+            entity.WeekNumber = schematic.WeekNumber;
+            entity.HoursInAkkordData = schematic.HoursInAkkordData;
+            entity.NormalHoursData = schematic.NormalHoursData;
+            entity.ShelterRateAmountOfDays = schematic.ShelterRateAmountOfDays;
+            entity.MileageAllowanceAmountOfKm = schematic.MileageAllowanceAmountOfKm;
+
+            // a collection of only matched parameter 
+            var collectByProjectNumberAndWeek =
+                _dbContext.Schematics.Where(s => s.ProjectNumber == entity.ProjectNumber && s.WeekNumber == entity.WeekNumber && s.WorkplaceAddress == entity.WorkplaceAddress);
+
 
             if (entity.MySignature == null)
             {
-                entity.MySignature = schematics.MySignature;
+                // update value from view to database
+                entity.MySignature = schematic.MySignature;
+
+                foreach (Schematics schematics in collectByProjectNumberAndWeek)
+                {   // apply that value to other scemas with same schema root data
+                    schematics.MySignature = entity.MySignature;
+                }
             }
 
             if (entity.EmployerSignature == null)
             {
-                entity.EmployerSignature = schematics.EmployerSignature;
+                entity.EmployerSignature = schematic.EmployerSignature;
+
+                foreach (Schematics schematics in collectByProjectNumberAndWeek)
+                {   // apply that value to other scemas with same schema root data
+                    schematics.EmployerSignature = entity.EmployerSignature;
+                }
+
             }
 
             SaveHoursToICollection(entity);
