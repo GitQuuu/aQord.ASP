@@ -7,7 +7,7 @@
 <h2>Kontrollere ugeskema inden underskrift</h2>
 
 
-@using (Html.BeginForm("Update","Schematics"))
+@using (Html.BeginForm("Save","Schematics"))
 {
     @Html.AntiForgeryToken()
     
@@ -147,8 +147,6 @@
             </div>
         </div>
     }
-    
-   
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

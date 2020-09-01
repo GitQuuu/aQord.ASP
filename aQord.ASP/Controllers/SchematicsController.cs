@@ -3,6 +3,7 @@ using System.Activities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -149,6 +150,7 @@ namespace aQord.ASP.Controllers
         /// <returns>ICollection</returns>
         public ICollection<Hours> SaveHoursToICollection(Schematics schematic)
         {
+            // https://stackoverflow.com/questions/15045763/what-does-the-dbcontext-entry-do
             _dbContext.Schematics.Attach(schematic);
 
             _dbContext.Entry(schematic).Collection(h => h.HoursICollection).Load();
@@ -159,8 +161,14 @@ namespace aQord.ASP.Controllers
                 {
                     var hours = schematic.HoursICollection.FirstOrDefault(s => s.Day == (DayOfWeek)i);
 
-                    hours.AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i - 1];
-                    hours.NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1];
+                    if (hours != null)
+                    {
+                        hours.AkkordHours = schematic.AkkordHours[(i == 0) ? 6 : i - 1];
+                        hours.NormalHours = schematic.NormalHours[(i == 0) ? 6 : i - 1];
+                    }
+
+                    // https://stackoverflow.com/questions/1836173/entity-framework-store-update-insert-or-delete-statement-affected-an-unexpec
+                    _dbContext.Entry(schematic).State = EntityState.Modified;
                 }
                 else
                 {
@@ -173,6 +181,9 @@ namespace aQord.ASP.Controllers
                             Day = (DayOfWeek)i,
                         }
                     );
+
+                    // move this from Save action
+                    _dbContext.Schematics.Add(schematic);
                 }
             }
 
@@ -188,7 +199,6 @@ namespace aQord.ASP.Controllers
             // Using a method that handles data input from view , to save to HoursICollection in model
             SaveHoursToICollection(schematic);
             
-            _dbContext.Schematics.Add(schematic);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Schematics");
